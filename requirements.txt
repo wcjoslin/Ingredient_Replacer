@@ -1,0 +1,9 @@
+torch
+transformers
+sentence-transformers
+requests
+numpy
+scikit-learn
+gql
+pandas
+scipy
