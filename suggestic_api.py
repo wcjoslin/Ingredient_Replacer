@@ -8,5 +8,9 @@ def query_suggestic(query: str, variables: dict = {}):
     }
     payload = {"query": query, "variables": variables}
     response = requests.post(SUGGESTIC_API_URL, json=payload, headers=headers)
-    return response.json()
-
+    try:
+        return response.json()
+    except Exception:
+        print("Suggestic API response status:", response.status_code)
+        print("Suggestic API response text:", response.text)
+        raise
