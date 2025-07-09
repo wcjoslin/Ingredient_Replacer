@@ -19,3 +19,6 @@
 /relation_extraction/data/comments/recipe1m_with_reviews_foodandwine_recipeland_cookeatshare.json
 /relation_extraction/data/comments/recipe1m_with_reviews_tastykitchen.json
 /.idea/
+__pycache__/
+*.json
+*.txt
