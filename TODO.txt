@@ -1,0 +1,8 @@
+# TODO
+
+- Implement caching for USDA FoodData Central API results to reduce API calls and improve speed.
+- Add error handling and retry logic for API requests.
+- Support batch queries for multiple ingredients.
+- Add support for other nutrition databases if needed.
+- Integrate per-ingredient nutrition checks into ingredient swap logic.
+- Add unit tests for nutrition lookup and swap logic.
