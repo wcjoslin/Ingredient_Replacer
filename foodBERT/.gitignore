@@ -22,3 +22,10 @@
 __pycache__/
 *.json
 *.txt
+/foodBERT/data/recipe1m.json
+/foodBERT/data/cleaned_recipe1m.json
+/foodBERT/foodbert/data/mlm_output/checkpoint-final/optimizer.pt
+/foodBERT/foodbert/data/optimizer.pt
+/foodBERT/foodbert/data/train_instructions.txt
+/foodBERT/foodbert/data/mlm_output/checkpoint-final/pytorch_model.bin
+/foodBERT/foodbert/data/pytorch_model.bin
