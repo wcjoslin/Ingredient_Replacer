@@ -1,6 +1,9 @@
 import json
 from pathlib import Path
-from suggestic_integration.suggestic_api import query_suggestic
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from suggestic_api import query_suggestic
 from foodBERT.foodbert_embeddings.helpers.generate_ingredient_embeddings import generate_food_embedding_dict
 from foodBERT.foodbert_embeddings.helpers.approx_knn_classifier import ApproxKNNClassifier
 
