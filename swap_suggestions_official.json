@@ -1,0 +1,142 @@
+[
+  {
+    "ingredient": "Penne",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "fettuccine",
+      "score": 0.5206481661253354,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Parmesan cheese",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "cheddar cheese",
+      "score": 0.7316549311524417,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Garlic",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "garlic cloves",
+      "score": 3.3463024899836875,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Baby spinach leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Baby spinach leaves' (normalized: 'baby spinach leaves') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Basil leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "basil",
+      "score": 3.157573423899963,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Lemon juice",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "lemon zest",
+      "score": 3.2823827159174677,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Walnuts",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "turmeric",
+      "score": 3.786747920865323,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Lemon zest",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "lemon juice",
+      "score": 3.2823827159174677,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Olive oil",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "vegetable bouillon",
+      "score": 0.14456207563776396,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Salt",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "sugar",
+      "score": 0.31916074735314215,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  },
+  {
+    "ingredient": "Black pepper",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "black beans",
+      "score": 3.5014748238756606,
+      "aggregation": "max",
+      "scoring": "zscore"
+    }
+  }
+]
