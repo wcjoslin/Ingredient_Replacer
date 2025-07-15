@@ -63,3 +63,5 @@ __pycache__/
 /foodBERT/foodbert/data/scheduler.pt
 /foodBERT/foodbert/data/training_args.bin
 /foodBERT/foodbert/data/used_ingredients.json
+foodBERT/foodbert/data/optimizer.pt
+foodBERT/foodbert/data/pytorch_model.bin
