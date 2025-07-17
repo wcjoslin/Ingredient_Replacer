@@ -1,33 +1,49 @@
 import json
 from integrate_usda_openfoodfacts import enrich_ingredient_data
 from dietary_restriction_analysis import analyze_dietary_restrictions
+from ingredient_swap_suggestions import suggest_swaps
 
-def run_ingredient_workflow(recipe_details_path, restrictions, output_prefix="workflow"):
-    # Step 1: Load recipe details
-    with open(recipe_details_path, "r", encoding="utf-8") as f:
-        recipe_details = json.load(f)
-    # Example: Use pre_diabetic test
-    ingredients = [i["name"] for i in recipe_details["pre_diabetic"]["ingredients"]]
+def run_ingredient_workflow(recipe_path, restrictions, output_prefix="final_recipe_swap"):
+    """
+    Orchestrates the full ingredient substitution workflow.
+    1. Loads a recipe.
+    2. Enriches its ingredients with nutritional and metadata.
+    3. Flags ingredients based on dietary restrictions.
+    4. Finds the best swap for each flagged ingredient using the enhanced scoring model.
+    """
+    # Step 1: Load recipe
+    with open(recipe_path, "r", encoding="utf-8") as f:
+        recipe = json.load(f)
     
+    # Assuming the recipe JSON has a list of ingredients under a key like "ingredients"
+    # This part might need adjustment based on the actual recipe format.
+    # For this example, we'll stick to the format from `diet_test_recipe_details.json`
+    ingredients = [i["name"] for i in recipe["pre_diabetic"]["ingredients"]]
+
     # Step 2: Enrich ingredient data
     enriched_data = enrich_ingredient_data(ingredients)
-    enriched_path = f"{output_prefix}_enriched_ingredient_data.json"
-    with open(enriched_path, "w", encoding="utf-8") as f:
-        json.dump(enriched_data, f, ensure_ascii=False, indent=2)
     
-    # Step 3: Analyze dietary restrictions
-    flagged = analyze_dietary_restrictions(enriched_data, restrictions)
+    # Step 3: Flag ingredients based on restrictions
+    flagged_ingredients = analyze_dietary_restrictions(enriched_data, restrictions)
     flagged_path = f"{output_prefix}_flagged_ingredients.json"
     with open(flagged_path, "w", encoding="utf-8") as f:
-        json.dump(flagged, f, ensure_ascii=False, indent=2)
-    
-    print(f"Workflow complete. Enriched data saved to {enriched_path}, flagged ingredients saved to {flagged_path}.")
+        json.dump(flagged_ingredients, f, ensure_ascii=False, indent=2)
+
+    # Step 4: Get swap suggestions for flagged ingredients
+    suggest_swaps(flagged_path, output_path_prefix=f"{output_prefix}_suggestions")
+
+    print(f"Workflow complete. Flagged ingredients saved to {flagged_path}.")
+    print(f"Swap suggestions saved to {output_prefix}_suggestions.json")
 
 if __name__ == "__main__":
+    # Define the dietary restrictions for the run
+    # In this case, we want to flag ingredients that are high in carbs.
     restrictions = {
-        "low-carb": 5,  # grams per ingredient
-        "vegan": True,
-        "kosher": True,
-        "halal": False
+        "low-carb": 40,  # Flag any ingredient with more than 40g of carbs
     }
-    run_ingredient_workflow("diet_test_recipe_details.json", restrictions)
+    
+    # Specify the recipe to process
+    recipe_file = "diet_test_recipe_details.json"
+    
+    # Run the full workflow
+    run_ingredient_workflow(recipe_file, restrictions)
