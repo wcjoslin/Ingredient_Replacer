@@ -25,9 +25,25 @@ def run_ingredient_workflow(recipe_path, restrictions, output_prefix="final_reci
     
     # Step 3: Flag ingredients based on restrictions
     flagged_ingredients = analyze_dietary_restrictions(enriched_data, restrictions)
+
+    # Early filtering: Remove spices and ingredients already meeting nutrition/category rules
+    from ingredient_swap_suggestions import COMMON_SPICES
+    filtered_flagged = []
+    for item in flagged_ingredients:
+        name = item["ingredient"].lower().strip()
+        # Skip common spices
+        if name in COMMON_SPICES:
+            continue
+        # Skip ingredients already meeting low-carb rule (<=10g carbs)
+        nutrition = item.get("nutrition", {})
+        if nutrition and nutrition.get("carbohydrates", 0) <= 10:
+            continue
+        # TODO: Add category filtering if needed
+        filtered_flagged.append(item)
+
     flagged_path = f"{output_prefix}_flagged_ingredients.json"
     with open(flagged_path, "w", encoding="utf-8") as f:
-        json.dump(flagged_ingredients, f, ensure_ascii=False, indent=2)
+        json.dump(filtered_flagged, f, ensure_ascii=False, indent=2)
 
     # Step 4: Get swap suggestions for flagged ingredients
     suggest_swaps(flagged_path, output_path_prefix=f"{output_prefix}_suggestions")

@@ -59,13 +59,21 @@ def get_allowed_categories(primary, dietary_goal=None):
         allowed.update(special.get(primary, []))
     return allowed
 
+# Nutrition profile cache
+NUTRITION_CACHE = {}
+
 def get_nutrition_profile(ingredient):
     norm_ingredient = normalize_ingredient_name(ingredient)
     # Use Nutritionix reference for common spices and garlic
     if norm_ingredient in SPICE_NUTRITION:
         return SPICE_NUTRITION[norm_ingredient]
+    # Use cache if available
+    if norm_ingredient in NUTRITION_CACHE:
+        return NUTRITION_CACHE[norm_ingredient]
     # Otherwise use main lookup
-    return get_food_nutrition_profile(norm_ingredient)
+    profile = get_food_nutrition_profile(norm_ingredient)
+    NUTRITION_CACHE[norm_ingredient] = profile
+    return profile
 
 def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler=None, dietary_goal=None):
     norm_ingredient = normalize_ingredient_name(ingredient)
@@ -77,6 +85,10 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
     original_nutrition = get_nutrition_profile(norm_ingredient)
     print(f"DEBUG: Original nutrition for '{norm_ingredient}': {original_nutrition}")
     ingredient_embedding = aggregate_embeddings_max(embedding_dict[norm_ingredient])
+
+    # Set allowed primary categories for swaps
+    primary = INGREDIENT_PRIMARY_CATEGORIES.get(norm_ingredient, "other")
+    allowed_primaries = get_allowed_categories(primary, dietary_goal)
 
   
   
@@ -160,6 +172,20 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
     print(f"DEBUG: Best swap for '{norm_ingredient}': {best_swap}")
     return best_swap
 
+import concurrent.futures
+
+def swap_task(args):
+    item, embedding_dict, knn_max, ingredient_labels, zscore_scaler, dietary_goal = args
+    ingredient = item["ingredient"]
+    swap_result = get_enhanced_swap(
+        ingredient, embedding_dict, knn_max, ingredient_labels, scaler=zscore_scaler, dietary_goal=dietary_goal
+    )
+    return {
+        "ingredient": ingredient,
+        "rationale": item["rationale"],
+        "swap_suggestion": swap_result
+    }
+
 def suggest_swaps(flagged_path, output_path_prefix="swap_suggestions_official", dietary_goal=None):
     with open(flagged_path, "r", encoding="utf-8") as f:
         flagged = json.load(f)
@@ -183,16 +209,15 @@ def suggest_swaps(flagged_path, output_path_prefix="swap_suggestions_official", 
 
     swap_results = []
     for item in flagged:
-        ingredient = item["ingredient"]
         swap_result = get_enhanced_swap(
-            ingredient, embedding_dict, knn_max, ingredient_labels, scaler=zscore_scaler, dietary_goal=dietary_goal
+            item["ingredient"], embedding_dict, knn_max, ingredient_labels, scaler=zscore_scaler, dietary_goal=dietary_goal
         )
         swap_results.append({
-            "ingredient": ingredient,
+            "ingredient": item["ingredient"],
             "rationale": item["rationale"],
             "swap_suggestion": swap_result
         })
-        
+
     with open(f"{output_path_prefix}.json", "w", encoding="utf-8") as f:
         json.dump(swap_results, f, ensure_ascii=False, indent=2)
     print(f"Official swap suggestions saved to {output_path_prefix}.json")
