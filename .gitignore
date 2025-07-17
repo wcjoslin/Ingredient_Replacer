@@ -42,7 +42,7 @@ foodBERT/foodbert_embeddings/helpers/__pycache__/generate_ingredient_embeddings.
 /relation_extraction/data/comments/recipe1m_with_reviews_tastykitchen.json
 /.idea/
 __pycache__/
-*.json
+
 *.txt
 /foodBERT/data/recipe1m.json
 /foodBERT/data/cleaned_recipe1m.json
@@ -65,3 +65,4 @@ __pycache__/
 /foodBERT/foodbert/data/used_ingredients.json
 foodBERT/foodbert/data/optimizer.pt
 foodBERT/foodbert/data/pytorch_model.bin
+foodBERT/foodbert_embeddings/data/food_embeddings_dict_foodbert_combined.pkl

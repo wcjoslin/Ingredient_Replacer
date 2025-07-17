@@ -8,7 +8,11 @@ def analyze_dietary_restrictions(enriched_ingredients, restrictions):
     flagged = []
     for item in enriched_ingredients:
         ingredient = item["ingredient"]
-        usda_carbs = item.get("usda_carbs")
+        # Extract carbs from usda_nutrition_profile if present
+        usda_nutrition = item.get("usda_nutrition_profile", {})
+        usda_carbs = None
+        if isinstance(usda_nutrition, dict):
+            usda_carbs = usda_nutrition.get("carbohydrates")
         metadata = item.get("openfoodfacts_metadata", {})
         rationale = []
 
