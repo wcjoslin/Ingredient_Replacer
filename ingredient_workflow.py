@@ -46,20 +46,45 @@ def run_ingredient_workflow(recipe_path, restrictions, output_prefix="final_reci
         json.dump(filtered_flagged, f, ensure_ascii=False, indent=2)
 
     # Step 4: Get swap suggestions for flagged ingredients
-    suggest_swaps(flagged_path, output_path_prefix=f"{output_prefix}_suggestions")
+    suggest_swaps(flagged_path, output_path_prefix=f"{output_prefix}_suggestions", restrictions=restrictions)
 
-    print(f"Workflow complete. Flagged ingredients saved to {flagged_path}.")
-    print(f"Swap suggestions saved to {output_prefix}_suggestions.json")
+    # (DEBUG OUTPUT REMOVED)
 
 if __name__ == "__main__":
-    # Define the dietary restrictions for the run
-    # In this case, we want to flag ingredients that are high in carbs.
-    restrictions = {
-        "low-carb": 40,  # Flag any ingredient with more than 40g of carbs
-    }
-    
-    # Specify the recipe to process
-    recipe_file = "diet_test_recipe_details.json"
-    
-    # Run the full workflow
-    run_ingredient_workflow(recipe_file, restrictions)
+    import json
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Run ingredient workflow with selected dietary restrictions.")
+    parser.add_argument("--restriction_ids", type=str, default="", help="Comma-separated list of restriction IDs (e.g., low_carb,vegan)")
+    parser.add_argument("--recipe_file", type=str, default="diet_test_recipe_details.json", help="Recipe file to process")
+    args = parser.parse_args()
+
+    # Parse restriction IDs
+    restriction_ids = [rid.strip() for rid in args.restriction_ids.split(",") if rid.strip()]
+    if not restriction_ids:
+        print("No restriction_ids specified. Please provide at least one restriction ID using --restriction_ids.")
+        exit(1)
+
+    # Load presets
+    with open("dietary_restriction_presets.json", "r", encoding="utf-8") as f:
+        presets = json.load(f)
+
+    # Merge rules from selected presets
+    merged_rules = {}
+    for rid in restriction_ids:
+        preset = next((p for p in presets if p["id"] == rid), None)
+        if preset:
+            for k, v in preset["rules"].items():
+                # For numeric rules, use the strictest value (lowest for max, highest for min)
+                if k.startswith("max_"):
+                    if k not in merged_rules or v < merged_rules[k]:
+                        merged_rules[k] = v
+                elif k.startswith("min_"):
+                    if k not in merged_rules or v > merged_rules[k]:
+                        merged_rules[k] = v
+                elif isinstance(v, list):
+                    merged_rules.setdefault(k, []).extend([item for item in v if item not in merged_rules.get(k, [])])
+                else:
+                    merged_rules[k] = v
+
+    run_ingredient_workflow(args.recipe_file, merged_rules)

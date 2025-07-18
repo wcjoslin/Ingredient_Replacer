@@ -64,7 +64,7 @@ NUTRITION_CACHE = {}
 
 def get_nutrition_profile(ingredient):
     norm_ingredient = normalize_ingredient_name(ingredient)
-    # Use Nutritionix reference for common spices and garlic
+    # Always use Nutritionix reference for common spices and garlic
     if norm_ingredient in SPICE_NUTRITION:
         return SPICE_NUTRITION[norm_ingredient]
     # Use cache if available
@@ -75,7 +75,7 @@ def get_nutrition_profile(ingredient):
     NUTRITION_CACHE[norm_ingredient] = profile
     return profile
 
-def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler=None, dietary_goal=None):
+def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler=None, restrictions=None):
     norm_ingredient = normalize_ingredient_name(ingredient)
     print(f"DEBUG: Processing ingredient '{ingredient}' (normalized: '{norm_ingredient}')")
     if norm_ingredient not in embedding_dict:
@@ -88,22 +88,26 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
 
     # Set allowed primary categories for swaps
     primary = INGREDIENT_PRIMARY_CATEGORIES.get(norm_ingredient, "other")
-    allowed_primaries = get_allowed_categories(primary, dietary_goal)
+    allowed_primaries = set(CATEGORY_MAPPING["default_allowed_swaps"].get(primary, []))
+    # Always allow vegetable swaps for flagged high-carb ingredients
+    if restrictions and "max_carbohydrates_g_per_serving" in restrictions:
+        allowed_primaries.add("vegetable")
+    # Apply category exclusions from restrictions
+    if restrictions and "exclude_categories" in restrictions:
+        allowed_primaries -= set(restrictions["exclude_categories"])
 
-  
-  
-
-    # ACTION ITEM 2 (updated): Skip swap if ingredient already has <=10g carbs per serving
-    if dietary_goal == "low_carb":
+    # Macronutrient threshold: skip swap if ingredient already meets restriction
+    if restrictions and "max_carbohydrates_g_per_serving" in restrictions:
         if (
             original_nutrition is not None
             and "carbohydrates" in original_nutrition
             and original_nutrition["carbohydrates"] is not None
-            and original_nutrition["carbohydrates"] <= 10
+            and original_nutrition["carbohydrates"] <= restrictions["max_carbohydrates_g_per_serving"]
         ):
-            print(f"DEBUG: Ingredient '{norm_ingredient}' already has <=10g carbs, skipping swap.")
-            return {"info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."}
+            print(f"DEBUG: Ingredient '{norm_ingredient}' already meets carb restriction, skipping swap.")
+            return {"info": f"Ingredient already meets carb cutoff (<= {restrictions['max_carbohydrates_g_per_serving']}g carbs), no swap needed."}
 
+    best_swap = {"score": -np.inf}
     distances, indices = knn.k_nearest_neighbors(ingredient_embedding.reshape(1, -1))
     flat_indices = indices.flatten()
     flat_distances = 1 - distances.flatten() if len(distances.flatten()) > 0 else []
@@ -111,49 +115,47 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
     if scaler is not None:
         flat_distances = scaler.transform(flat_distances.reshape(-1, 1)).flatten()
 
-    best_swap = {"score": -np.inf}
-    
     for idx, dist in zip(flat_indices, flat_distances):
         if idx < len(ingredient_labels):
             substitute = ingredient_labels[idx]
             sub_primary = INGREDIENT_PRIMARY_CATEGORIES.get(substitute, "other")
+            # (DEBUG OUTPUT REMOVED)
             if sub_primary not in allowed_primaries:
-                print(f"DEBUG: Substitute '{substitute}' filtered out by primary category '{sub_primary}'.")
                 continue
 
-            # Low-carb dietary goal: filter out substitutes with >=10g net carbs per serving
-            if dietary_goal == "low_carb":
-                sub_nutrition = get_nutrition_profile(substitute)
-                # Exclude spices from low-carb filtering
-                if substitute in COMMON_SPICES:
-                    print(f"DEBUG: Substitute '{substitute}' is a spice, skipping low-carb filter.")
-                elif (
+            # Category exclusion (apply to all, before any scoring/nutrition checks)
+            if restrictions and "exclude_categories" in restrictions and sub_primary in restrictions["exclude_categories"]:
+                continue
+            # Apply restrictions to substitute
+            sub_nutrition = get_nutrition_profile(substitute)
+            # Macronutrient restriction
+            if restrictions and "max_carbohydrates_g_per_serving" in restrictions:
+                if (
                     sub_nutrition is not None
                     and "carbohydrates" in sub_nutrition
                     and sub_nutrition["carbohydrates"] is not None
-                    and sub_nutrition["carbohydrates"] >= 10
+                    and sub_nutrition["carbohydrates"] > restrictions["max_carbohydrates_g_per_serving"]
                 ):
-                    print(f"DEBUG: Substitute '{substitute}' filtered out by low-carb rule (carbs: {sub_nutrition['carbohydrates']} >= 10).")
+                    print(f"DEBUG: Substitute '{substitute}' filtered out by carb restriction (carbs: {sub_nutrition['carbohydrates']} > {restrictions['max_carbohydrates_g_per_serving']}).")
                     continue
+            # Ingredient exclusion
+            if restrictions and "exclude_ingredients" in restrictions and substitute.lower() in [e.lower() for e in restrictions["exclude_ingredients"]]:
+                print(f"DEBUG: Substitute '{substitute}' excluded by ingredient restriction.")
+                continue
 
-            print(f"DEBUG: Considering substitute '{substitute}' for '{norm_ingredient}'")
+            # (DEBUG OUTPUT REMOVED)
             if substitute == norm_ingredient:
-                print(f"DEBUG: Substitute '{substitute}' is the same as original. Skipping.")
                 continue
 
             if not is_culinarily_valid(norm_ingredient, substitute):
-                print(f"DEBUG: Substitute '{substitute}' failed culinary validity check. Skipping.")
                 continue
 
             substitute_nutrition = get_nutrition_profile(substitute)
-            print(f"DEBUG: Substitute nutrition for '{substitute}': {substitute_nutrition}")
             nutrition_delta = calculate_nutrition_delta(original_nutrition, substitute_nutrition)
-            print(f"DEBUG: Nutrition delta for '{substitute}': {nutrition_delta}")
             
             # Weighted score
             foodbert_score = dist
             final_score = (0.8 * foodbert_score) - (0.2 * nutrition_delta)
-            print(f"DEBUG: Final score for '{substitute}': {final_score}")
 
             if final_score > best_swap["score"]:
                 best_swap = {
@@ -166,10 +168,8 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
                 }
 
     if best_swap["score"] == -np.inf:
-        print(f"DEBUG: No suitable substitute found for '{norm_ingredient}'.")
         return {"error": "No suitable substitute found."}
     
-    print(f"DEBUG: Best swap for '{norm_ingredient}': {best_swap}")
     return best_swap
 
 import concurrent.futures
@@ -186,7 +186,7 @@ def swap_task(args):
         "swap_suggestion": swap_result
     }
 
-def suggest_swaps(flagged_path, output_path_prefix="swap_suggestions_official", dietary_goal=None):
+def suggest_swaps(flagged_path, output_path_prefix="swap_suggestions_official", restrictions=None):
     with open(flagged_path, "r", encoding="utf-8") as f:
         flagged = json.load(f)
     
@@ -210,7 +210,7 @@ def suggest_swaps(flagged_path, output_path_prefix="swap_suggestions_official", 
     swap_results = []
     for item in flagged:
         swap_result = get_enhanced_swap(
-            item["ingredient"], embedding_dict, knn_max, ingredient_labels, scaler=zscore_scaler, dietary_goal=dietary_goal
+            item["ingredient"], embedding_dict, knn_max, ingredient_labels, scaler=zscore_scaler, restrictions=restrictions
         )
         swap_results.append({
             "ingredient": item["ingredient"],
@@ -223,12 +223,26 @@ def suggest_swaps(flagged_path, output_path_prefix="swap_suggestions_official", 
     print(f"Official swap suggestions saved to {output_path_prefix}.json")
 
 if __name__ == "__main__":
-    # Parse command-line arguments for dietary_goal and output_path_prefix
+    # Parse command-line arguments for restrictions and output_path_prefix
     import argparse
+    import json
     parser = argparse.ArgumentParser(description="Suggest ingredient swaps with category and dietary filtering.")
-    parser.add_argument("--dietary_goal", type=str, default=None, help="Special dietary goal (e.g., low_carb)")
+    parser.add_argument("--restrictions", type=str, default=None, help="JSON string or path to merged restriction rules")
     parser.add_argument("--output_path_prefix", type=str, default="swap_suggestions_official", help="Output file prefix")
     parser.add_argument("--flagged_path", type=str, default="workflow_flagged_ingredients.json", help="Flagged ingredients input file")
     args = parser.parse_args()
 
-    suggest_swaps(args.flagged_path, output_path_prefix=args.output_path_prefix, dietary_goal=args.dietary_goal)
+    # Load restrictions from JSON string or file
+    restrictions = None
+    if args.restrictions:
+        try:
+            if args.restrictions.endswith(".json"):
+                with open(args.restrictions, "r", encoding="utf-8") as f:
+                    restrictions = json.load(f)
+            else:
+                restrictions = json.loads(args.restrictions)
+        except Exception as e:
+            print(f"Error loading restrictions: {e}")
+            restrictions = None
+
+    suggest_swaps(args.flagged_path, output_path_prefix=args.output_path_prefix, restrictions=restrictions)

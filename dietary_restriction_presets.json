@@ -1,0 +1,115 @@
+[
+  {
+    "id": "low_carb",
+    "display_name": "Low-Carb",
+    "description": "A low-carb diet restricts carbohydrates, such as those found in sugary foods, pasta, and bread. It emphasizes foods high in protein and fat. The carb limit is typically less than 15 grams per serving. The goal is to reduce insulin levels, promote fat burning, and improve metabolic health.",
+    "source": "https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/low-carb-diet/art-20045831",
+    "rules": {
+      "max_carbohydrates_g_per_serving": 15,
+      "swap_grains_pastas_breads": "vegetables",
+      "exclude_categories": ["grains", "pasta", "bread", "sugar","pastas"]
+    }
+  },
+  {
+    "id": "keto",
+    "display_name": "Keto",
+    "description": "The ketogenic diet is a very low-carb, high-fat, moderate-protein diet. Carbohydrate intake is typically limited to less than 10 grams of net carbs per serving. The diet aims to induce ketosis, a metabolic state where the body burns fat for fuel instead of carbohydrates.",
+    "source": "https://www.hsph.harvard.edu/nutritionsource/healthy-weight/diet-reviews/ketogenic-diet/",
+    "rules": {
+      "max_carbohydrates_g_per_serving": 10,
+      "min_fat_percent": 70,
+      "swap_grains_sugars_starchy_veg": "low-carb vegetables, healthy fats",
+      "exclude_categories": ["grains", "sugar", "starchy vegetables", "most fruits"]
+    }
+  },
+  {
+    "id": "gluten_free",
+    "display_name": "Gluten-Free",
+    "description": "A gluten-free diet excludes all foods containing gluten, a protein found in wheat, barley, and rye. It is essential for people with celiac disease or gluten sensitivity.",
+    "source": "https://celiac.org/gluten-free-living/what-is-gluten/",
+    "rules": {
+      "exclude_ingredients": ["wheat", "barley", "rye", "triticale"],
+      "swap_wheat_products": "gluten-free grains, tubers, vegetables"
+    }
+  },
+  {
+    "id": "vegan",
+    "display_name": "Vegan",
+    "description": "Veganism excludes all animal products, including meat, dairy, eggs, and honey. The diet is based on plant foods such as vegetables, grains, nuts, seeds, legumes, and fruits.",
+    "source": "https://www.vegansociety.com/go-vegan/definition-veganism",
+    "rules": {
+      "exclude_categories": ["meat", "fish", "dairy", "eggs", "honey"],
+      "swap_animal_proteins": "plant proteins"
+    }
+  },
+  {
+    "id": "dairy_free",
+    "display_name": "Dairy-Free",
+    "description": "A dairy-free diet excludes all forms of dairy, including milk, cheese, yogurt, and butter. It is necessary for those with lactose intolerance or milk allergy.",
+    "source": "https://www.niams.nih.gov/health-topics/lactose-intolerance",
+    "rules": {
+      "exclude_categories": ["dairy"],
+      "swap_dairy_products": "plant-based alternatives"
+    }
+  },
+  {
+    "id": "nut_free",
+    "display_name": "Nut-Free",
+    "description": "A nut-free diet excludes all tree nuts and peanuts, which are common allergens. Seeds and seed-based products are often used as substitutes.",
+    "source": "https://www.foodallergy.org/resources/nut-allergy",
+    "rules": {
+      "exclude_categories": ["tree nuts", "peanuts"],
+      "swap_nuts": "seeds, seed-based products"
+    }
+  },
+  {
+    "id": "egg_free",
+    "display_name": "Egg-Free",
+    "description": "An egg-free diet excludes eggs and egg derivatives. Plant-based binders such as flaxseed meal, applesauce, and aquafaba are used in place of eggs in recipes.",
+    "source": "https://www.foodallergy.org/resources/egg-allergy",
+    "rules": {
+      "exclude_categories": ["eggs"],
+      "swap_eggs": "plant-based binders"
+    }
+  },
+  {
+    "id": "low_fat",
+    "display_name": "Low-Fat",
+    "description": "A low-fat diet limits total fat intake, especially saturated and trans fats. It emphasizes lean meats, low-fat dairy, whole grains, fruits, and vegetables.",
+    "source": "https://www.heart.org/en/healthy-living/healthy-eating/eat-smart/fats/dietary-fats",
+    "rules": {
+      "max_fat_percent_per_serving": 20,
+      "swap_high_fat": "lower-fat alternatives"
+    }
+  },
+  {
+    "id": "paleo",
+    "display_name": "Paleo",
+    "description": "The paleo diet is based on foods presumed to have been eaten by early humans, such as lean meats, fish, fruits, vegetables, nuts, and seeds. It excludes grains, legumes, dairy, and processed foods.",
+    "source": "https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/paleo-diet/art-20111182",
+    "rules": {
+      "exclude_categories": ["grains", "legumes", "dairy", "processed foods"],
+      "swap_processed": "whole foods"
+    }
+  },
+  {
+    "id": "allergen_aware",
+    "display_name": "Allergen-Aware",
+    "description": "An allergen-aware diet excludes any foods flagged as allergens for the individual, such as nuts, dairy, eggs, soy, wheat, fish, or shellfish.",
+    "source": "https://www.foodallergy.org/resources/common-allergens",
+    "rules": {
+      "exclude_flagged_allergens": true,
+      "swap_allergens": "safe alternatives"
+    }
+  },
+  {
+    "id": "plant_based",
+    "display_name": "Plant-Based/Whole-Food",
+    "description": "A plant-based, whole-food diet emphasizes whole, minimally processed plant foods such as vegetables, fruits, whole grains, legumes, nuts, and seeds. It minimizes or excludes animal products and processed foods.",
+    "source": "https://www.hsph.harvard.edu/nutritionsource/healthy-eating-plate/",
+    "rules": {
+      "emphasize_categories": ["vegetables", "fruits", "whole grains", "legumes", "nuts", "seeds"],
+      "exclude_categories": ["processed foods", "animal products"]
+    }
+  }
+]
