@@ -1,15 +1,35 @@
 import json
-from usda_api import get_food_carbs
+from usda_api import get_food_nutrition_profile
 from openfoodfacts_api import get_product_metadata
+from nutritionix_api import get_nutritionix_profile
 
 def enrich_ingredient_data(ingredient_list):
     enriched = []
     for ingredient in ingredient_list:
-        usda_carbs = get_food_carbs(ingredient)
-        off_metadata = get_product_metadata(ingredient)
+        normalized = ingredient.lower().strip()
+        # Special handling for black pepper
+        if normalized in ["black pepper", "pepper", "black peppercorns"]:
+            # Nutritionix for 1 tsp (2.3g) ground black pepper (fallback to USDA if needed)
+            nutritionix_profile = get_nutritionix_profile(ingredient)
+            if not nutritionix_profile:
+                nutritionix_profile = {
+                    "calories": 5.8,
+                    "protein": 0.2,
+                    "fat": 0.1,
+                    "carbohydrates": 1.5
+                }
+            off_metadata = {
+                "vegan": ["en:vegan", "en:vegetarian"],
+                "allergens": [],
+                "labels": [],
+                "categories": ["en:spices", "en:black-pepper"]
+            }
+        else:
+            nutritionix_profile = get_nutritionix_profile(ingredient)
+            off_metadata = get_product_metadata(ingredient)
         enriched.append({
             "ingredient": ingredient,
-            "usda_carbs": usda_carbs,
+            "nutritionix_nutrition_profile": nutritionix_profile,
             "openfoodfacts_metadata": off_metadata
         })
     return enriched

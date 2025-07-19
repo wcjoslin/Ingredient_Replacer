@@ -1,0 +1,1658 @@
+{
+  "almond extract": {
+    "calories": 12.1,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.53
+  },
+  "apple cider vinegar": {
+    "calories": 3.13,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.14
+  },
+  "apple juice": {
+    "calories": 114.08,
+    "protein": 0.25,
+    "fat": 0.32,
+    "carbohydrates": 28.02
+  },
+  "apple sauce": {
+    "calories": 75.48,
+    "protein": 0.18,
+    "fat": 0.19,
+    "carbohydrates": 19.41
+  },
+  "apples": {
+    "calories": 94.64,
+    "protein": 0.47,
+    "fat": 0.31,
+    "carbohydrates": 25.13
+  },
+  "applesauce": {
+    "calories": 75.48,
+    "protein": 0.18,
+    "fat": 0.19,
+    "carbohydrates": 19.41
+  },
+  "arborio rice": {
+    "calories": 241.8,
+    "protein": 4.39,
+    "fat": 0.35,
+    "carbohydrates": 53.44
+  },
+  "arrowroot powder": {
+    "calories": 78,
+    "protein": 5.09,
+    "fat": 0.24,
+    "carbohydrates": 16.07
+  },
+  "avocado oil": {
+    "calories": 123.76,
+    "protein": 0,
+    "fat": 14,
+    "carbohydrates": 0
+  },
+  "baby spinach leaves": {
+    "calories": 41.4,
+    "protein": 5.35,
+    "fat": 0.47,
+    "carbohydrates": 6.75
+  },
+  "baguette": {
+    "calories": 881.28,
+    "protein": 34.83,
+    "fat": 7.84,
+    "carbohydrates": 168.09
+  },
+  "bananas": {
+    "calories": 105.02,
+    "protein": 1.29,
+    "fat": 0.39,
+    "carbohydrates": 26.95
+  },
+  "barbeque sauce": {
+    "calories": 58.48,
+    "protein": 0.28,
+    "fat": 0.21,
+    "carbohydrates": 13.86
+  },
+  "basil leaves": {
+    "calories": 0.12,
+    "protein": 0.02,
+    "fat": 0,
+    "carbohydrates": 0.01
+  },
+  "basmati rice": {
+    "calories": 205.4,
+    "protein": 4.25,
+    "fat": 0.44,
+    "carbohydrates": 44.51
+  },
+  "bay leaf": {
+    "calories": 0.63,
+    "protein": 0.02,
+    "fat": 0.02,
+    "carbohydrates": 0.15
+  },
+  "beef chuck": {
+    "calories": 162.35,
+    "protein": 27.55,
+    "fat": 5.8,
+    "carbohydrates": 0
+  },
+  "beef sirloin": {
+    "calories": 206.55,
+    "protein": 22.92,
+    "fat": 12.1,
+    "carbohydrates": 0
+  },
+  "beef steak": {
+    "calories": 614.38,
+    "protein": 57.81,
+    "fat": 40.77,
+    "carbohydrates": 0
+  },
+  "beef tenderloin": {
+    "calories": 275.4,
+    "protein": 20.32,
+    "fat": 20.91,
+    "carbohydrates": 0
+  },
+  "berries": {
+    "calories": 64.72,
+    "protein": 1.4,
+    "fat": 0.61,
+    "carbohydrates": 15.41
+  },
+  "bread, cut french into loaf": {
+    "calories": 2005.64,
+    "protein": 66.73,
+    "fat": 25.11,
+    "carbohydrates": 372.63
+  },
+  "broccoli florets": {
+    "calories": 3.5,
+    "protein": 0.24,
+    "fat": 0.04,
+    "carbohydrates": 0.72
+  },
+  "buckwheat groats": {
+    "calories": 154.56,
+    "protein": 5.68,
+    "fat": 1.04,
+    "carbohydrates": 33.5
+  },
+  "buffalo sauce": {
+    "calories": 0.52,
+    "protein": 0.02,
+    "fat": 0.02,
+    "carbohydrates": 0.08
+  },
+  "butter beans": {
+    "calories": 216.2,
+    "protein": 14.66,
+    "fat": 0.71,
+    "carbohydrates": 39.25
+  },
+  "butter lettuce": {
+    "calories": 21.19,
+    "protein": 2.2,
+    "fat": 0.36,
+    "carbohydrates": 3.63
+  },
+  "cajun seasoning": {
+    "calories": 11.3,
+    "protein": 0.46,
+    "fat": 0.25,
+    "carbohydrates": 2.42
+  },
+  "cannelloni": {
+    "calories": 492.55,
+    "protein": 29.09,
+    "fat": 26.14,
+    "carbohydrates": 36.77
+  },
+  "cardamom": {
+    "calories": 6.22,
+    "protein": 0.22,
+    "fat": 0.13,
+    "carbohydrates": 1.37
+  },
+  "carrots": {
+    "calories": 16.1,
+    "protein": 0.35,
+    "fat": 0.08,
+    "carbohydrates": 3.78
+  },
+  "cayenne pepper": {
+    "calories": 5.72,
+    "protein": 0.22,
+    "fat": 0.31,
+    "carbohydrates": 1.02
+  },
+  "cayenne powder": {
+    "calories": 5.72,
+    "protein": 0.22,
+    "fat": 0.31,
+    "carbohydrates": 1.02
+  },
+  "celery ribs": {
+    "calories": 6.75,
+    "protein": 0.31,
+    "fat": 0.06,
+    "carbohydrates": 1.5
+  },
+  "cheese": {
+    "calories": 113.12,
+    "protein": 6.4,
+    "fat": 9.33,
+    "carbohydrates": 0.87
+  },
+  "cheese cheddar": {
+    "calories": 114.53,
+    "protein": 6.48,
+    "fat": 9.44,
+    "carbohydrates": 0.88
+  },
+  "chicken bouillon granules": {
+    "calories": 5.34,
+    "protein": 0.33,
+    "fat": 0.28,
+    "carbohydrates": 0.36
+  },
+  "chicken breasts": {
+    "calories": 198,
+    "protein": 37.22,
+    "fat": 4.28,
+    "carbohydrates": 0
+  },
+  "chicken stock": {
+    "calories": 86.4,
+    "protein": 6.05,
+    "fat": 2.88,
+    "carbohydrates": 8.47
+  },
+  "chicken thighs": {
+    "calories": 278.2,
+    "protein": 30.51,
+    "fat": 17.95,
+    "carbohydrates": 0.12
+  },
+  "chickpea flour": {
+    "calories": 356.04,
+    "protein": 20.6,
+    "fat": 6.15,
+    "carbohydrates": 53.19
+  },
+  "chiles": {
+    "calories": 18,
+    "protein": 0.84,
+    "fat": 0.2,
+    "carbohydrates": 3.96
+  },
+  "chili": {
+    "calories": 566.4,
+    "protein": 36.14,
+    "fat": 34.08,
+    "carbohydrates": 29.28
+  },
+  "chili paste": {
+    "calories": 56.33,
+    "protein": 0.67,
+    "fat": 0.24,
+    "carbohydrates": 13.63
+  },
+  "chili pepper": {
+    "calories": 18,
+    "protein": 0.84,
+    "fat": 0.2,
+    "carbohydrates": 3.96
+  },
+  "chili sauce": {
+    "calories": 5.52,
+    "protein": 0.15,
+    "fat": 0.02,
+    "carbohydrates": 1.19
+  },
+  "chipotle powder": {
+    "calories": 7.61,
+    "protein": 0.36,
+    "fat": 0.39,
+    "carbohydrates": 1.34
+  },
+  "chorizo": {
+    "calories": 128.99,
+    "protein": 6.83,
+    "fat": 10.85,
+    "carbohydrates": 0.53
+  },
+  "chow mein noodles": {
+    "calories": 133,
+    "protein": 2.27,
+    "fat": 4.32,
+    "carbohydrates": 20.38
+  },
+  "cider vinegar": {
+    "calories": 3.13,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.14
+  },
+  "cilantro leaves": {
+    "calories": 0.92,
+    "protein": 0.09,
+    "fat": 0.02,
+    "carbohydrates": 0.15
+  },
+  "cocoa powder": {
+    "calories": 20.5,
+    "protein": 1,
+    "fat": 0.5,
+    "carbohydrates": 3
+  },
+  "coconut butter": {
+    "calories": 211.2,
+    "protein": 2.2,
+    "fat": 20.65,
+    "carbohydrates": 7.57
+  },
+  "coconut cream": {
+    "calories": 67.83,
+    "protein": 0.22,
+    "fat": 3.1,
+    "carbohydrates": 10.11
+  },
+  "coconut extract": {
+    "calories": 387.6,
+    "protein": 2.66,
+    "fat": 23.79,
+    "carbohydrates": 44.07
+  },
+  "coconut flour": {
+    "calories": 27.58,
+    "protein": 1.25,
+    "fat": 0.89,
+    "carbohydrates": 5.18
+  },
+  "coconut milk kefir": {
+    "calories": 445.22,
+    "protein": 4.57,
+    "fat": 48.21,
+    "carbohydrates": 6.35
+  },
+  "coconut sugar": {
+    "calories": 15.48,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 4
+  },
+  "cod fillets": {
+    "calories": 189,
+    "protein": 41.09,
+    "fat": 1.55,
+    "carbohydrates": 0
+  },
+  "cooking spray": {
+    "calories": 2.38,
+    "protein": 0,
+    "fat": 0.24,
+    "carbohydrates": 0.06
+  },
+  "cooking wine": {
+    "calories": 122.01,
+    "protein": 0.1,
+    "fat": 0,
+    "carbohydrates": 3.82
+  },
+  "corn kernels": {
+    "calories": 98.88,
+    "protein": 3.51,
+    "fat": 1.55,
+    "carbohydrates": 21.61
+  },
+  "corn starch": {
+    "calories": 30.48,
+    "protein": 0.02,
+    "fat": 0,
+    "carbohydrates": 7.3
+  },
+  "cornmeal": {
+    "calories": 441.64,
+    "protein": 9.91,
+    "fat": 4.38,
+    "carbohydrates": 93.81
+  },
+  "cornsalad": {
+    "calories": 11.76,
+    "protein": 1.12,
+    "fat": 0.22,
+    "carbohydrates": 2.02
+  },
+  "cornstarch": {
+    "calories": 30.48,
+    "protein": 0.02,
+    "fat": 0,
+    "carbohydrates": 7.3
+  },
+  "cream": {
+    "calories": 101.32,
+    "protein": 0.85,
+    "fat": 10.75,
+    "carbohydrates": 0.82
+  },
+  "cream of mushroom soup": {
+    "calories": 409.5,
+    "protein": 14.87,
+    "fat": 22.55,
+    "carbohydrates": 36.29
+  },
+  "crimini mushrooms": {
+    "calories": 19.14,
+    "protein": 2.17,
+    "fat": 0.09,
+    "carbohydrates": 3.74
+  },
+  "croutons": {
+    "calories": 66.03,
+    "protein": 1.53,
+    "fat": 2.6,
+    "carbohydrates": 9.02
+  },
+  "cumin powder": {
+    "calories": 7.88,
+    "protein": 0.37,
+    "fat": 0.47,
+    "carbohydrates": 0.93
+  },
+  "cumin seed": {
+    "calories": 7.88,
+    "protein": 0.37,
+    "fat": 0.47,
+    "carbohydrates": 0.93
+  },
+  "curry paste": {
+    "calories": 18.03,
+    "protein": 0.6,
+    "fat": 0.15,
+    "carbohydrates": 4.04
+  },
+  "curry powder": {
+    "calories": 6.5,
+    "protein": 0.29,
+    "fat": 0.28,
+    "carbohydrates": 1.12
+  },
+  "curry sauce": {
+    "calories": 124.45,
+    "protein": 1.54,
+    "fat": 9.69,
+    "carbohydrates": 9.4
+  },
+  "dashi": {
+    "calories": 37.28,
+    "protein": 5.27,
+    "fat": 1.89,
+    "carbohydrates": 0
+  },
+  "dijon": {
+    "calories": 3.12,
+    "protein": 0.19,
+    "fat": 0.17,
+    "carbohydrates": 0.3
+  },
+  "dijon style mustard": {
+    "calories": 3.12,
+    "protein": 0.19,
+    "fat": 0.17,
+    "carbohydrates": 0.3
+  },
+  "dill pickles": {
+    "calories": 4.2,
+    "protein": 0.18,
+    "fat": 0.11,
+    "carbohydrates": 0.84
+  },
+  "dill weed": {
+    "calories": 0.43,
+    "protein": 0.03,
+    "fat": 0.01,
+    "carbohydrates": 0.07
+  },
+  "dinner rolls": {
+    "calories": 76.44,
+    "protein": 2.41,
+    "fat": 1.76,
+    "carbohydrates": 12.88
+  },
+  "egg noodles": {
+    "calories": 220.8,
+    "protein": 7.26,
+    "fat": 3.31,
+    "carbohydrates": 40.26
+  },
+  "eggs": {
+    "calories": 71.5,
+    "protein": 6.28,
+    "fat": 4.76,
+    "carbohydrates": 0.36
+  },
+  "elbow macaroni": {
+    "calories": 189.6,
+    "protein": 6.96,
+    "fat": 1.12,
+    "carbohydrates": 37.03
+  },
+  "enchilada sauce": {
+    "calories": 16.8,
+    "protein": 0.35,
+    "fat": 0.51,
+    "carbohydrates": 2.73
+  },
+  "erythritol": {
+    "calories": 1.74,
+    "protein": 0.01,
+    "fat": 0,
+    "carbohydrates": 0.42
+  },
+  "fava beans": {
+    "calories": 93.5,
+    "protein": 6.46,
+    "fat": 0.34,
+    "carbohydrates": 16.7
+  },
+  "fennel seeds": {
+    "calories": 6.9,
+    "protein": 0.32,
+    "fat": 0.3,
+    "carbohydrates": 1.05
+  },
+  "fettuccine": {
+    "calories": 211.47,
+    "protein": 7.43,
+    "fat": 0.86,
+    "carbohydrates": 42.56
+  },
+  "fish": {
+    "calories": 217.6,
+    "protein": 44.46,
+    "fat": 4.51,
+    "carbohydrates": 0
+  },
+  "fish cutlets": {
+    "calories": 217.6,
+    "protein": 44.46,
+    "fat": 4.51,
+    "carbohydrates": 0
+  },
+  "fish fillets": {
+    "calories": 173.31,
+    "protein": 37.71,
+    "fat": 1.43,
+    "carbohydrates": 0
+  },
+  "fish stock": {
+    "calories": 37.28,
+    "protein": 5.27,
+    "fat": 1.89,
+    "carbohydrates": 0
+  },
+  "flax seed": {
+    "calories": 55,
+    "protein": 1.88,
+    "fat": 4.34,
+    "carbohydrates": 2.97
+  },
+  "flax seed meal": {
+    "calories": 69.42,
+    "protein": 2.38,
+    "fat": 5.48,
+    "carbohydrates": 3.75
+  },
+  "flaxseed oil": {
+    "calories": 120.45,
+    "protein": 0,
+    "fat": 13.63,
+    "carbohydrates": 0
+  },
+  "fusilli": {
+    "calories": 195.92,
+    "protein": 7.19,
+    "fat": 1.15,
+    "carbohydrates": 38.27
+  },
+  "garam masala": {
+    "calories": 4.64,
+    "protein": 0.16,
+    "fat": 0.19,
+    "carbohydrates": 0.85
+  },
+  "garam masala powder": {
+    "calories": 4.64,
+    "protein": 0.16,
+    "fat": 0.19,
+    "carbohydrates": 0.85
+  },
+  "garlic paste": {
+    "calories": 27.32,
+    "protein": 0.22,
+    "fat": 2.52,
+    "carbohydrates": 1.16
+  },
+  "ginger paste": {
+    "calories": 40.3,
+    "protein": 0.29,
+    "fat": 3.23,
+    "carbohydrates": 2.84
+  },
+  "gluten-free flour": {
+    "calories": 455,
+    "protein": 12.91,
+    "fat": 1.23,
+    "carbohydrates": 95.39
+  },
+  "gochujang": {
+    "calories": 56.33,
+    "protein": 0.67,
+    "fat": 0.24,
+    "carbohydrates": 13.63
+  },
+  "gouda cheese": {
+    "calories": 100.93,
+    "protein": 7.07,
+    "fat": 7.78,
+    "carbohydrates": 0.63
+  },
+  "granola": {
+    "calories": 298.29,
+    "protein": 8.34,
+    "fat": 14.83,
+    "carbohydrates": 32.87
+  },
+  "green cardamom pods": {
+    "calories": 0.62,
+    "protein": 0.02,
+    "fat": 0.01,
+    "carbohydrates": 0.14
+  },
+  "green chili": {
+    "calories": 18,
+    "protein": 0.9,
+    "fat": 0.09,
+    "carbohydrates": 4.26
+  },
+  "green onion": {
+    "calories": 4.8,
+    "protein": 0.27,
+    "fat": 0.03,
+    "carbohydrates": 1.1
+  },
+  "ground coriander": {
+    "calories": 5.36,
+    "protein": 0.22,
+    "fat": 0.32,
+    "carbohydrates": 0.99
+  },
+  "habanero pepper": {
+    "calories": 18,
+    "protein": 0.84,
+    "fat": 0.2,
+    "carbohydrates": 3.96
+  },
+  "halloumi cheese": {
+    "calories": 85.05,
+    "protein": 6.29,
+    "fat": 6.34,
+    "carbohydrates": 0.62
+  },
+  "hamburger buns": {
+    "calories": 127.88,
+    "protein": 4.54,
+    "fat": 1.73,
+    "carbohydrates": 23.07
+  },
+  "harissa": {
+    "calories": 46.29,
+    "protein": 0.87,
+    "fat": 3.54,
+    "carbohydrates": 3.77
+  },
+  "heavy whipping cream": {
+    "calories": 101.32,
+    "protein": 0.85,
+    "fat": 10.75,
+    "carbohydrates": 0.82
+  },
+  "hemp seeds": {
+    "calories": 165.9,
+    "protein": 9.47,
+    "fat": 14.63,
+    "carbohydrates": 2.6
+  },
+  "hoisin sauce": {
+    "calories": 35.2,
+    "protein": 0.53,
+    "fat": 0.54,
+    "carbohydrates": 7.05
+  },
+  "horseradish": {
+    "calories": 2.4,
+    "protein": 0.06,
+    "fat": 0.03,
+    "carbohydrates": 0.56
+  },
+  "italian seasoning blend": {
+    "calories": 15.32,
+    "protein": 0.61,
+    "fat": 0.48,
+    "carbohydrates": 3.35
+  },
+  "jalapeno pepper": {
+    "calories": 4.06,
+    "protein": 0.13,
+    "fat": 0.05,
+    "carbohydrates": 0.91
+  },
+  "jalapeno peppers": {
+    "calories": 4.06,
+    "protein": 0.13,
+    "fat": 0.05,
+    "carbohydrates": 0.91
+  },
+  "jerk seasoning": {
+    "calories": 6.6,
+    "protein": 0.01,
+    "fat": 0.39,
+    "carbohydrates": 0.83
+  },
+  "kale leaves": {
+    "calories": 36.4,
+    "protein": 2.47,
+    "fat": 0.52,
+    "carbohydrates": 7.32
+  },
+  "kimchi": {
+    "calories": 22.5,
+    "protein": 1.65,
+    "fat": 0.75,
+    "carbohydrates": 3.6
+  },
+  "kiwi": {
+    "calories": 42.09,
+    "protein": 0.79,
+    "fat": 0.36,
+    "carbohydrates": 10.12
+  },
+  "lamb stew meat": {
+    "calories": 189.55,
+    "protein": 28.64,
+    "fat": 7.48,
+    "carbohydrates": 0
+  },
+  "lasagna noodles": {
+    "calories": 90.06,
+    "protein": 3.31,
+    "fat": 0.53,
+    "carbohydrates": 17.59
+  },
+  "lemon zest": {
+    "calories": 2.82,
+    "protein": 0.09,
+    "fat": 0.02,
+    "carbohydrates": 0.96
+  },
+  "lettuce leaves": {
+    "calories": 2.89,
+    "protein": 0.21,
+    "fat": 0.05,
+    "carbohydrates": 0.56
+  },
+  "macaroni": {
+    "calories": 189.6,
+    "protein": 6.96,
+    "fat": 1.12,
+    "carbohydrates": 37.03
+  },
+  "macaroni pasta": {
+    "calories": 189.6,
+    "protein": 6.96,
+    "fat": 1.12,
+    "carbohydrates": 37.03
+  },
+  "marinara sauce": {
+    "calories": 66,
+    "protein": 1.83,
+    "fat": 2.13,
+    "carbohydrates": 9.81
+  },
+  "marsala wine": {
+    "calories": 14.5,
+    "protein": 0.14,
+    "fat": 0,
+    "carbohydrates": 1.83
+  },
+  "mascarpone": {
+    "calories": 122.01,
+    "protein": 1.3,
+    "fat": 12.87,
+    "carbohydrates": 0.86
+  },
+  "mild green chiles": {
+    "calories": 18,
+    "protein": 0.9,
+    "fat": 0.09,
+    "carbohydrates": 4.26
+  },
+  "mirin": {
+    "calories": 71.88,
+    "protein": 0.08,
+    "fat": 0,
+    "carbohydrates": 13.8
+  },
+  "monterey jack cheese": {
+    "calories": 105.75,
+    "protein": 6.94,
+    "fat": 8.58,
+    "carbohydrates": 0.19
+  },
+  "mushroom soup": {
+    "calories": 409.5,
+    "protein": 14.87,
+    "fat": 22.55,
+    "carbohydrates": 36.29
+  },
+  "mustard powder": {
+    "calories": 10.16,
+    "protein": 0.52,
+    "fat": 0.72,
+    "carbohydrates": 0.56
+  },
+  "nori": {
+    "calories": 3.5,
+    "protein": 0.58,
+    "fat": 0.03,
+    "carbohydrates": 0.51
+  },
+  "nuts": {
+    "calories": 172.08,
+    "protein": 5.68,
+    "fat": 15.29,
+    "carbohydrates": 5.97
+  },
+  "oat flour": {
+    "calories": 420.16,
+    "protein": 15.25,
+    "fat": 9.48,
+    "carbohydrates": 68.33
+  },
+  "oatmilk": {
+    "calories": 130.38,
+    "protein": 1.97,
+    "fat": 0.98,
+    "carbohydrates": 29.15
+  },
+  "oil": {
+    "calories": 123.76,
+    "protein": 0,
+    "fat": 14,
+    "carbohydrates": 0
+  },
+  "onion salt": {
+    "calories": 0.51,
+    "protein": 0.02,
+    "fat": 0,
+    "carbohydrates": 0.12
+  },
+  "onion soup mix": {
+    "calories": 21.98,
+    "protein": 0.56,
+    "fat": 0.03,
+    "carbohydrates": 4.88
+  },
+  "onions": {
+    "calories": 41.36,
+    "protein": 1.28,
+    "fat": 0.18,
+    "carbohydrates": 9.54
+  },
+  "orange bell pepper": {
+    "calories": 31.92,
+    "protein": 1.05,
+    "fat": 0.23,
+    "carbohydrates": 7.64
+  },
+  "orange juice": {
+    "calories": 111.6,
+    "protein": 1.74,
+    "fat": 0.5,
+    "carbohydrates": 25.79
+  },
+  "oranges": {
+    "calories": 68.6,
+    "protein": 1.27,
+    "fat": 0.21,
+    "carbohydrates": 17.56
+  },
+  "oregano leaves": {
+    "calories": 2.65,
+    "protein": 0.09,
+    "fat": 0.04,
+    "carbohydrates": 0.69
+  },
+  "orzo": {
+    "calories": 315.54,
+    "protein": 11.09,
+    "fat": 1.28,
+    "carbohydrates": 63.51
+  },
+  "orzo pasta": {
+    "calories": 315.54,
+    "protein": 11.09,
+    "fat": 1.28,
+    "carbohydrates": 63.51
+  },
+  "oyster sauce": {
+    "calories": 9.18,
+    "protein": 0.24,
+    "fat": 0.05,
+    "carbohydrates": 1.97
+  },
+  "papaya": {
+    "calories": 62.35,
+    "protein": 0.68,
+    "fat": 0.38,
+    "carbohydrates": 15.69
+  },
+  "parsley leaves": {
+    "calories": 1.37,
+    "protein": 0.11,
+    "fat": 0.03,
+    "carbohydrates": 0.24
+  },
+  "pasta water": {
+    "calories": 195.92,
+    "protein": 7.19,
+    "fat": 1.15,
+    "carbohydrates": 38.27
+  },
+  "pastry dough": {
+    "calories": 297.1,
+    "protein": 5.69,
+    "fat": 15.57,
+    "carbohydrates": 33.42
+  },
+  "pea protein powder": {
+    "calories": 112.64,
+    "protein": 25,
+    "fat": 0.5,
+    "carbohydrates": 2
+  },
+  "peanut oil": {
+    "calories": 119.34,
+    "protein": 0,
+    "fat": 13.5,
+    "carbohydrates": 0
+  },
+  "peanuts": {
+    "calories": 5.87,
+    "protein": 0.24,
+    "fat": 0.5,
+    "carbohydrates": 0.21
+  },
+  "pecan": {
+    "calories": 10.3,
+    "protein": 0.14,
+    "fat": 1.07,
+    "carbohydrates": 0.21
+  },
+  "penne": {
+    "calories": 195.92,
+    "protein": 7.19,
+    "fat": 1.15,
+    "carbohydrates": 38.27
+  },
+  "pepper sauce": {
+    "calories": 0.52,
+    "protein": 0.02,
+    "fat": 0.02,
+    "carbohydrates": 0.08
+  },
+  "peppercorns": {
+    "calories": 5.77,
+    "protein": 0.24,
+    "fat": 0.07,
+    "carbohydrates": 1.47
+  },
+  "peppers": {
+    "calories": 31.54,
+    "protein": 1.08,
+    "fat": 0.23,
+    "carbohydrates": 7.49
+  },
+  "phyllo dough": {
+    "calories": 84.77,
+    "protein": 2.01,
+    "fat": 1.7,
+    "carbohydrates": 14.91
+  },
+  "phyllo pastry": {
+    "calories": 297.1,
+    "protein": 5.69,
+    "fat": 15.57,
+    "carbohydrates": 33.42
+  },
+  "pickle juice": {
+    "calories": 24.82,
+    "protein": 0.07,
+    "fat": 0.06,
+    "carbohydrates": 5.92
+  },
+  "pie crust": {
+    "calories": 782.32,
+    "protein": 10.01,
+    "fat": 44.03,
+    "carbohydrates": 86.61
+  },
+  "pineapple chunks": {
+    "calories": 149.4,
+    "protein": 1.05,
+    "fat": 0.2,
+    "carbohydrates": 39.09
+  },
+  "pineapple juice": {
+    "calories": 132.5,
+    "protein": 0.9,
+    "fat": 0.3,
+    "carbohydrates": 32.17
+  },
+  "pink salmon": {
+    "calories": 467.62,
+    "protein": 50.17,
+    "fat": 28.03,
+    "carbohydrates": 0
+  },
+  "pita bread": {
+    "calories": 165,
+    "protein": 5.46,
+    "fat": 0.72,
+    "carbohydrates": 33.42
+  },
+  "plain flour": {
+    "calories": 455,
+    "protein": 12.91,
+    "fat": 1.23,
+    "carbohydrates": 95.39
+  },
+  "pork chop": {
+    "calories": 328.13,
+    "protein": 40.21,
+    "fat": 17.36,
+    "carbohydrates": 0
+  },
+  "pork loin": {
+    "calories": 163.2,
+    "protein": 22.48,
+    "fat": 7.5,
+    "carbohydrates": 0
+  },
+  "pork ribs": {
+    "calories": 126.35,
+    "protein": 7.31,
+    "fat": 10.8,
+    "carbohydrates": 0
+  },
+  "pork sausage": {
+    "calories": 149.5,
+    "protein": 8.52,
+    "fat": 12.54,
+    "carbohydrates": 0.65
+  },
+  "pork shoulder": {
+    "calories": 394.2,
+    "protein": 31.43,
+    "fat": 28.88,
+    "carbohydrates": 0
+  },
+  "pork tenderloin": {
+    "calories": 124.95,
+    "protein": 22.13,
+    "fat": 3.37,
+    "carbohydrates": 0
+  },
+  "porridge oats": {
+    "calories": 213.6,
+    "protein": 10.94,
+    "fat": 5.83,
+    "carbohydrates": 29.61
+  },
+  "potato flour": {
+    "calories": 571.2,
+    "protein": 11.04,
+    "fat": 0.54,
+    "carbohydrates": 132.96
+  },
+  "potatoes": {
+    "calories": 160.89,
+    "protein": 4.33,
+    "fat": 0.22,
+    "carbohydrates": 36.59
+  },
+  "prawn": {
+    "calories": 5.95,
+    "protein": 1.14,
+    "fat": 0.09,
+    "carbohydrates": 0.08
+  },
+  "protein": {
+    "calories": 112.64,
+    "protein": 25,
+    "fat": 0.5,
+    "carbohydrates": 2
+  },
+  "protein powder": {
+    "calories": 112.64,
+    "protein": 25,
+    "fat": 0.5,
+    "carbohydrates": 2
+  },
+  "prunes": {
+    "calories": 22.8,
+    "protein": 0.21,
+    "fat": 0.04,
+    "carbohydrates": 6.07
+  },
+  "puff pastry": {
+    "calories": 158.19,
+    "protein": 2.1,
+    "fat": 10.91,
+    "carbohydrates": 12.96
+  },
+  "pumpkin purée": {
+    "calories": 83.3,
+    "protein": 2.7,
+    "fat": 0.69,
+    "carbohydrates": 19.82
+  },
+  "pumpkin seeds": {
+    "calories": 285.44,
+    "protein": 11.87,
+    "fat": 12.42,
+    "carbohydrates": 34.4
+  },
+  "quick oats": {
+    "calories": 120.36,
+    "protein": 4.19,
+    "fat": 2.41,
+    "carbohydrates": 20.66
+  },
+  "quinoa flour": {
+    "calories": 412.16,
+    "protein": 15.81,
+    "fat": 6.8,
+    "carbohydrates": 71.86
+  },
+  "red cabbage": {
+    "calories": 43.5,
+    "protein": 2.27,
+    "fat": 0.14,
+    "carbohydrates": 10.41
+  },
+  "red chili peppers": {
+    "calories": 18,
+    "protein": 0.84,
+    "fat": 0.2,
+    "carbohydrates": 3.96
+  },
+  "red chilies": {
+    "calories": 18,
+    "protein": 0.84,
+    "fat": 0.2,
+    "carbohydrates": 3.96
+  },
+  "red enchilada sauce": {
+    "calories": 16.8,
+    "protein": 0.35,
+    "fat": 0.51,
+    "carbohydrates": 2.73
+  },
+  "red lentils": {
+    "calories": 225.72,
+    "protein": 17.86,
+    "fat": 0.75,
+    "carbohydrates": 38.69
+  },
+  "red onions": {
+    "calories": 41.36,
+    "protein": 1.28,
+    "fat": 0.18,
+    "carbohydrates": 9.54
+  },
+  "red pepper": {
+    "calories": 31.92,
+    "protein": 1.05,
+    "fat": 0.23,
+    "carbohydrates": 7.64
+  },
+  "red pepper flakes": {
+    "calories": 5.72,
+    "protein": 0.22,
+    "fat": 0.31,
+    "carbohydrates": 1.02
+  },
+  "red potatoes": {
+    "calories": 266.11,
+    "protein": 6.88,
+    "fat": 0.45,
+    "carbohydrates": 58.57
+  },
+  "rib of celery": {
+    "calories": 126.35,
+    "protein": 7.31,
+    "fat": 10.8,
+    "carbohydrates": 0
+  },
+  "rice flour": {
+    "calories": 578.28,
+    "protein": 9.4,
+    "fat": 2.24,
+    "carbohydrates": 126.61
+  },
+  "rice vinegar": {
+    "calories": 2.68,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.01
+  },
+  "rice wine": {
+    "calories": 233.96,
+    "protein": 0.87,
+    "fat": 0,
+    "carbohydrates": 8.73
+  },
+  "rice wine vinegar": {
+    "calories": 2.68,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.01
+  },
+  "ricotta cheese": {
+    "calories": 171.12,
+    "protein": 14.12,
+    "fat": 9.81,
+    "carbohydrates": 6.37
+  },
+  "rigatoni pasta": {
+    "calories": 199.87,
+    "protein": 7.34,
+    "fat": 1.18,
+    "carbohydrates": 39.04
+  },
+  "romaine lettuce leaves": {
+    "calories": 2.89,
+    "protein": 0.21,
+    "fat": 0.05,
+    "carbohydrates": 0.56
+  },
+  "rosemary leaves": {
+    "calories": 3.97,
+    "protein": 0.06,
+    "fat": 0.18,
+    "carbohydrates": 0.77
+  },
+  "russet potato": {
+    "calories": 167.81,
+    "protein": 4.55,
+    "fat": 0.22,
+    "carbohydrates": 37.09
+  },
+  "saffron threads": {
+    "calories": 2.17,
+    "protein": 0.08,
+    "fat": 0.04,
+    "carbohydrates": 0.46
+  },
+  "sake": {
+    "calories": 233.96,
+    "protein": 0.87,
+    "fat": 0,
+    "carbohydrates": 8.73
+  },
+  "salmon fillets": {
+    "calories": 467.62,
+    "protein": 50.17,
+    "fat": 28.03,
+    "carbohydrates": 0
+  },
+  "salt": {
+    "calories": 0,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0
+  },
+  "scallions": {
+    "calories": 4.8,
+    "protein": 0.27,
+    "fat": 0.03,
+    "carbohydrates": 1.1
+  },
+  "seedless red grapes": {
+    "calories": 33.81,
+    "protein": 0.35,
+    "fat": 0.08,
+    "carbohydrates": 8.87
+  },
+  "serrano": {
+    "calories": 1.95,
+    "protein": 0.11,
+    "fat": 0.03,
+    "carbohydrates": 0.41
+  },
+  "shell pasta": {
+    "calories": 165.9,
+    "protein": 6.09,
+    "fat": 0.98,
+    "carbohydrates": 32.4
+  },
+  "shiitake": {
+    "calories": 6.46,
+    "protein": 0.43,
+    "fat": 0.09,
+    "carbohydrates": 1.29
+  },
+  "sirloin steak": {
+    "calories": 206.55,
+    "protein": 22.92,
+    "fat": 12.1,
+    "carbohydrates": 0
+  },
+  "smoked paprika": {
+    "calories": 6.49,
+    "protein": 0.33,
+    "fat": 0.3,
+    "carbohydrates": 1.24
+  },
+  "snapper fillets": {
+    "calories": 217.6,
+    "protein": 44.71,
+    "fat": 2.92,
+    "carbohydrates": 0
+  },
+  "sourdough bread": {
+    "calories": 174.08,
+    "protein": 6.88,
+    "fat": 1.55,
+    "carbohydrates": 33.2
+  },
+  "soy bean paste": {
+    "calories": 640.74,
+    "protein": 18.13,
+    "fat": 2.39,
+    "carbohydrates": 141.57
+  },
+  "soy milk": {
+    "calories": 99.63,
+    "protein": 7,
+    "fat": 4.01,
+    "carbohydrates": 7.99
+  },
+  "soybean sprouts": {
+    "calories": 42.7,
+    "protein": 4.58,
+    "fat": 2.35,
+    "carbohydrates": 3.35
+  },
+  "spinach leaves": {
+    "calories": 41.4,
+    "protein": 5.35,
+    "fat": 0.47,
+    "carbohydrates": 6.75
+  },
+  "spring onions": {
+    "calories": 4.8,
+    "protein": 0.27,
+    "fat": 0.03,
+    "carbohydrates": 1.1
+  },
+  "squash": {
+    "calories": 41.4,
+    "protein": 1.87,
+    "fat": 0.7,
+    "carbohydrates": 6.82
+  },
+  "sriracha sauce": {
+    "calories": 6.05,
+    "protein": 0.13,
+    "fat": 0.06,
+    "carbohydrates": 1.25
+  },
+  "sundried tomatoes": {
+    "calories": 5.16,
+    "protein": 0.28,
+    "fat": 0.06,
+    "carbohydrates": 1.12
+  },
+  "sweet onion": {
+    "calories": 105.92,
+    "protein": 2.65,
+    "fat": 0.26,
+    "carbohydrates": 24.99
+  },
+  "tamarind concentrate": {
+    "calories": 286.8,
+    "protein": 3.36,
+    "fat": 0.72,
+    "carbohydrates": 75
+  },
+  "tamarind paste": {
+    "calories": 286.8,
+    "protein": 3.36,
+    "fat": 0.72,
+    "carbohydrates": 75
+  },
+  "thai fish sauce": {
+    "calories": 6.3,
+    "protein": 0.91,
+    "fat": 0,
+    "carbohydrates": 0.66
+  },
+  "tiger prawn": {
+    "calories": 5.95,
+    "protein": 1.14,
+    "fat": 0.09,
+    "carbohydrates": 0.08
+  },
+  "toast": {
+    "calories": 63.8,
+    "protein": 1.98,
+    "fat": 0.88,
+    "carbohydrates": 11.99
+  },
+  "tomato paste": {
+    "calories": 13.12,
+    "protein": 0.69,
+    "fat": 0.08,
+    "carbohydrates": 3.03
+  },
+  "tomato pure": {
+    "calories": 22.14,
+    "protein": 1.08,
+    "fat": 0.25,
+    "carbohydrates": 4.78
+  },
+  "tomato sauce": {
+    "calories": 29.4,
+    "protein": 1.47,
+    "fat": 0.37,
+    "carbohydrates": 6.5
+  },
+  "tomatoes": {
+    "calories": 22.14,
+    "protein": 1.08,
+    "fat": 0.25,
+    "carbohydrates": 4.78
+  },
+  "tortilla": {
+    "calories": 159.25,
+    "protein": 4.26,
+    "fat": 3.48,
+    "carbohydrates": 27.24
+  },
+  "tortilla chips": {
+    "calories": 14.16,
+    "protein": 0.21,
+    "fat": 0.62,
+    "carbohydrates": 2.03
+  },
+  "tortillas": {
+    "calories": 159.25,
+    "protein": 4.26,
+    "fat": 3.48,
+    "carbohydrates": 27.24
+  },
+  "turmeric": {
+    "calories": 9.36,
+    "protein": 0.29,
+    "fat": 0.1,
+    "carbohydrates": 2.01
+  },
+  "turmeric powder": {
+    "calories": 9.36,
+    "protein": 0.29,
+    "fat": 0.1,
+    "carbohydrates": 2.01
+  },
+  "unsweetened coconut milk": {
+    "calories": 44.52,
+    "protein": 0.46,
+    "fat": 4.82,
+    "carbohydrates": 0.64
+  },
+  "vanilla": {
+    "calories": 12.1,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.53
+  },
+  "vanilla essence": {
+    "calories": 12.1,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.53
+  },
+  "vanilla greek yogurt": {
+    "calories": 12.1,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.53
+  },
+  "vanilla protein powder": {
+    "calories": 112.64,
+    "protein": 25,
+    "fat": 0.5,
+    "carbohydrates": 2
+  },
+  "vegan butter": {
+    "calories": 101.81,
+    "protein": 0.02,
+    "fat": 11.46,
+    "carbohydrates": 0.1
+  },
+  "vegan cheese": {
+    "calories": 70.31,
+    "protein": 3.25,
+    "fat": 3.46,
+    "carbohydrates": 6.71
+  },
+  "vegetable bouillon": {
+    "calories": 59.15,
+    "protein": 2.6,
+    "fat": 0.14,
+    "carbohydrates": 11.91
+  },
+  "vegetable oil": {
+    "calories": 120.22,
+    "protein": 0,
+    "fat": 13.6,
+    "carbohydrates": 0
+  },
+  "vegetable stock": {
+    "calories": 13.2,
+    "protein": 0.51,
+    "fat": 0.15,
+    "carbohydrates": 2.24
+  },
+  "vegetables": {
+    "calories": 59.15,
+    "protein": 2.6,
+    "fat": 0.14,
+    "carbohydrates": 11.91
+  },
+  "vodka": {
+    "calories": 97.02,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0
+  },
+  "water": {
+    "calories": 0,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0
+  },
+  "water chestnut": {
+    "calories": 60.14,
+    "protein": 0.87,
+    "fat": 0.06,
+    "carbohydrates": 14.84
+  },
+  "wheat tortilla": {
+    "calories": 127.1,
+    "protein": 4,
+    "fat": 4,
+    "carbohydrates": 18.81
+  },
+  "whey protein powder": {
+    "calories": 112.64,
+    "protein": 25,
+    "fat": 0.5,
+    "carbohydrates": 2
+  },
+  "white balsamic vinegar": {
+    "calories": 14.08,
+    "protein": 0.08,
+    "fat": 0,
+    "carbohydrates": 2.72
+  },
+  "white cheese": {
+    "calories": 365.8,
+    "protein": 24.05,
+    "fat": 28.69,
+    "carbohydrates": 2.99
+  },
+  "white fish": {
+    "calories": 264.88,
+    "protein": 37.68,
+    "fat": 11.57,
+    "carbohydrates": 0
+  },
+  "white vinegar": {
+    "calories": 2.68,
+    "protein": 0,
+    "fat": 0,
+    "carbohydrates": 0.01
+  },
+  "whole grain bread": {
+    "calories": 80.64,
+    "protein": 3.98,
+    "fat": 1.12,
+    "carbohydrates": 13.67
+  },
+  "wonton wrappers": {
+    "calories": 23.28,
+    "protein": 0.78,
+    "fat": 0.12,
+    "carbohydrates": 4.63
+  },
+  "worchestire sauce": {
+    "calories": 66,
+    "protein": 1.83,
+    "fat": 2.13,
+    "carbohydrates": 9.81
+  },
+  "parmesan cheese": {
+    "calories": 21,
+    "protein": 1.42,
+    "fat": 1.39,
+    "carbohydrates": 0.7
+  },
+  "garlic": {
+    "calories": 4.47,
+    "protein": 0.19,
+    "fat": 0.02,
+    "carbohydrates": 0.99
+  },
+  "lemon juice": {
+    "calories": 0.85,
+    "protein": 0.02,
+    "fat": 0,
+    "carbohydrates": 0.28
+  },
+  "walnuts": {
+    "calories": 13.28,
+    "protein": 0.31,
+    "fat": 1.32,
+    "carbohydrates": 0.28
+  },
+  "olive oil": {
+    "calories": 119.34,
+    "protein": 0,
+    "fat": 13.5,
+    "carbohydrates": 0
+  },
+  "black pepper": {
+    "calories": 5.77,
+    "protein": 0.24,
+    "fat": 0.07,
+    "carbohydrates": 1.47
+  }
+}
