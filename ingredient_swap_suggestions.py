@@ -116,7 +116,7 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
             print(f"DEBUG: Ingredient '{norm_ingredient}' already meets carb restriction, skipping swap.")
             return {"info": f"Ingredient already meets carb cutoff (<= {restrictions['max_carbohydrates_g_per_serving']}g carbs), no swap needed."}
 
-    best_swap = {"score": -np.inf}
+    swap_candidates = []
     distances, indices = knn.k_nearest_neighbors(ingredient_embedding.reshape(1, -1))
     flat_indices = indices.flatten()
     flat_distances = 1 - distances.flatten() if len(distances.flatten()) > 0 else []
@@ -128,16 +128,12 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
         if idx < len(ingredient_labels):
             substitute = ingredient_labels[idx]
             sub_primary = INGREDIENT_PRIMARY_CATEGORIES.get(substitute, "other")
-            # (DEBUG OUTPUT REMOVED)
             if sub_primary not in allowed_primaries:
                 continue
 
-            # Category exclusion (apply to all, before any scoring/nutrition checks)
             if restrictions and "exclude_categories" in restrictions and sub_primary in restrictions["exclude_categories"]:
                 continue
-            # Apply restrictions to substitute
             sub_nutrition = get_nutrition_profile(substitute)
-            # Macronutrient restriction
             if restrictions and "max_carbohydrates_g_per_serving" in restrictions:
                 if (
                     sub_nutrition is not None
@@ -145,41 +141,35 @@ def get_enhanced_swap(ingredient, embedding_dict, knn, ingredient_labels, scaler
                     and sub_nutrition["carbohydrates"] is not None
                     and sub_nutrition["carbohydrates"] > restrictions["max_carbohydrates_g_per_serving"]
                 ):
-                    print(f"DEBUG: Substitute '{substitute}' filtered out by carb restriction (carbs: {sub_nutrition['carbohydrates']} > {restrictions['max_carbohydrates_g_per_serving']}).")
                     continue
-            # Ingredient exclusion
             if restrictions and "exclude_ingredients" in restrictions and substitute.lower() in [e.lower() for e in restrictions["exclude_ingredients"]]:
-                print(f"DEBUG: Substitute '{substitute}' excluded by ingredient restriction.")
                 continue
-
-            # (DEBUG OUTPUT REMOVED)
             if substitute == norm_ingredient:
                 continue
-
             if not is_culinarily_valid(norm_ingredient, substitute):
                 continue
 
             substitute_nutrition = get_nutrition_profile(substitute)
             nutrition_delta = calculate_nutrition_delta(original_nutrition, substitute_nutrition)
-            
-            # Weighted score
             foodbert_score = dist
             final_score = (0.8 * foodbert_score) - (0.2 * nutrition_delta)
 
-            if final_score > best_swap["score"]:
-                best_swap = {
-                    "substitute": substitute,
-                    "score": final_score,
-                    "foodbert_score": foodbert_score,
-                    "nutrition_delta": nutrition_delta,
-                    "original_nutrition": original_nutrition,
-                    "substitute_nutrition": substitute_nutrition
-                }
+            swap_candidates.append({
+                "substitute": substitute,
+                "score": final_score,
+                "foodbert_score": foodbert_score,
+                "nutrition_delta": nutrition_delta,
+                "original_nutrition": original_nutrition,
+                "substitute_nutrition": substitute_nutrition
+            })
 
-    if best_swap["score"] == -np.inf:
+    # Sort candidates by score descending and take top 3
+    swap_candidates = sorted(swap_candidates, key=lambda x: x["score"], reverse=True)[:3]
+
+    if not swap_candidates:
         return {"error": "No suitable substitute found."}
     
-    return best_swap
+    return {"ranked_swaps": swap_candidates}
 
 import concurrent.futures
 
