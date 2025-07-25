@@ -16,11 +16,29 @@ def analyze_dietary_restrictions(enriched_ingredients, restrictions):
         metadata = item.get("openfoodfacts_metadata", {})
         rationale = []
 
-        # Example restriction checks
-        if "low-carb" in restrictions and usda_carbs is not None and usda_carbs > restrictions["low-carb"]:
-            rationale.append(f"Carbs ({usda_carbs}g) exceed low-carb threshold ({restrictions['low-carb']}g).")
-        if "vegan" in restrictions and metadata:
-            if not any("vegan" in tag for tag in metadata.get("vegan", [])):
+        # Apply merged dietary restriction rules
+        # Macronutrient threshold
+        from ingredient_swap_suggestions import get_nutrition_profile
+        nutrition = get_nutrition_profile(ingredient)
+        carbs = nutrition.get("carbohydrates", None)
+        if "max_carbohydrates_g_per_serving" in restrictions and carbs is not None:
+            if carbs > restrictions["max_carbohydrates_g_per_serving"]:
+                rationale.append(f"Carbs ({carbs}g) exceed max per serving ({restrictions['max_carbohydrates_g_per_serving']}g).")
+        if "max_fat_percent_per_serving" in restrictions and nutrition.get("fat_percent") is not None:
+            if nutrition["fat_percent"] > restrictions["max_fat_percent_per_serving"]:
+                rationale.append(f"Fat percent ({nutrition['fat_percent']}%) exceeds max per serving ({restrictions['max_fat_percent_per_serving']}%).")
+        # Category exclusion
+        if "exclude_categories" in restrictions and item.get("primary_category") in restrictions["exclude_categories"]:
+            rationale.append(f"Category '{item.get('primary_category')}' is excluded by restriction.")
+        # Ingredient exclusion
+        if "exclude_ingredients" in restrictions and ingredient.lower() in [e.lower() for e in restrictions["exclude_ingredients"]]:
+            rationale.append(f"Ingredient '{ingredient}' is excluded by restriction.")
+        # Flagged allergens
+        if restrictions.get("exclude_flagged_allergens") and item.get("is_flagged_allergen"):
+            rationale.append(f"Ingredient '{ingredient}' is flagged as allergen.")
+        # Vegan check
+        if "exclude_categories" in restrictions and "meat" in restrictions["exclude_categories"]:
+            if metadata and not any("vegan" in tag for tag in metadata.get("vegan", [])):
                 rationale.append("Ingredient may not be vegan.")
         # Add more checks as needed
 

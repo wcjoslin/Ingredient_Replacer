@@ -17,7 +17,8 @@ from foodbert_embeddings.helpers.generate_ingredient_embeddings import generate_
 from foodbert_embeddings.helpers.utils import clean_ingredient_name, clean_substitutes
 
 
-threshold = 0.48
+from config import INGREDIENT_SUGGESTION_SCORE_THRESHOLD, INGREDIENT_SUGGESTION_ALLOWED_CATEGORIES
+threshold = INGREDIENT_SUGGESTION_SCORE_THRESHOLD
 
 def avg(values):
     summed = sum(values)
@@ -47,6 +48,9 @@ def filter_out_forbidden_neigbours(ingredient_name, potential_neighbors):
     return filtered_potential_neighbors
 
 
+with open("ingredient_primary_categories.json") as cat_file:
+    INGREDIENT_CATEGORY_MAP = json.load(cat_file)
+
 def get_nearest_N_neigbours(ingredient_name, ingredients_to_embeddings, all_ingredient_labels,
                             knn_classifier: ApproxKNNClassifier):
     ingredient_embeddings = ingredients_to_embeddings[ingredient_name]
@@ -68,13 +72,28 @@ def get_nearest_N_neigbours(ingredient_name, ingredients_to_embeddings, all_ingr
     relative_lengths = [len(elem[1]) / (len(sorted_neighbors[0][1])) for elem in sorted_neighbors]
     final_neighbors = []
     for idx in range(len(relative_lengths)):
-        if relative_lengths[idx] >= threshold:  # Currently doesn't sort anything out # TODO tune this
+        if relative_lengths[idx] >= threshold:
             final_neighbors.append(sorted_neighbors[idx])
 
-    try:
-        return list(zip(*final_neighbors))[0]
+    # Compute average score for each neighbor (lower distance = higher confidence)
+    ranked_neighbors = []
+    for key, distances in final_neighbors:
+        avg_distance = avg(distances)
+        # Category filtering
+        cat = INGREDIENT_CATEGORY_MAP.get(key, None)
+        if cat and cat in INGREDIENT_SUGGESTION_ALLOWED_CATEGORIES:
+            ranked_neighbors.append((key, avg_distance))
 
-    except Exception as e:
+    # Sort by confidence (lowest avg_distance first)
+    ranked_neighbors.sort(key=lambda x: x[1])
+
+    # Limit to top 3
+    top_neighbors = ranked_neighbors[:3]
+
+    # Return list of (ingredient, score)
+    if top_neighbors:
+        return top_neighbors
+    else:
         return None
 
 
@@ -143,11 +162,17 @@ def main():
             none_counter += 1
             continue
 
-        cleaned_substitutes = clean_substitutes(substitutes, normalization_fixes)
-        for cleaned_substitute in cleaned_substitutes:
-            subtitute_pairs.add((clean_ingredient_name(ingredient_name, normalization_fixes), cleaned_substitute))
+        # substitutes is a list of (ingredient, score)
+        cleaned_substitutes = []
+        for sub_name, sub_score in substitutes:
+            cleaned_name = clean_ingredient_name(sub_name, normalization_fixes)
+            cleaned_substitutes.append((clean_ingredient_name(ingredient_name, normalization_fixes), cleaned_name, sub_score))
+
+        for entry in cleaned_substitutes:
+            subtitute_pairs.add(entry)
 
     with substitute_pairs_path.open('w') as f:
+        # Save as list of tuples: (original, substitute, score)
         json.dump(list(sorted(subtitute_pairs)), f)
 
     print(f'Nones: {none_counter}')

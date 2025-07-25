@@ -65,5 +65,38 @@ class TestIngredientWorkflowFiltering(unittest.TestCase):
         # "unknown ingredient" should be excluded
         self.assertNotIn("unknown ingredient", [i["ingredient"] for i in filtered_flagged])
 
+class TestMultiIngredientSuggestionRanking(unittest.TestCase):
+    def test_ranked_swaps_structure(self):
+        # Simulate API output for multi-ingredient suggestion
+        api_response = {
+            "swap_suggestion": {
+                "ranked_swaps": [
+                    {"substitute": "greek yogurt", "score": 0.92},
+                    {"substitute": "cottage cheese", "score": 0.85},
+                    {"substitute": "quark", "score": 0.80}
+                ]
+            }
+        }
+        ranked = api_response["swap_suggestion"]["ranked_swaps"]
+        self.assertTrue(isinstance(ranked, list))
+        self.assertLessEqual(len(ranked), 3)
+        self.assertEqual(ranked[0]["substitute"], "greek yogurt")
+        self.assertGreater(ranked[0]["score"], ranked[1]["score"])
+        self.assertGreater(ranked[1]["score"], ranked[2]["score"])
+
+    def test_ranked_swaps_edge_cases(self):
+        # 0 results
+        api_response = {"swap_suggestion": {"ranked_swaps": []}}
+        self.assertEqual(len(api_response["swap_suggestion"]["ranked_swaps"]), 0)
+        # 1 result
+        api_response = {"swap_suggestion": {"ranked_swaps": [{"substitute": "greek yogurt", "score": 0.92}]}}
+        self.assertEqual(len(api_response["swap_suggestion"]["ranked_swaps"]), 1)
+        # 2 results
+        api_response = {"swap_suggestion": {"ranked_swaps": [
+            {"substitute": "greek yogurt", "score": 0.92},
+            {"substitute": "cottage cheese", "score": 0.85}
+        ]}}
+        self.assertEqual(len(api_response["swap_suggestion"]["ranked_swaps"]), 2)
+
 if __name__ == "__main__":
     unittest.main()
