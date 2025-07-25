@@ -67,6 +67,15 @@ def get_nutrition_profile(ingredient):
     # Always use Nutritionix reference for common spices and garlic
     if norm_ingredient in SPICE_NUTRITION:
         return SPICE_NUTRITION[norm_ingredient]
+    # Load Nutritionix reference data for all ingredients
+    try:
+        with open("data enrichment/enriched_ingredient_data_nutritionix.json", "r", encoding="utf-8") as nut_file:
+            nutritionix_list = json.load(nut_file)
+        nutritionix_data = {entry["ingredient"].lower().strip(): entry["nutritionix_nutrition_profile"] for entry in nutritionix_list}
+        if norm_ingredient in nutritionix_data:
+            return nutritionix_data[norm_ingredient]
+    except Exception as e:
+        pass
     # Use cache if available
     if norm_ingredient in NUTRITION_CACHE:
         return NUTRITION_CACHE[norm_ingredient]
