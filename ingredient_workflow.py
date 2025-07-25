@@ -20,14 +20,22 @@ def run_ingredient_workflow(recipe_path, restrictions, output_prefix="final_reci
     # For this example, we'll stick to the format from `diet_test_recipe_details.json`
     ingredients = [i["name"] for i in recipe["pre_diabetic"]["ingredients"]]
 
-    # Step 2: Enrich ingredient data
-    enriched_data = enrich_ingredient_data(ingredients)
+    # Step 2: Enrich ingredient data using Nutritionix reference
+    with open("data enrichment/enriched_ingredient_data_nutritionix.json", "r", encoding="utf-8") as nut_file:
+        nutritionix_list = json.load(nut_file)
+    nutritionix_data = {entry["ingredient"].lower().strip(): entry["nutritionix_nutrition_profile"] for entry in nutritionix_list}
+    enriched_data = []
+    for ingredient in ingredients:
+        nutrition = nutritionix_data.get(ingredient.lower().strip(), {})
+        enriched_data.append({"ingredient": ingredient, "nutrition": nutrition})
     
     # Step 3: Flag ingredients based on restrictions
     flagged_ingredients = analyze_dietary_restrictions(enriched_data, restrictions)
 
-    # Early filtering: Remove spices and ingredients already meeting nutrition/category rules
+    # Early filtering: Remove spices, ingredients already meeting nutrition/category rules, and mismatched categories
     from ingredient_swap_suggestions import COMMON_SPICES
+    with open("ingredient_primary_categories.json", "r", encoding="utf-8") as cat_file:
+        primary_categories = json.load(cat_file)
     filtered_flagged = []
     for item in flagged_ingredients:
         name = item["ingredient"].lower().strip()
@@ -38,7 +46,13 @@ def run_ingredient_workflow(recipe_path, restrictions, output_prefix="final_reci
         nutrition = item.get("nutrition", {})
         if nutrition and nutrition.get("carbohydrates", 0) <= 10:
             continue
-        # TODO: Add category filtering if needed
+        # Category filtering: Only allow replacements with matching primary category
+        target_category = primary_categories.get(name)
+        if not target_category:
+            continue
+        # Only keep if candidate's category matches the flagged ingredient's category
+        if primary_categories.get(name) != target_category:
+            continue
         filtered_flagged.append(item)
 
     flagged_path = f"{output_prefix}_flagged_ingredients.json"
