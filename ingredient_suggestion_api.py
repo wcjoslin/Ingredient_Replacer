@@ -1,67 +1,131 @@
 # ingredient_suggestion_api.py
-# Enhanced FastAPI endpoint to serve multi-ingredient suggestions with dietary restriction filtering and CORS support
+# FastAPI endpoint for dynamic foodBERT-powered ingredient swaps
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 import json
+import pickle
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+from ingredient_swap_suggestions import get_enhanced_swap, COMMON_SPICES
+from dietary_restriction_analysis import analyze_dietary_restrictions
+from ingredient_workflow import map_ingredients_to_foodbert
 
 app = FastAPI(title="Multi-Ingredient Suggestion API")
 
-# Add CORS support
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can restrict this to ["http://localhost:3000"] for more security
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Load swap suggestions at startup
-with open("swap_suggestions_official.json", "r", encoding="utf-8") as f:
-    SUGGESTIONS = json.load(f)
+# Load all required data/models ONCE at startup
+with open("foodBERT/foodbert_embeddings/data/food_embeddings_dict_foodbert_combined.pkl", "rb") as f:
+    embedding_dict = pickle.load(f)
+ingredient_labels = list(embedding_dict.keys())
+all_embeddings_max = [np.max(embedding_dict[label], axis=0) for label in ingredient_labels]
+all_embeddings_max = np.stack(all_embeddings_max)
+from foodBERT.foodbert_embeddings.helpers.approx_knn_classifier import ApproxKNNClassifier
+knn_max = ApproxKNNClassifier(all_ingredient_embeddings=all_embeddings_max, max_embedding_count=40)
+raw_scores = []
+for emb in all_embeddings_max:
+    dists, _ = knn_max.k_nearest_neighbors(emb.reshape(1, -1))
+    raw_scores.extend(1 - dists.flatten())
+raw_scores = np.array(raw_scores).reshape(-1, 1)
+zscore_scaler = StandardScaler().fit(raw_scores)
 
-def filter_suggestions_by_diet(suggestions, diets: Optional[List[str]]):
-    if not diets or len(diets) == 0:
-        return suggestions
-    filtered = []
-    for entry in suggestions:
-        # Assume each entry has a 'diets' field: list of compatible diet keys
-        # If not present, treat as compatible with all diets
-        entry_diets = entry.get("diets", [])
-        if not entry_diets or any(diet in entry_diets for diet in diets):
-            filtered.append(entry)
-    return filtered
+with open("ingredient_primary_categories.json", "r", encoding="utf-8") as cat_file:
+    primary_categories = json.load(cat_file)
+
+# Load dietary restriction presets
+with open("dietary_restriction_presets.json", "r", encoding="utf-8") as f:
+    restriction_presets = json.load(f)
+
+def merge_restriction_rules(diet_ids: List[str]):
+    merged_rules = {}
+    for rid in diet_ids:
+        preset = next((p for p in restriction_presets if p["id"] == rid), None)
+        if preset:
+            for k, v in preset["rules"].items():
+                if k.startswith("max_"):
+                    if k not in merged_rules or v < merged_rules[k]:
+                        merged_rules[k] = v
+                elif k.startswith("min_"):
+                    if k not in merged_rules or v > merged_rules[k]:
+                        merged_rules[k] = v
+                elif isinstance(v, list):
+                    merged_rules.setdefault(k, []).extend([item for item in v if item not in merged_rules.get(k, [])])
+                else:
+                    merged_rules[k] = v
+    return merged_rules
 
 @app.get("/suggestions")
-def get_all_suggestions(diets: Optional[List[str]] = Query(None, description="Dietary restriction keys")):
-    """
-    Return all ingredient swap suggestions, optionally filtered by dietary restrictions.
-    Example: /suggestions?diets=vegan&diets=glutenfree
-    """
-    filtered = filter_suggestions_by_diet(SUGGESTIONS, diets)
-    return JSONResponse(content=filtered)
+def suggestions_get():
+    return JSONResponse(content={"error": "Use POST for /suggestions. This endpoint only supports POST requests with a JSON body containing ingredients and diets."}, status_code=405)
 
-@app.get("/suggestion")
-def get_suggestion(
-    ingredient: str = Query(..., description="Ingredient name to query"),
-    diets: Optional[List[str]] = Query(None, description="Dietary restriction keys"),
-):
+@app.post("/suggestions")
+async def get_suggestions_post(request: Request):
     """
-    Return swap suggestion for a specific ingredient, optionally filtered by dietary restrictions.
+    Accepts a POST request with a JSON body:
+    {
+        "ingredients": ["ingredient1", "ingredient2", ...],
+        "diets": ["vegan", "glutenfree", ...]  # optional
+    }
+    Returns swap suggestions for the provided ingredients, filtered by diets if specified.
     """
-    ingredient_lower = ingredient.lower().strip()
-    filtered = filter_suggestions_by_diet(SUGGESTIONS, diets)
-    for entry in filtered:
-        if entry["ingredient"].lower().strip() == ingredient_lower:
-            return JSONResponse(content=entry)
-    return JSONResponse(content={"error": f"No swap suggestion found for '{ingredient}'"}, status_code=404)
+    body = await request.json()
+    raw_ingredients = body.get("ingredients", [])
+    diets = body.get("diets", [])
+    restrictions = merge_restriction_rules(diets)
 
-# Example usage:
-# GET /suggestions                -> returns all swap suggestions
-# GET /suggestions?diets=vegan    -> returns vegan-compatible swaps
-# GET /suggestion?ingredient=Olive oil&diets=vegan   -> returns vegan swap for "Olive oil"
+    # Step 0: Normalize and map ingredients to foodBERT vocabulary
+    mapped_ingredients = map_ingredients_to_foodbert(raw_ingredients)
+    print(f"\n--- MAPPED INGREDIENTS ---\n{mapped_ingredients}\n")
 
-# To run:
-#   uvicorn ingredient_suggestion_api:app --reload
+    # Step 1: Enrich ingredient data (Nutritionix reference)
+    with open("data enrichment/enriched_ingredient_data_nutritionix.json", "r", encoding="utf-8") as nut_file:
+        nutritionix_list = json.load(nut_file)
+    nutritionix_data = {entry["ingredient"].lower().strip(): entry["nutritionix_nutrition_profile"] for entry in nutritionix_list}
+    enriched_data = []
+    for ingredient in mapped_ingredients:
+        nutrition = nutritionix_data.get(ingredient.lower().strip(), {})
+        enriched_data.append({"ingredient": ingredient, "nutrition": nutrition})
+    print(f"\n--- ENRICHED INGREDIENT DATA ---\n{enriched_data}\n")
+
+    # Step 2: Flag ingredients based on restrictions
+    flagged_ingredients = analyze_dietary_restrictions(enriched_data, restrictions)
+    print(f"\n--- FLAGGED INGREDIENTS ---\n{flagged_ingredients}\n")
+
+    # Step 3: Filter flagged ingredients (remove spices, low-carb, missing category)
+    filtered_flagged = []
+    for item in flagged_ingredients:
+        name = item["ingredient"].lower().strip()
+        if name in COMMON_SPICES:
+            continue
+        nutrition = item.get("nutrition", {})
+        if nutrition and nutrition.get("carbohydrates", 0) <= 10:
+            continue
+        target_category = primary_categories.get(name)
+        if not target_category:
+            continue
+        filtered_flagged.append(item)
+    print(f"\n--- FILTERED FLAGGED INGREDIENTS ---\n{filtered_flagged}\n")
+
+    # Step 4: Get swap suggestions for flagged ingredients
+    results = []
+    for item in filtered_flagged:
+        swap_result = get_enhanced_swap(
+            item["ingredient"], embedding_dict, knn_max, ingredient_labels, scaler=zscore_scaler, restrictions=restrictions
+        )
+        results.append({
+            "original": item["ingredient"],
+            "swap_suggestion": swap_result
+        })
+    print(f"\n--- FINAL SWAP RESULTS ---\n{results}\n")
+
+    return JSONResponse(content={"suggestions": results})
