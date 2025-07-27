@@ -73,7 +73,7 @@ foodBERT/foodbert_embeddings/data/*.pkl
 app-landing-page/.next/
 app-landing-page/node_modules/
 app-landing-page/package-lock.json
-
+/node_modules
 # Python cache
 __pycache__/
 *.pyc
