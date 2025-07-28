@@ -49,17 +49,15 @@ This project allows users to upload recipes and receive ingredient suggestions o
 
 ---
 
-## API Endpoints
+## API Documentation
 
-### `POST /upload-recipe`
-- **Description:** Upload a recipe file and receive ingredient suggestions.
-- **Request:** Multipart/form-data with recipe file.
-- **Response:** JSON with suggested ingredients and replacements.
+See [API_DOCS.md](API_DOCS.md) for full details.
 
-### `GET /ingredient-suggestions`
-- **Description:** Get ingredient suggestions for a given recipe.
-- **Request:** Query parameters or JSON body.
-- **Response:** JSON with suggestions.
+**Main Endpoint:**
+
+### POST `/suggestions`
+- **Request:** JSON body with `ingredients` (array of strings) and optional `diets` (array of strings).
+- **Response:** JSON with swap suggestions for each ingredient.
 
 ---
 
@@ -75,16 +73,20 @@ This project allows users to upload recipes and receive ingredient suggestions o
 
 ## Testing
 
-### Manual Testing
+### Backend
 
-- Upload valid and invalid recipe files.
-- Test with different dietary restrictions.
-- Check error handling and UI feedback.
+- Run backend tests:
+  ```bash
+  pytest tests/test_recipe_upload_api.py
+  ```
 
-### Automated Testing
+### Frontend
 
-- Backend: Use `pytest` for API endpoint tests.
-- Frontend: Use `Jest` and `React Testing Library` for component and integration tests.
+- Run frontend tests:
+  ```bash
+  cd app-landing-page
+  npm test
+  ```
 
 ---
 
@@ -98,11 +100,9 @@ This project allows users to upload recipes and receive ingredient suggestions o
 
 ## Unfinished Steps (for future tasks)
 
-- Remove any committed `node_modules` folders from git history.
-- Clean up large data/model files from git history if needed.
-- Add automated unit and integration tests for backend and frontend.
-- Add OpenAPI/Swagger documentation for backend API.
-- Push all staged changes to GitHub.
+- Add real frontend and backend tests for all major features.
+- Expand API documentation as new endpoints are added.
+- Set up CI/CD for automated testing and deployment.
 
 ---
 
