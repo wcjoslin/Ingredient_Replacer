@@ -2,44 +2,47 @@
 
 ## Overview
 
-This API provides ingredient swap suggestions based on user-provided ingredients and dietary restrictions, powered by foodBERT and custom logic.
-
----
-
-## Base URL
-
-```
-http://localhost:8000
-```
-
----
+This API provides robust ingredient enrichment and substitution, including:
+- Nutrition facts (from Nutritionix)
+- Dietary categories (from foodBERT)
+- Dietary restriction flagging (vegan, vegetarian, gluten-free, etc.)
+- Ranked ingredient swap suggestions
 
 ## Endpoints
 
 ### POST `/suggestions`
 
-**Description:**  
-Get swap suggestions for a list of ingredients, optionally filtered by dietary restrictions.
-
-**Request Body (JSON):**
+**Request:**
 ```json
 {
-  "ingredients": ["ingredient1", "ingredient2", "..."],
-  "diets": ["vegan", "glutenfree", "..."] // optional
+  "ingredients": ["ingredient1", "ingredient2", ...],
+  "diets": ["vegan", "glutenfree", ...]  // optional
 }
 ```
 
-- `ingredients`: (array of strings) List of ingredient names.
-- `diets`: (optional, array of strings) List of dietary restriction IDs.
+- `ingredients`: List of ingredient names (cleaned, e.g., from recipe parsing)
+- `diets`: Array of dietary restriction keys (see below for options)
 
-**Response (200 OK):**
+**Response:**
 ```json
 {
   "suggestions": [
     {
-      "original": "ingredient1",
+      "original": "mozzarella cheese",
+      "categories": ["en:dairies", "en:cheeses", ...],  // raw keys for logic
+      "display_categories": ["Dairies", "Cheeses", ...], // user-friendly for UI
+      "dietary_flags": ["Not vegan", "vegetarian-friendly"],
       "swap_suggestion": {
-        // swap suggestion details (structure depends on backend logic)
+        "ranked_swaps": [
+          {
+            "substitute": "plant-based cheese",
+            "score": 0.91,
+            "foodbert_score": 0.93,
+            "nutrition_delta": 0.05,
+            "original_nutrition": {...},
+            "substitute_nutrition": {...}
+          }
+        ]
       }
     },
     ...
@@ -47,55 +50,73 @@ Get swap suggestions for a list of ingredients, optionally filtered by dietary r
 }
 ```
 
-**Error Responses:**
-- `405 Method Not Allowed`: If using GET on `/suggestions`.
-- `422 Unprocessable Entity`: If request body is invalid.
+- Only ingredients flagged for the selected dietary restrictions are included in the swap suggestions.
+- Category and restriction matching is robust and case-insensitive.
 
----
+## Dietary Restriction Keys
+
+Supported values for the `diets` array (case-insensitive):
+- `"vegan"`
+- `"vegetarian"`
+- `"glutenfree"`
+- `"dairyfree"`
+- `"lowcarb"`
+- `"paleo"`
+- `"keto"`
+- (See `dietary_restriction_presets.json` for full list and logic.)
+
+## Enrichment & Swap Workflow
+
+1. **Ingredient normalization:** Handles singular/plural and punctuation.
+2. **Nutrition lookup:** From Nutritionix reference.
+3. **Category lookup:** From foodBERT categories (raw keys and display names).
+4. **Dietary restriction flagging:** Matches categories against restriction presets (case-insensitive).
+5. **Swap suggestion:** For flagged ingredients, suggests up to 3 substitutes.
+
+## Error Handling
+
+- If nutrition or category data is missing, a clear message is included in the output.
+- Partial results are returned if only some data is available.
 
 ## Example Usage
 
-### Request
-
-```http
-POST /suggestions HTTP/1.1
-Host: localhost:8000
-Content-Type: application/json
-
+**Request:**
+```json
 {
-  "ingredients": ["egg", "milk", "flour"],
+  "ingredients": ["mozzarella cheese", "lasagna noodles"],
   "diets": ["vegan"]
 }
 ```
 
-### Response
-
+**Response:**
 ```json
 {
   "suggestions": [
     {
-      "original": "egg",
+      "original": "mozzarella cheese",
+      "categories": ["en:dairies", "en:cheeses"],
+      "display_categories": ["Dairies", "Cheeses"],
+      "dietary_flags": ["Not vegan", "vegetarian-friendly"],
       "swap_suggestion": {
-        "swap": "flaxseed meal",
-        "score": 0.92,
-        "reason": "Vegan alternative"
+        "ranked_swaps": [
+          {
+            "substitute": "plant-based cheese",
+            "score": 0.91,
+            "foodbert_score": 0.93,
+            "nutrition_delta": 0.05,
+            "original_nutrition": {"calories": 85, "protein": 6.3, "carbohydrates": 0.6, "fat": 6.3},
+            "substitute_nutrition": {"calories": 70, "protein": 2.0, "carbohydrates": 1.0, "fat": 4.0}
+          }
+        ]
       }
-    },
-    ...
+    }
   ]
 }
 ```
 
----
-
 ## Notes
 
-- The `/suggestions` endpoint expects a JSON body.
-- The list of supported `diets` can be found in your `dietary_restriction_presets.json`.
-- The structure of `swap_suggestion` may include fields like `swap`, `score`, and `reason`, depending on your backend implementation.
+- The API is designed for synchronous use during recipe upload or ingredient analysis.
+- For more details on the enrichment and swap logic, see [README.md](README.md).
 
 ---
-
-## Contact
-
-For questions or issues, please open an issue on GitHub or contact the project maintainer.
