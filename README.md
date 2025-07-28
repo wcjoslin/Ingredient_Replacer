@@ -19,6 +19,48 @@ This project provides an API and UI for robust ingredient enrichment and substit
 
 ## API Endpoints
 
+### GET `/diet_rules`
+
+Returns all available diet rules, including description, category restrictions, and macronutrient restrictions for each diet. Used by the frontend to display diet summaries and restrictions.
+
+### POST `/enrich_ingredients`
+
+Request:
+```json
+{
+  "ingredients": ["ingredient1", "ingredient2", ...]
+}
+```
+
+Response:
+```json
+{
+  "ingredients": [
+    {
+      "ingredient": "mozzarella cheese",
+      "nutrition_facts": {
+        "calories": 85,
+        "protein": 6.3,
+        "carbs": 0.6,
+        "fat": 6.3
+      },
+      "categories": ["en:dairies", "en:cheeses", ...],
+      "swap_rationales": ["Category: Vegan excluded"],
+      "dietary_change_description": "Ingredient does not comply with selected diet(s): Category: Vegan excluded",
+      "bullet_points": [
+        "Calories: 85",
+        "Protein: 6.3",
+        "Carbs: 0.6",
+        "Fat: 6.3",
+        "Category: en:dairies",
+        "Flagged: Category: Vegan excluded"
+      ]
+    }
+  ]
+}
+```
+Used by the frontend to display ingredient nutrition, categories, and highlight dietary flags and rationales.
+
 ### POST `/suggestions`
 
 Request:
