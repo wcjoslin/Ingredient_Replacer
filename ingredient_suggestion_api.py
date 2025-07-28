@@ -1,5 +1,5 @@
 # ingredient_suggestion_api.py
-# FastAPI endpoint for dynamic foodBERT-powered ingredient swaps
+# FastAPI endpoint for dynamic foodBERT-powered ingredient swaps and robust enrichment
 
 from fastapi import FastAPI, Query, Request
 from fastapi.responses import JSONResponse
@@ -13,6 +13,9 @@ from sklearn.preprocessing import StandardScaler
 from ingredient_swap_suggestions import get_enhanced_swap, COMMON_SPICES
 from dietary_restriction_analysis import analyze_dietary_restrictions
 from ingredient_workflow import map_ingredients_to_foodbert
+
+# Import robust enrichment logic
+from ingredient_data_enrichment import enrich_recipe_ingredients
 
 app = FastAPI(title="Multi-Ingredient Suggestion API")
 
@@ -45,6 +48,15 @@ with open("ingredient_primary_categories.json", "r", encoding="utf-8") as cat_fi
 # Load dietary restriction presets
 with open("dietary_restriction_presets.json", "r", encoding="utf-8") as f:
     restriction_presets = json.load(f)
+
+# Load foodBERT category keys for each ingredient for raw category logic
+with open("foodbert_ingredient_categories_merged.json", "r", encoding="utf-8") as f:
+    foodbert_categories = json.load(f)
+
+def format_category_display(cat_key):
+    if cat_key.startswith("en:"):
+        cat_key = cat_key[3:]
+    return cat_key.replace("-", " ").replace("_", " ").title()
 
 def merge_restriction_rules(diet_ids: List[str]):
     merged_rules = {}
@@ -83,23 +95,61 @@ async def get_suggestions_post(request: Request):
     diets = body.get("diets", [])
     restrictions = merge_restriction_rules(diets)
 
+    # Debug: Print received diets
+    print("Received diets:", diets)
+
     # Step 0: Normalize and map ingredients to foodBERT vocabulary
     mapped_ingredients = map_ingredients_to_foodbert(raw_ingredients)
     print(f"\n--- MAPPED INGREDIENTS ---\n{mapped_ingredients}\n")
 
-    # Step 1: Enrich ingredient data (Nutritionix reference)
-    with open("data enrichment/enriched_ingredient_data_nutritionix.json", "r", encoding="utf-8") as nut_file:
-        nutritionix_list = json.load(nut_file)
-    nutritionix_data = {entry["ingredient"].lower().strip(): entry["nutritionix_nutrition_profile"] for entry in nutritionix_list}
+    # Step 1: Robust enrichment (nutrition, categories, dietary flags, error handling)
+    enriched_dict = enrich_recipe_ingredients(mapped_ingredients)
     enriched_data = []
-    for ingredient in mapped_ingredients:
-        nutrition = nutritionix_data.get(ingredient.lower().strip(), {})
-        enriched_data.append({"ingredient": ingredient, "nutrition": nutrition})
+    for ingr in mapped_ingredients:
+        nutrition = {}
+        # Use raw foodBERT category keys for logic
+        raw_category_keys = foodbert_categories.get(ingr.lower().strip(), [])
+        dietary_flags = []
+        # Human-friendly display categories
+        display_categories = [format_category_display(cat) for cat in raw_category_keys]
+        for bp in enriched_dict.get(ingr, []):
+            lower_bp = bp.lower()
+            if lower_bp.startswith("calories"):
+                try:
+                    nutrition["calories"] = float(bp.split(":")[1].strip())
+                except Exception:
+                    pass
+            elif lower_bp.startswith("protein"):
+                try:
+                    nutrition["protein"] = float(bp.split(":")[1].strip())
+                except Exception:
+                    pass
+            elif lower_bp.startswith("carbs"):
+                try:
+                    nutrition["carbohydrates"] = float(bp.split(":")[1].strip())
+                except Exception:
+                    pass
+            elif lower_bp.startswith("fat"):
+                try:
+                    nutrition["fat"] = float(bp.split(":")[1].strip())
+                except Exception:
+                    pass
+            elif bp.endswith("-friendly") or bp.startswith("Not "):
+                dietary_flags.append(bp.strip())
+        enriched_data.append({
+            "ingredient": ingr,
+            "nutrition": nutrition,
+            "categories": raw_category_keys,  # Use raw keys for logic and rules
+            "display_categories": display_categories,  # User-friendly for UI
+            "dietary_flags": dietary_flags
+        })
     print(f"\n--- ENRICHED INGREDIENT DATA ---\n{enriched_data}\n")
 
-    # Step 2: Flag ingredients based on restrictions
+    # Step 2: Flag ingredients based on restrictions (uses raw category keys)
     flagged_ingredients = analyze_dietary_restrictions(enriched_data, restrictions)
-    print(f"\n--- FLAGGED INGREDIENTS ---\n{flagged_ingredients}\n")
+    print("--- FLAGGED INGREDIENTS ---")
+    for item in flagged_ingredients:
+        print(item["ingredient"], item.get("dietary_flags", []))
 
     # Step 3: Filter flagged ingredients (remove spices, low-carb, missing category)
     filtered_flagged = []
@@ -108,7 +158,8 @@ async def get_suggestions_post(request: Request):
         if name in COMMON_SPICES:
             continue
         nutrition = item.get("nutrition", {})
-        if nutrition and nutrition.get("carbohydrates", 0) <= 10:
+        # Only filter for low-carb if requested
+        if "lowcarb" in diets and nutrition and nutrition.get("carbohydrates", 0) <= 10:
             continue
         target_category = primary_categories.get(name)
         if not target_category:
@@ -124,6 +175,9 @@ async def get_suggestions_post(request: Request):
         )
         results.append({
             "original": item["ingredient"],
+            "categories": item.get("categories", []),  # raw keys
+            "display_categories": item.get("display_categories", []),  # for UI
+            "dietary_flags": item.get("dietary_flags", []),
             "swap_suggestion": swap_result
         })
     print(f"\n--- FINAL SWAP RESULTS ---\n{results}\n")
