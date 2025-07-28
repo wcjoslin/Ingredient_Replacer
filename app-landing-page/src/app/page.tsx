@@ -39,6 +39,16 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedDiets, setSelectedDiets] = useState<string[]>([]);
+  const [dietSummaries, setDietSummaries] = useState<any[]>([]);
+  const [enrichedIngredients, setEnrichedIngredients] = useState<any[]>([]);
+
+  // Fetch diet summaries on mount
+  React.useEffect(() => {
+    fetch("http://127.0.0.1:8000/diet_rules")
+      .then((res) => res.json())
+      .then((data) => setDietSummaries(data.diets || []))
+      .catch(() => setDietSummaries([]));
+  }, []);
 
   function handleDietToggle(diet: string) {
     setSelectedDiets((prev) =>
@@ -66,6 +76,20 @@ export default function Home() {
         setIngredients(data.ingredients);
         // Step 2: Clean ingredients (no filtering)
         const cleanedIngredients = data.ingredients.map(cleanIngredient);
+
+        // Fetch enriched ingredient data for highlighting
+        try {
+          const enrichRes = await fetch("http://127.0.0.1:8000/enrich_ingredients", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ingredients: cleanedIngredients }),
+          });
+          const enrichData = await enrichRes.json();
+          setEnrichedIngredients(enrichData.ingredients || []);
+        } catch {
+          setEnrichedIngredients([]);
+        }
+
         // Step 3: Send ingredients and diets to backend for swap suggestions
         const swapRes = await fetch("http://127.0.0.1:8000/suggestions", {
           method: "POST",
@@ -119,13 +143,113 @@ export default function Home() {
         </button>
       </form>
       {error && <div className="text-red-600 mt-2">{error}</div>}
-      {ingredients.length > 0 && (
+      {/* Legend for highlight system */}
+      <div className="mt-6 w-full max-w-md">
+        <h2 className="text-md font-semibold mb-2">Legend</h2>
+        <ul className="list-disc pl-6">
+          <li>
+            <span className="inline-block w-3 h-3 bg-yellow-100 border-l-4 border-yellow-500 align-middle mr-2"></span>
+            <span className="align-middle">Ingredient flagged for dietary restriction</span>
+          </li>
+          <li>
+            <span className="inline-block w-3 h-3 bg-transparent border-l-4 border-red-700 align-middle mr-2"></span>
+            <span className="align-middle">Bullet highlighted in red: Reason for flag (nutrition/category)</span>
+          </li>
+          <li>
+            <span className="inline-block w-3 h-3 bg-gray-200 border align-middle mr-2"></span>
+            <span className="align-middle">No highlight: Ingredient is compliant</span>
+          </li>
+        </ul>
+        <div className="text-xs text-gray-600 mt-1">
+          <span className="font-semibold">Accessibility:</span> Icons and border styles are used in addition to color for users with color vision deficiency.
+        </div>
+      </div>
+      {/* Diet summaries */}
+      {selectedDiets.length > 0 && (
         <div className="mt-6 w-full max-w-md">
-          <h2 className="text-lg font-semibold mb-2">Extracted Ingredients:</h2>
-          <ul className="list-disc pl-6">
-            {ingredients.map((ing, i) => (
-              <li key={i}>{ing}</li>
+          <h2 className="text-lg font-semibold mb-2">Selected Diet Summaries:</h2>
+          {dietSummaries
+            .filter((diet) => selectedDiets.includes(diet.id))
+            .map((diet) => (
+              <div key={diet.id} className="mb-4 border rounded p-2 bg-gray-50">
+                <div className="font-bold">{diet.name}</div>
+                <div className="text-sm mb-1">{diet.description}</div>
+                <div>
+                  <span className="font-semibold">Category Restrictions:</span>
+                  <ul className="list-disc pl-6">
+                    {diet.category_restrictions.map((r: any, i: number) => (
+                      <li key={i} title={r.full}>
+                        {r.text}
+                        {r.text !== r.full && (
+                          <span className="ml-1 text-xs text-gray-500">(…)</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <span className="font-semibold">Macronutrient Restrictions:</span>
+                  <ul className="list-disc pl-6">
+                    {diet.macronutrient_restrictions.map((r: any, i: number) => (
+                      <li key={i} title={r.full}>
+                        {r.text}
+                        {r.text !== r.full && (
+                          <span className="ml-1 text-xs text-gray-500">(…)</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
+        </div>
+      )}
+      {/* Enriched ingredient list with highlights */}
+      {enrichedIngredients.length > 0 && (
+        <div className="mt-6 w-full max-w-md">
+          <h2 className="text-lg font-semibold mb-2">Ingredients & Nutrition:</h2>
+          <ul className="list-disc pl-6">
+            {enrichedIngredients.map((ing: any, i: number) => {
+              const isFlagged = ing.swap_rationales && ing.swap_rationales.length > 0;
+              return (
+                <li
+                  key={i}
+                  className={isFlagged ? "bg-yellow-100 border-l-4 border-yellow-500 p-2 mb-2 rounded" : ""}
+                  title={isFlagged ? ing.dietary_change_description : ""}
+                >
+                  <span className={isFlagged ? "font-bold text-black" : ""}>
+                    {ing.ingredient}
+                  </span>
+                  <ul className="list-disc pl-6">
+                    {ing.bullet_points.map((bp: string, j: number) => {
+                      // Highlight bullet if it's a rationale
+                      const isRationale = bp.startsWith("Flagged:");
+                      // If flagged and not rationale, make text black for contrast
+                      const bulletClass =
+                        isRationale
+                          ? "text-red-700 font-semibold"
+                          : isFlagged
+                          ? "text-black"
+                          : "";
+                      return (
+                        <li
+                          key={j}
+                          className={bulletClass}
+                          title={isRationale ? ing.swap_rationales.join("; ") : ""}
+                        >
+                          {bp}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {isFlagged && (
+                    <div className="text-xs text-yellow-700 mt-1">
+                      {ing.dietary_change_description}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

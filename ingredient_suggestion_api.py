@@ -103,7 +103,7 @@ async def get_suggestions_post(request: Request):
     print(f"\n--- MAPPED INGREDIENTS ---\n{mapped_ingredients}\n")
 
     # Step 1: Robust enrichment (nutrition, categories, dietary flags, error handling)
-    enriched_dict = enrich_recipe_ingredients(mapped_ingredients)
+    enriched_list = enrich_recipe_ingredients(mapped_ingredients)
     enriched_data = []
     for ingr in mapped_ingredients:
         nutrition = {}
@@ -112,30 +112,33 @@ async def get_suggestions_post(request: Request):
         dietary_flags = []
         # Human-friendly display categories
         display_categories = [format_category_display(cat) for cat in raw_category_keys]
-        for bp in enriched_dict.get(ingr, []):
-            lower_bp = bp.lower()
-            if lower_bp.startswith("calories"):
-                try:
-                    nutrition["calories"] = float(bp.split(":")[1].strip())
-                except Exception:
-                    pass
-            elif lower_bp.startswith("protein"):
-                try:
-                    nutrition["protein"] = float(bp.split(":")[1].strip())
-                except Exception:
-                    pass
-            elif lower_bp.startswith("carbs"):
-                try:
-                    nutrition["carbohydrates"] = float(bp.split(":")[1].strip())
-                except Exception:
-                    pass
-            elif lower_bp.startswith("fat"):
-                try:
-                    nutrition["fat"] = float(bp.split(":")[1].strip())
-                except Exception:
-                    pass
-            elif bp.endswith("-friendly") or bp.startswith("Not "):
-                dietary_flags.append(bp.strip())
+        # Find the enriched entry for this ingredient
+        enriched_entry = next((e for e in enriched_list if e["ingredient"] == ingr), None)
+        if enriched_entry:
+            for bp in enriched_entry.get("bullet_points", []):
+                lower_bp = bp.lower()
+                if lower_bp.startswith("calories"):
+                    try:
+                        nutrition["calories"] = float(bp.split(":")[1].strip())
+                    except Exception:
+                        pass
+                elif lower_bp.startswith("protein"):
+                    try:
+                        nutrition["protein"] = float(bp.split(":")[1].strip())
+                    except Exception:
+                        pass
+                elif lower_bp.startswith("carbs"):
+                    try:
+                        nutrition["carbohydrates"] = float(bp.split(":")[1].strip())
+                    except Exception:
+                        pass
+                elif lower_bp.startswith("fat"):
+                    try:
+                        nutrition["fat"] = float(bp.split(":")[1].strip())
+                    except Exception:
+                        pass
+                elif bp.endswith("-friendly") or bp.startswith("Not "):
+                    dietary_flags.append(bp.strip())
         enriched_data.append({
             "ingredient": ingr,
             "nutrition": nutrition,
@@ -183,3 +186,20 @@ async def get_suggestions_post(request: Request):
     print(f"\n--- FINAL SWAP RESULTS ---\n{results}\n")
 
     return JSONResponse(content={"suggestions": results})
+
+# --- New endpoint for ingredient enrichment (for diet highlight UI) ---
+
+@app.post("/enrich_ingredients")
+async def enrich_ingredients_post(request: Request):
+    """
+    Accepts a POST request with a JSON body:
+    {
+        "ingredients": ["ingredient1", "ingredient2", ...]
+    }
+    Returns enriched ingredient data for each ingredient, including nutrition facts, categories, swap rationales, and dietary change description.
+    """
+    body = await request.json()
+    ingredient_list = body.get("ingredients", [])
+    # No mapping or filtering, just enrichment
+    enriched = enrich_recipe_ingredients(ingredient_list)
+    return JSONResponse(content={"ingredients": enriched})

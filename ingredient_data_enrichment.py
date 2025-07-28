@@ -73,10 +73,11 @@ def preprocess_dietary_presets(presets_list):
     if not presets_list:
         return presets_dict
     for entry in presets_list:
-        name = entry.get("name")
+        # Use "id" as key for correct mapping to selected diets
+        key = entry.get("id") or entry.get("name")
         rules = entry.get("rules")
-        if name and rules:
-            presets_dict[name] = rules
+        if key and rules:
+            presets_dict[key] = rules
     return presets_dict
 
 def get_nutrition(ingredient, nutrition_data):
@@ -104,10 +105,13 @@ def flag_dietary_restrictions(categories, dietary_presets):
     flags = []
     if not categories or not dietary_presets:
         return flags
-    # Normalize ingredient categories for comparison
-    ingredient_cats = set([c.lower().strip() for c in categories])
+    # Normalize ingredient categories for comparison, strip "en:" prefix
+    def norm(cat):
+        c = cat.lower().strip()
+        return c[3:] if c.startswith("en:") else c
+    ingredient_cats = set([norm(c) for c in categories])
     for preset_name, rules in dietary_presets.items():
-        exclude = set([e.lower().strip() for e in rules.get("exclude_categories", [])])
+        exclude = set([norm(e) for e in rules.get("exclude_categories", [])])
         if exclude & ingredient_cats:
             flags.append(f"Not {preset_name}")
         else:
@@ -119,17 +123,45 @@ def enrich_ingredient(ingredient, nutrition_data, category_data, dietary_presets
     categories = get_categories(ingredient, category_data)
     dietary_flags = flag_dietary_restrictions(categories, dietary_presets)
 
-    bullet_points = []
+    # Nutrition facts as dict
+    nutrition_facts = {}
     if nutrition:
         for key in ["calories", "protein", "carbs", "fat"]:
             if key in nutrition:
-                bullet_points.append(f"{key.capitalize()}: {nutrition[key]}")
+                nutrition_facts[key] = nutrition[key]
             elif key == "carbs" and "carbohydrates" in nutrition:
-                bullet_points.append(f"Carbs: {nutrition['carbohydrates']}")
-    if categories:
-        bullet_points.extend([f"Category: {cat}" for cat in categories])
+                nutrition_facts["carbs"] = nutrition["carbohydrates"]
+
+    # Categories as list
+    categories_list = categories if categories else []
+
+    # Swap rationales: reasons for being flagged (nutrition/category)
+    swap_rationales = []
     if dietary_flags:
-        bullet_points.extend(dietary_flags)
+        for flag in dietary_flags:
+            if flag.startswith("Not "):
+                # Example: "Not Vegan" or "Not Keto"
+                reason = flag.replace("Not ", "")
+                if categories_list:
+                    swap_rationales.append(f"Category: {reason} excluded")
+                else:
+                    swap_rationales.append(f"Category restriction: {reason}")
+            # else: "{diet}-friendly" (not flagged)
+
+    # Description of dietary change (if flagged)
+    dietary_change_description = ""
+    if swap_rationales:
+        dietary_change_description = "Ingredient does not comply with selected diet(s): " + "; ".join(swap_rationales)
+
+    # Bullet points for display
+    bullet_points = []
+    if nutrition_facts:
+        for k, v in nutrition_facts.items():
+            bullet_points.append(f"{k.capitalize()}: {v}")
+    if categories_list:
+        bullet_points.extend([f"Category: {cat}" for cat in categories_list])
+    if swap_rationales:
+        bullet_points.extend([f"Flagged: {r}" for r in swap_rationales])
     if not nutrition and not categories:
         bullet_points.append(
             f"Nutritional Information for {ingredient} is incomplete at this time, unable to find dietary information at this time"
@@ -142,7 +174,15 @@ def enrich_ingredient(ingredient, nutrition_data, category_data, dietary_presets
         bullet_points.append(
             f"Dietary category information for {ingredient} is incomplete at this time"
         )
-    return bullet_points
+
+    return {
+        "ingredient": ingredient,
+        "nutrition_facts": nutrition_facts,
+        "categories": categories_list,
+        "swap_rationales": swap_rationales,
+        "dietary_change_description": dietary_change_description,
+        "bullet_points": bullet_points
+    }
 
 def enrich_recipe_ingredients(ingredient_list):
     nutrition_list = load_json(NUTRITION_FILE)
@@ -151,10 +191,12 @@ def enrich_recipe_ingredients(ingredient_list):
     dietary_presets_list = load_json(DIETARY_PRESETS_FILE)
     dietary_presets = preprocess_dietary_presets(dietary_presets_list)
 
-    enriched = {}
+    enriched = []
     for ingredient in ingredient_list:
-        enriched[ingredient] = enrich_ingredient(
-            ingredient, nutrition_data, category_data, dietary_presets
+        enriched.append(
+            enrich_ingredient(
+                ingredient, nutrition_data, category_data, dietary_presets
+            )
         )
     return enriched
 
