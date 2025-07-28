@@ -1,111 +1,86 @@
-# Ingredient Replacer – Recipe Upload Feature
+# Ingredient Replacer
 
-## Overview
+This project provides an API and UI for robust ingredient enrichment and substitution, including nutrition, dietary category, and dietary restriction flagging, powered by foodBERT and Nutritionix data.
 
-This project allows users to upload recipes and receive ingredient suggestions or replacements based on dietary preferences and other criteria.
+## Features
 
----
+- **Ingredient Enrichment:**  
+  - Nutrition facts (calories, protein, carbs, fat) from Nutritionix.
+  - Dietary categories from foodBERT (e.g., "en:cheeses", "en:dairies").
+  - Dietary restriction flagging (vegan, vegetarian, gluten-free, etc.) based on robust category matching.
+  - Handles singular/plural ingredient forms and partial/missing data gracefully.
 
-## Setup Instructions
+- **Ingredient Swap Suggestions:**  
+  - Suggests up to 3 ranked substitutes for flagged ingredients, with confidence scores and nutrition delta.
+  - Filtering and flagging logic respects user-selected dietary restrictions.
 
-### Backend (FastAPI)
+- **UI:**  
+  - Paste a recipe URL, select dietary restrictions, and get enriched ingredient info and swap suggestions.
 
-1. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. **Start the API server:**
-   ```bash
-   uvicorn ingredient_suggestion_api:app --reload
-   ```
-3. **Ensure required model/data files are present:**
-   - `foodBERT/foodbert_embeddings/data/food_embeddings_dict_foodbert_combined.pkl` (not tracked by git, must be present locally)
-
-### Frontend (Next.js/React)
-
-1. **Navigate to the frontend directory:**
-   ```bash
-   cd app-landing-page
-   ```
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-3. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-4. **Access the app:**
-   - Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## Recipe Upload Workflow
-
-1. User uploads a recipe file via the frontend.
-2. Frontend sends the file to the backend API.
-3. Backend processes the recipe and returns ingredient suggestions.
-4. Frontend displays the results to the user.
-
----
-
-## API Documentation
-
-See [API_DOCS.md](API_DOCS.md) for full details.
-
-**Main Endpoint:**
+## API Endpoints
 
 ### POST `/suggestions`
-- **Request:** JSON body with `ingredients` (array of strings) and optional `diets` (array of strings).
-- **Response:** JSON with swap suggestions for each ingredient.
+
+Request:
+```json
+{
+  "ingredients": ["ingredient1", "ingredient2", ...],
+  "diets": ["vegan", "glutenfree", ...]  // optional
+}
+```
+
+Response:
+```json
+{
+  "suggestions": [
+    {
+      "original": "mozzarella cheese",
+      "categories": ["en:dairies", "en:cheeses", ...],  // raw keys for logic
+      "display_categories": ["Dairies", "Cheeses", ...], // user-friendly for UI
+      "dietary_flags": ["Not vegan", "vegetarian-friendly"],
+      "swap_suggestion": {
+        "ranked_swaps": [
+          {
+            "substitute": "plant-based cheese",
+            "score": 0.91,
+            "foodbert_score": 0.93,
+            "nutrition_delta": 0.05,
+            "original_nutrition": {...},
+            "substitute_nutrition": {...}
+          }
+        ]
+      }
+    },
+    ...
+  ]
+}
+```
+
+- Only ingredients flagged for the selected dietary restrictions are included in the swap suggestions.
+- Category and restriction matching is robust and case-insensitive.
+
+## Enrichment Workflow
+
+1. **Ingredient normalization:** Handles singular/plural and punctuation.
+2. **Nutrition lookup:** From Nutritionix reference.
+3. **Category lookup:** From foodBERT categories (raw keys and display names).
+4. **Dietary restriction flagging:** Matches categories against restriction presets (case-insensitive).
+5. **Swap suggestion:** For flagged ingredients, suggests up to 3 substitutes.
+
+## Error Handling
+
+- If nutrition or category data is missing, a clear message is included in the output.
+- Partial results are returned if only some data is available.
+
+## Manual Testing
+
+- Paste a recipe URL in the UI, select dietary restrictions, and verify enrichment and swap suggestions.
+- Test with common, rare, and unknown ingredients.
+
+## Development
+
+- See `Ingredient_Data_Enrichment_Implementation_Checklist.md` for step-by-step implementation and testing guidance.
 
 ---
 
-## Environment Variables
-
-- `.env` file should contain any secrets, API keys, or configuration values.
-- Example:
-  ```
-  API_URL=http://localhost:8000
-  ```
-
----
-
-## Testing
-
-### Backend
-
-- Run backend tests:
-  ```bash
-  pytest tests/test_recipe_upload_api.py
-  ```
-
-### Frontend
-
-- Run frontend tests:
-  ```bash
-  cd app-landing-page
-  npm test
-  ```
-
----
-
-## Contributing
-
-- Ensure `.gitignore` excludes large data/model files, node_modules, and cache files.
-- Do not commit `node_modules` or `.pyc` files.
-- Document new features and API changes.
-
----
-
-## Unfinished Steps (for future tasks)
-
-- Add real frontend and backend tests for all major features.
-- Expand API documentation as new endpoints are added.
-- Set up CI/CD for automated testing and deployment.
-
----
-
-## License
-
-MIT
+For more details, see [API_DOCS.md](API_DOCS.md).

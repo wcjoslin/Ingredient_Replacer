@@ -19,7 +19,7 @@
       "max_carbohydrates_g_per_serving": 10,
       "min_fat_percent": 70,
       "swap_grains_sugars_starchy_veg": "low-carb vegetables, healthy fats",
-      "exclude_categories": ["grains", "sugar", "starchy vegetables", "most fruits"]
+      "exclude_categories": ["grains", "sugar", "starchy vegetables", "most fruits", "sugars"]
     }
   },
   {
@@ -38,7 +38,7 @@
     "description": "Veganism excludes all animal products, including meat, dairy, eggs, and honey. The diet is based on plant foods such as vegetables, grains, nuts, seeds, legumes, and fruits.",
     "source": "https://www.vegansociety.com/go-vegan/definition-veganism",
     "rules": {
-      "exclude_categories": ["meat", "fish", "dairy", "eggs", "honey"],
+      "exclude_categories": ["meat", "fish", "dairy", "eggs", "honey", "egg","dairies","cheeses","Dairies","en:dairies","en:cheeses"],
       "swap_animal_proteins": "plant proteins"
     }
   },
@@ -48,7 +48,7 @@
     "description": "A dairy-free diet excludes all forms of dairy, including milk, cheese, yogurt, and butter. It is necessary for those with lactose intolerance or milk allergy.",
     "source": "https://www.niams.nih.gov/health-topics/lactose-intolerance",
     "rules": {
-      "exclude_categories": ["dairy"],
+      "exclude_categories": ["dairy","dairies", "cheeses"],
       "swap_dairy_products": "plant-based alternatives"
     }
   },
