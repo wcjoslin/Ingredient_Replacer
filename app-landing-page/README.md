@@ -23,19 +23,11 @@ It allows users to upload recipes and view ingredient suggestions.
 
 ## Testing
 
-### Manual Testing
-
-- Upload a recipe file using the UI.
-- Verify that ingredient suggestions are displayed.
-- Test error handling (invalid file, empty upload).
-
-### Automated Testing
-
 - Run frontend tests:
    ```bash
    npm test
    ```
-- Add tests in `__tests__/` or `src/__tests__/` using Jest and React Testing Library.
+- Minimal tests are included as a baseline. Add real tests for your components as needed.
 
 ---
 
@@ -53,6 +45,12 @@ It allows users to upload recipes and view ingredient suggestions.
 - `src/app/page.tsx` – Main upload page
 - `src/app/api/` – API route handlers (if any)
 - `src/app/components/` – UI components
+
+---
+
+## API Reference
+
+See [../API_DOCS.md](../API_DOCS.md) for backend API documentation.
 
 ---
 
