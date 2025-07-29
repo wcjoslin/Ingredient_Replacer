@@ -42,6 +42,9 @@ export default function Home() {
   const [dietSummaries, setDietSummaries] = useState<any[]>([]);
   const [enrichedIngredients, setEnrichedIngredients] = useState<any[]>([]);
 
+  // --- Nutrition Label State ---
+  const [nutritionLabelImage, setNutritionLabelImage] = useState<string | null>(null);
+
   // Fetch diet summaries on mount
   React.useEffect(() => {
     fetch("http://127.0.0.1:8000/diet_rules")
@@ -98,6 +101,24 @@ export default function Home() {
         });
         const swapData = await swapRes.json();
         setSwapSuggestions(swapData.suggestions || []);
+
+        // --- Nutrition Label API Call Addition ---
+        // Use cleanedIngredients and a default servings value (e.g., 4)
+        try {
+          const nutritionRes = await fetch("http://127.0.0.1:5001/nutrition-label", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ingredients: cleanedIngredients, servings: 4 }),
+          });
+          if (nutritionRes.ok) {
+            const nutritionData = await nutritionRes.json();
+            setNutritionLabelImage("data:image/png;base64," + nutritionData.nutrition_label_image);
+          }
+        } catch (nutritionError) {
+          console.error("Failed to fetch nutrition label:", nutritionError);
+        }
+        // --- End Nutrition Label API Call Addition ---
+
       } else {
         setError(data.error || "No ingredients found.");
       }
@@ -202,6 +223,12 @@ export default function Home() {
                 </div>
               </div>
             ))}
+        </div>
+      )}
+      {/* --- Nutrition Label Display Addition --- */}
+      {nutritionLabelImage && (
+        <div style={{ marginBottom: "2rem" }}>
+          <img src={nutritionLabelImage} alt="Nutrition Label" style={{ maxWidth: "400px", border: "1px solid #333" }} />
         </div>
       )}
       {/* Enriched ingredient list with highlights */}

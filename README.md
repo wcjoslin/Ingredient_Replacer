@@ -1,128 +1,72 @@
-# Ingredient Replacer
-
-This project provides an API and UI for robust ingredient enrichment and substitution, including nutrition, dietary category, and dietary restriction flagging, powered by foodBERT and Nutritionix data.
+# Ingredient Replacer App
 
 ## Features
 
-- **Ingredient Enrichment:**  
-  - Nutrition facts (calories, protein, carbs, fat) from Nutritionix.
-  - Dietary categories from foodBERT (e.g., "en:cheeses", "en:dairies").
-  - Dietary restriction flagging (vegan, vegetarian, gluten-free, etc.) based on robust category matching.
-  - Handles singular/plural ingredient forms and partial/missing data gracefully.
+- Upload a recipe URL and extract ingredients
+- Highlight ingredients flagged for dietary restrictions
+- Suggest ingredient swaps for selected diets
+- Display diet summaries and ingredient nutrition
+- **NEW:** Generate and display FDA-style nutrition label for uploaded recipes
 
-- **Ingredient Swap Suggestions:**  
-  - Suggests up to 3 ranked substitutes for flagged ingredients, with confidence scores and nutrition delta.
-  - Filtering and flagging logic respects user-selected dietary restrictions.
+## Nutrition Label Feature
 
-- **UI:**  
-  - Paste a recipe URL, select dietary restrictions, and get enriched ingredient info and swap suggestions.
+- Backend API: `/nutrition-label` (see `nutrition_label_api.py`)
+  - Accepts: JSON with `ingredients` (list) and `servings` (int)
+  - Returns: base64-encoded PNG image and nutrition summary
+- Frontend: Displays nutrition label image above ingredient list after recipe upload
 
-## API Endpoints
+## How to Use
 
-### GET `/diet_rules`
+1. Start the backend API:
+   ```
+   python nutrition_label_api.py
+   ```
+   (Requires `flask` and `flask-cors`)
 
-Returns all available diet rules, including description, category restrictions, and macronutrient restrictions for each diet. Used by the frontend to display diet summaries and restrictions.
+2. Start the frontend app:
+   ```
+   npm run dev
+   ```
+   (or `yarn dev`)
 
-### POST `/enrich_ingredients`
+3. Paste a recipe URL and submit. The app will:
+   - Extract ingredients
+   - Highlight flagged items
+   - Suggest swaps
+   - Show diet summaries
+   - **Show a nutrition label image above the ingredient list**
 
+## Testing
+
+- Run backend tests:
+  ```
+  pytest tests/test_nutrition_label_api.py
+  ```
+- Run frontend tests:
+  ```
+  npm test
+  ```
+
+## API Reference
+
+### POST `/nutrition-label`
 Request:
 ```json
 {
-  "ingredients": ["ingredient1", "ingredient2", ...]
+  "ingredients": ["egg", "milk"],
+  "servings": 2
 }
 ```
-
 Response:
 ```json
 {
-  "ingredients": [
-    {
-      "ingredient": "mozzarella cheese",
-      "nutrition_facts": {
-        "calories": 85,
-        "protein": 6.3,
-        "carbs": 0.6,
-        "fat": 6.3
-      },
-      "categories": ["en:dairies", "en:cheeses", ...],
-      "swap_rationales": ["Category: Vegan excluded"],
-      "dietary_change_description": "Ingredient does not comply with selected diet(s): Category: Vegan excluded",
-      "bullet_points": [
-        "Calories: 85",
-        "Protein: 6.3",
-        "Carbs: 0.6",
-        "Fat: 6.3",
-        "Category: en:dairies",
-        "Flagged: Category: Vegan excluded"
-      ]
-    }
-  ]
-}
-```
-Used by the frontend to display ingredient nutrition, categories, and highlight dietary flags and rationales.
-
-### POST `/suggestions`
-
-Request:
-```json
-{
-  "ingredients": ["ingredient1", "ingredient2", ...],
-  "diets": ["vegan", "glutenfree", ...]  // optional
+  "nutrition_label_image": "<base64 PNG>",
+  "nutrition_summary": { ... }
 }
 ```
 
-Response:
-```json
-{
-  "suggestions": [
-    {
-      "original": "mozzarella cheese",
-      "categories": ["en:dairies", "en:cheeses", ...],  // raw keys for logic
-      "display_categories": ["Dairies", "Cheeses", ...], // user-friendly for UI
-      "dietary_flags": ["Not vegan", "vegetarian-friendly"],
-      "swap_suggestion": {
-        "ranked_swaps": [
-          {
-            "substitute": "plant-based cheese",
-            "score": 0.91,
-            "foodbert_score": 0.93,
-            "nutrition_delta": 0.05,
-            "original_nutrition": {...},
-            "substitute_nutrition": {...}
-          }
-        ]
-      }
-    },
-    ...
-  ]
-}
-```
+## Requirements
 
-- Only ingredients flagged for the selected dietary restrictions are included in the swap suggestions.
-- Category and restriction matching is robust and case-insensitive.
-
-## Enrichment Workflow
-
-1. **Ingredient normalization:** Handles singular/plural and punctuation.
-2. **Nutrition lookup:** From Nutritionix reference.
-3. **Category lookup:** From foodBERT categories (raw keys and display names).
-4. **Dietary restriction flagging:** Matches categories against restriction presets (case-insensitive).
-5. **Swap suggestion:** For flagged ingredients, suggests up to 3 substitutes.
-
-## Error Handling
-
-- If nutrition or category data is missing, a clear message is included in the output.
-- Partial results are returned if only some data is available.
-
-## Manual Testing
-
-- Paste a recipe URL in the UI, select dietary restrictions, and verify enrichment and swap suggestions.
-- Test with common, rare, and unknown ingredients.
-
-## Development
-
-- See `Ingredient_Data_Enrichment_Implementation_Checklist.md` for step-by-step implementation and testing guidance.
-
----
-
-For more details, see [API_DOCS.md](API_DOCS.md).
+- Python 3.10+ (for backend)
+- Node.js 18+ (for frontend)
+- Flask, flask-cors, Pillow, pytest
