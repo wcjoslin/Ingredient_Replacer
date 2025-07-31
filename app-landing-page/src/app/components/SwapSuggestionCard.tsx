@@ -20,7 +20,14 @@ const SwapSuggestionCard: React.FC<SwapSuggestionCardProps> = ({
   original,
   rankedSwaps,
 }) => (
-  <Card variant="outlined" sx={{ mb: 2, boxShadow: 2 }}>
+  <Card
+    variant="outlined"
+    sx={{
+      mb: 2,
+      backgroundColor: (theme) => theme.palette.background.paper,
+      boxShadow: 2,
+    }}
+  >
     <CardContent sx={{ p: 2 }}>
       <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
         {original}
