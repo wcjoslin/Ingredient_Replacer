@@ -1,5 +1,40 @@
 # Ingredient Replacer Frontend – Recipe Upload
 
+---
+
+**Migration Note:**  
+This project has been migrated from Tailwind CSS to [Material UI MCP](https://mui.com/material-ui/getting-started/mcp/) for all UI components and layout.  
+- All major UI code now uses Material UI components and theming.
+- Tailwind and custom CSS have been removed.
+- See `Material_UI_MCP_Migration_Checklist.md` for migration details and checklist.
+
+---
+
+## UI Development with Material UI MCP
+
+This project uses [Material UI MCP](https://mui.com/material-ui/getting-started/mcp/) for all UI components and layout.
+
+### Key Guidelines
+- Use Material UI components for all new UI features.
+- Wrap new UI in MUI's `Box`, `Stack`, `Card`, `Typography`, `Button`, etc.
+- Use the `sx` prop for custom styling and spacing.
+- Theme customization is handled in `src/app/MuiProvider.tsx`.
+- Accessibility: Use MUI's built-in accessibility features and ARIA props.
+- See `Material_UI_MCP_Migration_Checklist.md` for a step-by-step migration and development checklist.
+
+### Useful References
+- [Material UI Documentation](https://mui.com/material-ui/getting-started/overview/)
+- [Material UI MCP Guide](https://mui.com/material-ui/getting-started/mcp/)
+- [Theming](https://mui.com/material-ui/customization/theming/)
+- [Component Demos](https://mui.com/material-ui/react-button/)
+
+### Project Structure for UI
+- `src/app/components/` – All reusable UI components (use MUI)
+- `src/app/page.tsx` – Main page layout (uses MUI)
+- `src/app/MuiProvider.tsx` – ThemeProvider and CssBaseline setup
+
+---
+
 ## Overview
 
 This is the Next.js/React frontend for the Ingredient Replacer project.  
