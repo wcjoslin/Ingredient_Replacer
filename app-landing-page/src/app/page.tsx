@@ -14,6 +14,8 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
+import IngredientCard from "./components/IngredientCard";
+import SwapSuggestionCard from "./components/SwapSuggestionCard";
 
 const DIET_OPTIONS = [
   { key: "vegan", label: "Vegan" },
@@ -311,59 +313,16 @@ export default function Home() {
           <Typography variant="h6" fontWeight={600} mb={1}>
             Ingredients & Nutrition:
           </Typography>
-          <List dense>
-            {enrichedIngredients.map((ing: any, i: number) => {
-              const isFlagged = ing.swap_rationales && ing.swap_rationales.length > 0;
-              return (
-                <ListItem
-                  key={i}
-                  sx={{
-                    bgcolor: isFlagged ? "#fffde7" : "inherit",
-                    borderLeft: isFlagged ? "4px solid #ed6c02" : undefined,
-                    p: isFlagged ? 2 : 1,
-                    mb: isFlagged ? 1 : 0,
-                    borderRadius: isFlagged ? 1 : 0,
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                  }}
-                  title={isFlagged ? ing.dietary_change_description : ""}
-                  disableGutters
-                >
-                  <Typography fontWeight={isFlagged ? 700 : 400} color={isFlagged ? "text.primary" : "inherit"}>
-                    {ing.ingredient}
-                  </Typography>
-                  <List dense sx={{ pl: 2 }}>
-                    {ing.bullet_points.map((bp: string, j: number) => {
-                      const isRationale = bp.startsWith("Flagged:");
-                      return (
-                        <ListItem
-                          key={j}
-                          sx={{
-                            color: isRationale
-                              ? "error.main"
-                              : isFlagged
-                              ? "text.primary"
-                              : "inherit",
-                            fontWeight: isRationale ? 600 : isFlagged ? 500 : 400,
-                            fontSize: "1rem",
-                          }}
-                          title={isRationale ? ing.swap_rationales.join("; ") : ""}
-                          disableGutters
-                        >
-                          {bp}
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                  {isFlagged && (
-                    <Typography variant="caption" color="warning.main" sx={{ mt: 1, display: "block" }}>
-                      {ing.dietary_change_description}
-                    </Typography>
-                  )}
-                </ListItem>
-              );
-            })}
-          </List>
+          {enrichedIngredients.map((ing: any, i: number) => (
+            <IngredientCard
+              key={i}
+              ingredient={ing.ingredient}
+              bulletPoints={ing.bullet_points}
+              isFlagged={!!(ing.swap_rationales && ing.swap_rationales.length > 0)}
+              dietaryChangeDescription={ing.dietary_change_description}
+              swapRationales={ing.swap_rationales}
+            />
+          ))}
         </Box>
       )}
 
@@ -373,28 +332,17 @@ export default function Home() {
           <Typography variant="h6" fontWeight={600} mb={1}>
             Swap Suggestions:
           </Typography>
-          <List dense>
-            {swapSuggestions.map((swap, i) => (
-              <ListItem key={i} disableGutters>
-                <Typography component="span" fontWeight={700}>
-                  {swap.original}:
-                </Typography>{" "}
-                {swap.swap_suggestion && swap.swap_suggestion.ranked_swaps
-                  ? swap.swap_suggestion.ranked_swaps.map((s: any, idx: number) => (
-                      <Typography
-                        key={idx}
-                        component="span"
-                        variant="body2"
-                        sx={{ ml: 1, color: "text.secondary" }}
-                      >
-                        {s.substitute} (score: {s.score.toFixed(2)})
-                        {idx < swap.swap_suggestion.ranked_swaps.length - 1 ? ", " : ""}
-                      </Typography>
-                    ))
-                  : "No swap found"}
-              </ListItem>
-            ))}
-          </List>
+          {swapSuggestions.map((swap, i) => (
+            <SwapSuggestionCard
+              key={i}
+              original={swap.original}
+              rankedSwaps={
+                swap.swap_suggestion && swap.swap_suggestion.ranked_swaps
+                  ? swap.swap_suggestion.ranked_swaps
+                  : []
+              }
+            />
+          ))}
         </Box>
       )}
     </Box>
