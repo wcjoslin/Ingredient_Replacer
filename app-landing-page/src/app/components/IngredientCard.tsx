@@ -26,7 +26,7 @@ const IngredientCard: React.FC<IngredientCardProps> = ({
     sx={{
       mb: 2,
       borderLeft: isFlagged ? "4px solid #ed6c02" : undefined,
-      backgroundColor: "#fffde7",
+      backgroundColor: (theme) => theme.palette.background.paper,
       boxShadow: 2,
     }}
   >
