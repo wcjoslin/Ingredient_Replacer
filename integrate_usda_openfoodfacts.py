@@ -41,5 +41,5 @@ if __name__ == "__main__":
     # Use pre_diabetic test as example
     ingredients = [i["name"] for i in recipe_details["pre_diabetic"]["ingredients"]]
     enriched_data = enrich_ingredient_data(ingredients)
-    with open("enriched_ingredient_data.json", "w", encoding="utf-8") as f:
-        json.dump(enriched_data, f, ensure_ascii=False, indent=2)
+with open("data/enriched_ingredient_data.json", "w", encoding="utf-8") as f:
+    json.dump(enriched_data, f, ensure_ascii=False, indent=2)

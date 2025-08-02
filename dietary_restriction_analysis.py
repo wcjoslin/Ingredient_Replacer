@@ -60,15 +60,15 @@ def analyze_dietary_restrictions(enriched_ingredients, restrictions):
 
 if __name__ == "__main__":
     # Example: Load enriched ingredient data
-    with open("enriched_ingredient_data.json", "r", encoding="utf-8") as f:
+    with open("data/enriched_ingredient_data.json", "r", encoding="utf-8") as f:
         enriched_ingredients = json.load(f)
-    # Example restrictions
-    restrictions = {
-        "low-carb": 5,  # grams per ingredient
-        "vegan": True,
-        "kosher": True,
-        "halal": False
-    }
-    flagged = analyze_dietary_restrictions(enriched_ingredients, restrictions)
-    with open("flagged_ingredients.json", "w", encoding="utf-8") as f:
-        json.dump(flagged, f, ensure_ascii=False, indent=2)
+        # Example restrictions
+        restrictions = {
+            "low-carb": 5,  # grams per ingredient
+            "vegan": True,
+            "kosher": True,
+            "halal": False
+        }
+        flagged = analyze_dietary_restrictions(enriched_ingredients, restrictions)
+        with open("flagged_ingredients.json", "w", encoding="utf-8") as f:
+            json.dump(flagged, f, ensure_ascii=False, indent=2)
