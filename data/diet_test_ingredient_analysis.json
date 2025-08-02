@@ -1,0 +1,17 @@
+{
+  "pre_diabetic": {
+    "recipe": "Lemon Pesto Pasta",
+    "ingredients_to_swap": ["Penne"],
+    "swap_rationale": "Reduce carbohydrates by replacing pasta with a lower-carb alternative."
+  },
+  "vegan": {
+    "recipe": "Watermelon Gazpacho",
+    "ingredients_to_swap": [],
+    "swap_rationale": "No non-vegan ingredients detected; recipe is already vegan."
+  },
+  "kosher": {
+    "recipe": "Garlic-Shrimp Pasta",
+    "ingredients_to_swap": ["Shrimp"],
+    "swap_rationale": "Replace shrimp to conform to kosher dietary laws."
+  }
+}
