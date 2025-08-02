@@ -1,0 +1,325 @@
+[
+  {
+    "ingredient": "Penne",
+    "usda_nutrition_profile": {
+      "calories": 333.0,
+      "protein": 14.04,
+      "fat": 1.75,
+      "carbohydrates": 70.18
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:gluten"
+      ],
+      "labels": [
+        "en:green-dot",
+        "fr:tidy-man",
+        "fr:triman"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:cereals-and-potatoes",
+        "en:cereals-and-their-products",
+        "en:pastas",
+        "en:cereal-pastas",
+        "en:dry-pastas",
+        "en:durum-wheat-pasta",
+        "en:dry-durum-wheat-pasta",
+        "en:penne",
+        "en:penne-rigate"
+      ]
+    }
+  },
+  {
+    "ingredient": "Parmesan cheese",
+    "usda_nutrition_profile": {
+      "calories": 400.0,
+      "protein": 40.0,
+      "fat": 30.0,
+      "carbohydrates": 0.0
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-content-unknown",
+        "en:vegan-status-unknown",
+        "en:vegetarian-status-unknown"
+      ],
+      "allergens": [
+        "en:milk"
+      ],
+      "labels": [
+        "en:contains-milk",
+        "en:made-in-italy",
+        "en:pdo"
+      ],
+      "categories": [
+        "en:dairies",
+        "en:fermented-foods",
+        "en:fermented-milk-products",
+        "en:cheeses"
+      ]
+    }
+  },
+  {
+    "ingredient": "Garlic",
+    "usda_nutrition_profile": {
+      "calories": 167.0,
+      "protein": 0.0,
+      "fat": 0.0,
+      "carbohydrates": 33.33
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:gluten"
+      ],
+      "labels": [
+        "en:vegetarian",
+        "en:vegan"
+      ],
+      "categories": []
+    }
+  },
+  {
+    "ingredient": "Baby spinach leaves",
+    "usda_nutrition_profile": {
+      "calories": null,
+      "protein": 2.851875,
+      "fat": 0.6188,
+      "carbohydrates": 2.406325
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [],
+      "labels": [
+        "en:vegetarian",
+        "en:vegan"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:fruits-and-vegetables-based-foods",
+        "en:vegetables-based-foods",
+        "en:vegetables",
+        "en:fresh-foods",
+        "en:fresh-plant-based-foods",
+        "en:leaf-vegetables",
+        "en:fresh-vegetables",
+        "en:spinachs",
+        "en:spinach-young-leaves"
+      ]
+    }
+  },
+  {
+    "ingredient": "Basil leaves",
+    "usda_nutrition_profile": {
+      "calories": 64.0,
+      "protein": 9.4,
+      "fat": 1.4,
+      "carbohydrates": 8.28
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan-status-unknown",
+        "en:vegetarian-status-unknown"
+      ],
+      "allergens": [
+        "en:soybeans"
+      ],
+      "labels": [],
+      "categories": []
+    }
+  },
+  {
+    "ingredient": "Lemon juice",
+    "usda_nutrition_profile": {
+      "calories": 0.0,
+      "protein": 0.0,
+      "fat": 0.0,
+      "carbohydrates": 0.0
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [],
+      "labels": [],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:beverages",
+        "en:plant-based-beverages",
+        "en:fruit-based-beverages",
+        "en:juices-and-nectars",
+        "en:fruit-juices",
+        "en:lemon-juice"
+      ]
+    }
+  },
+  {
+    "ingredient": "Walnuts",
+    "usda_nutrition_profile": {
+      "calories": 656.0,
+      "protein": 15.62,
+      "fat": 65.62,
+      "carbohydrates": 12.5
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:nuts"
+      ],
+      "labels": [
+        "en:green-dot",
+        "en:nutriscore",
+        "en:nutriscore-grade-a",
+        "fr:triman"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:nuts-and-their-products",
+        "en:nuts",
+        "en:shelled-nuts",
+        "en:walnuts",
+        "en:walnut-kernels"
+      ]
+    }
+  },
+  {
+    "ingredient": "Lemon zest",
+    "usda_nutrition_profile": {
+      "calories": 357.0,
+      "protein": 14.29,
+      "fat": 25.0,
+      "carbohydrates": 10.71
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil",
+        "en:non-vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:eggs",
+        "en:gluten",
+        "en:milk"
+      ],
+      "labels": [
+        "en:vegetarian"
+      ],
+      "categories": [
+        "en:dairies",
+        "en:snacks",
+        "en:desserts",
+        "en:sweet-snacks",
+        "en:dairy-desserts",
+        "en:biscuits-and-cakes",
+        "en:cakes",
+        "en:cheesecakes",
+        "en:lemon-cheesecakes"
+      ]
+    }
+  },
+  {
+    "ingredient": "Olive oil",
+    "usda_nutrition_profile": {
+      "calories": 900,
+      "protein": 0.0,
+      "fat": 100,
+      "carbohydrates": 0.0
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil",
+        "en:non-vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:milk"
+      ],
+      "labels": [
+        "en:sustainable",
+        "en:vegetarian",
+        "en:sustainable-palm-oil",
+        "en:green-dot"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:fats",
+        "en:spreads",
+        "en:plant-based-spreads",
+        "en:salted-spreads",
+        "en:spreadable-fats",
+        "en:vegetable-fats",
+        "en:margarines"
+      ]
+    }
+  },
+  {
+    "ingredient": "Salt",
+    "usda_nutrition_profile": {
+      "calories": 0.0,
+      "protein": 0.0,
+      "fat": 0.0,
+      "carbohydrates": 0.0
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [],
+      "labels": [],
+      "categories": [
+        "en:condiments",
+        "en:salts",
+        "en:table-salts",
+        "en:groceries"
+      ]
+    }
+  },
+  {
+    "ingredient": "Black pepper",
+    "usda_nutrition_profile": {
+      "calories": 5.8,
+      "protein": 0.2,
+      "fat": 0.1,
+      "carbohydrates": 1.5
+    },
+    "openfoodfacts_metadata": {
+      "vegan": [
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [],
+      "labels": [],
+      "categories": [
+        "en:spices",
+        "en:black-pepper"
+      ]
+    }
+  }
+]
