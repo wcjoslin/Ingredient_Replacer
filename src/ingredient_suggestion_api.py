@@ -8,7 +8,7 @@ from typing import List, Optional
 import json
 import pickle
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+# Removed scikit-learn dependency for normalization
 
 from src.ingredient_swap_suggestions import get_enhanced_swap, COMMON_SPICES
 from dietary_restriction_analysis import analyze_dietary_restrictions
@@ -39,8 +39,15 @@ raw_scores = []
 for emb in all_embeddings_max:
     dists, _ = knn_max.k_nearest_neighbors(emb.reshape(1, -1))
     raw_scores.extend(1 - dists.flatten())
-raw_scores = np.array(raw_scores).reshape(-1, 1)
-zscore_scaler = StandardScaler().fit(raw_scores)
+raw_scores = np.array(raw_scores)
+# Min-max normalization (no scikit-learn)
+min_score = raw_scores.min()
+max_score = raw_scores.max()
+if max_score > min_score:
+    norm_scores = (raw_scores - min_score) / (max_score - min_score)
+else:
+    norm_scores = raw_scores
+zscore_scaler = None  # Placeholder, not used
 
 with open("ingredient_primary_categories.json", "r", encoding="utf-8") as cat_file:
     primary_categories = json.load(cat_file)
