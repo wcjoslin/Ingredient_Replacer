@@ -6,7 +6,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from nutrition_label_api import app
+from src.nutrition_label_api import app
 
 @pytest.fixture
 def client():
@@ -30,4 +30,5 @@ def test_nutrition_label_api(client):
     assert "nutrition_summary" in data
     # Check that the image is a valid base64 PNG
     img_bytes = base64.b64decode(data["nutrition_label_image"])
-    assert img_bytes[:4] == b"\x89PNG"
+    # PNG signature is 8 bytes: b'\x89PNG\r\n\x1a\n'
+    assert img_bytes[:8] == b'\x89PNG\r\n\x1a\n'
