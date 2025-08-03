@@ -1,6 +1,7 @@
 torch
 uvicorn
 fastapi
+annoy
 transformers
 sentence-transformers
 requests
