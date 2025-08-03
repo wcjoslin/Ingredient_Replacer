@@ -1,5 +1,6 @@
 torch
 uvicorn
+fastapi
 transformers
 sentence-transformers
 requests
