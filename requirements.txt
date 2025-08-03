@@ -3,7 +3,7 @@ uvicorn
 fastapi
 pyannoy
 transformers
-sentence-transformers
+
 requests
 numpy
 scikit-learn
