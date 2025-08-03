@@ -38,7 +38,7 @@ This project uses [Material UI MCP](https://mui.com/material-ui/getting-started/
 ## Overview
 
 This is the Next.js/React frontend for the Ingredient Replacer project.  
-It allows users to upload recipes and view ingredient suggestions.
+It allows users to upload recipes and view ingredient suggestions, nutrition labels, and swap suggestions.
 
 ---
 
@@ -56,6 +56,31 @@ It allows users to upload recipes and view ingredient suggestions.
 
 ---
 
+## API Integration
+
+- The frontend calls the backend FastAPI endpoints for ingredient enrichment and swap suggestions:
+  - `/suggestions` for swap suggestions (uses precomputed foodBERT cache)
+  - `/enrich_ingredients` for ingredient enrichment
+- For nutrition label generation, the frontend calls the Flask API endpoint:
+  - `/nutrition-label` for FDA-style nutrition label images
+
+- Configure API endpoint in `.env.local`:
+  ```
+  NEXT_PUBLIC_API_URL=http://localhost:8000
+  ```
+
+---
+
+## Features
+
+- Upload a recipe URL and extract ingredients
+- Highlight ingredients flagged for dietary restrictions
+- Suggest ingredient swaps for selected diets (cache-based, instant)
+- Display diet summaries and ingredient nutrition
+- Generate and display FDA-style nutrition label for uploaded recipes
+
+---
+
 ## Testing
 
 - Run frontend tests:
@@ -66,20 +91,38 @@ It allows users to upload recipes and view ingredient suggestions.
 
 ---
 
-## Environment Variables
+## Deployment Guide
 
-- Configure API endpoint in `.env.local`:
-  ```
-  NEXT_PUBLIC_API_URL=http://localhost:8000
-  ```
+### Local Development
 
----
+1. Start backend APIs:
+   - FastAPI (swap suggestions, enrichment):  
+     ```
+     uvicorn src.ingredient_suggestion_api:app --reload
+     ```
+   - Flask (nutrition label):  
+     ```
+     python src/nutrition_label_api.py
+     ```
 
-## Main Components
+2. Start frontend:
+   ```
+   npm run dev
+   ```
 
-- `src/app/page.tsx` – Main upload page
-- `src/app/api/` – API route handlers (if any)
-- `src/app/components/` – UI components
+### Production Deployment
+
+- **Frontend:**  
+  Deploy to [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/) for Next.js apps.
+  - Set `NEXT_PUBLIC_API_URL` to your backend's public URL.
+
+- **Backend:**  
+  Deploy FastAPI and Flask APIs to [Render](https://render.com/), [Heroku](https://www.heroku.com/), or [AWS](https://aws.amazon.com/).
+  - Ensure all required data files (swap cache, nutrition data) are included.
+  - Set up CORS and environment variables as needed.
+
+- **Cache Regeneration:**  
+  If you update ingredients, regenerate the swap cache and redeploy the backend.
 
 ---
 
