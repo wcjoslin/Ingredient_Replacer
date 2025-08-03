@@ -6,15 +6,14 @@ transformers
 
 requests
 numpy
-scikit-learn
+
 gql
 pandas
 flask
 flask-cors
 Pillow
 tqdm
-matplotlib
-gensim
+
 nltk
 spacy
 torchvision
