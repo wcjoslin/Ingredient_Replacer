@@ -23,7 +23,7 @@ import io
 import base64
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from recipe_nutrition_label_workflow import process_recipe_upload_fda_style
+from src.recipe_nutrition_label_workflow import process_recipe_upload_fda_style
 
 app = Flask(__name__)
 CORS(app)
