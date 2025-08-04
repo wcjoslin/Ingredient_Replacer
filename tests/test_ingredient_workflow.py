@@ -1,3 +1,9 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../foodBERT")))
+
 import pytest
 from ingredient_workflow import normalize_ingredient_string, fuzzy_match_ingredient, map_ingredients_to_foodbert
 from dietary_restriction_analysis import analyze_dietary_restrictions
@@ -11,6 +17,10 @@ def test_normalize_ingredient_string():
     assert normalize_ingredient_string("▢ 1 tablespoon olive oil") == "olive oil"
     assert normalize_ingredient_string("¼ tsp pepper") == "tsp pepper"
     assert normalize_ingredient_string("¾ lb. ground beef") == "ground beef"
+    assert normalize_ingredient_string("cucumber cut into pieces") == "cucumber"
+    assert normalize_ingredient_string("2 cups shredded cheddar cheese") == "cheddar cheese"
+    assert normalize_ingredient_string("¼ teaspoon black pepper") == "black pepper"
+    assert normalize_ingredient_string("onion, chopped") == "onion"
 
 def test_fuzzy_match_ingredient():
     vocab = {"parmesan cheese", "salt", "egg", "mozzarella cheese", "olive oil", "ground beef"}
@@ -23,7 +33,7 @@ def test_fuzzy_match_ingredient():
     assert fuzzy_match_ingredient("unknown ingredient", vocabulary=vocab, cutoff=0.6) == ""
 
 def test_map_ingredients_to_foodbert():
-    vocab = {"parmesan cheese", "salt", "egg", "mozzarella cheese", "olive oil", "ground beef"}
+    vocab = {"parmesan cheese", "salt", "egg", "mozzarella cheese", "olive oil", "ground beef", "cucumber", "cheddar cheese", "black pepper", "onion"}
     ingredients = [
         "¾ cup parmesan cheese",
         "½ teaspoon salt",
@@ -31,6 +41,10 @@ def test_map_ingredients_to_foodbert():
         "mozzarella cheese",
         "▢ 1 tablespoon olive oil",
         "¾ lb. ground beef",
+        "cucumber cut into pieces",
+        "2 cups shredded cheddar cheese",
+        "¼ teaspoon black pepper",
+        "onion, chopped",
         "unknown ingredient"
     ]
     def patched_fuzzy_match_ingredient(cleaned, vocabulary=vocab, cutoff=0.6):
@@ -38,7 +52,8 @@ def test_map_ingredients_to_foodbert():
     mapped = []
     for raw in ingredients:
         norm = normalize_ingredient_string(raw)
-        match = patched_fuzzy_match_ingredient(norm)
+        core = extract_core_ingredient_spacy(norm)
+        match = patched_fuzzy_match_ingredient(core)
         if match:
             mapped.append(match)
     assert mapped == [
@@ -47,7 +62,11 @@ def test_map_ingredients_to_foodbert():
         "egg",
         "mozzarella cheese",
         "olive oil",
-        "ground beef"
+        "ground beef",
+        "cucumber",
+        "cheddar cheese",
+        "black pepper",
+        "onion"
     ]
 
 def test_analyze_dietary_restrictions():

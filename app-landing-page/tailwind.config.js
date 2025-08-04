@@ -1,0 +1,65 @@
+// tailwind.config.js
+module.exports = {
+  content: [
+    "./src/app/**/*.{js,ts,jsx,tsx}",
+    "./src/app/components/**/*.{js,ts,jsx,tsx}",
+    "./public/index.html"
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [ "caramellatte",
+      {
+        customtheme: {
+          "primary": "#3b82f6",
+          "secondary": "#fbbf24",
+          "accent": "#10b981",
+          "neutral": "#374151",
+          "base-100": "#f3f4f6",
+          "info": "#0ea5e9",
+          "success": "#22c55e",
+          "warning": "#f59e42",
+          "error": "#ef4444",
+        }
+      },
+      "light",
+      "dark",
+      "cupcake",
+      "bumblebee",
+      "emerald",
+      "corporate",
+      "synthwave",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "halloween",
+      "garden",
+      "forest",
+      "aqua",
+      "lofi",
+      "pastel",
+      "fantasy",
+      "wireframe",
+      "black",
+      "luxury",
+      "dracula",
+      "cmyk",
+      "autumn",
+      "business",
+      "acid",
+      "lemonade",
+      "night",
+      "coffee",
+      "winter"
+    ],
+    darkTheme: "customtheme",
+    base: true,
+    styled: true,
+    utils: true,
+    logs: false,
+    rtl: false,
+    prefix: "",
+  }
+}
