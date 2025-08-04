@@ -2,7 +2,7 @@
 
 **🌐 Public Demo:**  
 [https://ingredient-replacer.onrender.com](https://ingredient-replacer.onrender.com)
-
+Note: Ingredient swap suggestions Demo uses a precomputed foodBERT cache that may not have all ingredients available
 
 ## Features
 
@@ -10,8 +10,7 @@
 - Highlight ingredients flagged for dietary restrictions
 - Suggest ingredient swaps for selected diets
 - Display diet summaries and ingredient nutrition
-- **NEW:** Generate and display FDA-style nutrition label for uploaded recipes
-- **NEW:** Ingredient swap suggestions now use a precomputed foodBERT cache for fast, reliable results
+
 
 ## Nutrition Label Feature
 
