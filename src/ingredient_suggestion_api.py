@@ -11,7 +11,7 @@ import numpy as np
 # Removed scikit-learn dependency for normalization
 
 from src.ingredient_swap_suggestions import get_enhanced_swap, COMMON_SPICES
-from dietary_restriction_analysis import analyze_dietary_restrictions
+from src.dietary_restriction_analysis import analyze_dietary_restrictions
 from src.ingredient_workflow import map_ingredients_to_foodbert
 
 # Import robust enrichment logic
@@ -34,8 +34,7 @@ ingredient_labels = []
 knn_max = None
 zscore_scaler = None
 
-
-with open("ingredient_primary_categories.json", "r", encoding="utf-8") as cat_file:
+with open("src/ingredient_primary_categories.json", "r", encoding="utf-8") as cat_file:
     primary_categories = json.load(cat_file)
 
 # Load dietary restriction presets
@@ -43,7 +42,7 @@ with open("data/dietary_restriction_presets.json", "r", encoding="utf-8") as f:
     restriction_presets = json.load(f)
 
 # Load foodBERT category keys for each ingredient for raw category logic
-with open("foodbert_ingredient_categories_merged.json", "r", encoding="utf-8") as f:
+with open("src/foodbert_ingredient_categories_merged.json", "r", encoding="utf-8") as f:
     foodbert_categories = json.load(f)
 
 def format_category_display(cat_key):
