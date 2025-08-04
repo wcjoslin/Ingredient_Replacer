@@ -50,7 +50,7 @@ __pycache__/
 /foodBERT/foodbert/data/train_instructions.txt
 /foodBERT/foodbert/data/mlm_output/checkpoint-final/pytorch_model.bin
 /foodBERT/foodbert/data/pytorch_model.bin
-*.pkl
+
 /foodBERT/foodbert_embeddings/helpers/__pycache__/
 /foodBERT/foodbert_embeddings/helpers/__pycache__/generate_ingredient_embeddings.cpython-311.pyc
 /foodBERT/foodbert/count_ingredient_occurances.py
@@ -64,10 +64,10 @@ __pycache__/
 /foodBERT/foodbert/data/used_ingredients.json
 foodBERT/foodbert/data/optimizer.pt
 foodBERT/foodbert/data/pytorch_model.bin
-foodBERT/foodbert_embeddings/data/food_embeddings_dict_foodbert_combined.pkl
+
 
 # Large model/data files
-foodBERT/foodbert_embeddings/data/*.pkl
+
 
 # Node/Next.js frontend
 app-landing-page/.next/
@@ -82,3 +82,4 @@ __pycache__/
 # Environment files
 .env
 .vscode/mcp.json
+foodBERT/foodbert_embeddings/data/food_embeddings_dict_foodbert_combined.pkl
