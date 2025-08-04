@@ -35,9 +35,9 @@ SPICE_NUTRITION = {
 }
 
 # Load master ingredient categories for filtering
-with open("foodbert_ingredient_categories_merged.json", "r", encoding="utf-8") as f:
+with open("src/foodbert_ingredient_categories_merged.json", "r", encoding="utf-8") as f:
     INGREDIENT_CATEGORIES = json.load(f)
-with open("ingredient_primary_categories.json", "r", encoding="utf-8") as f:
+with open("src/ingredient_primary_categories.json", "r", encoding="utf-8") as f:
     INGREDIENT_PRIMARY_CATEGORIES = json.load(f)
 with open("data/category_mapping_and_primary_tags.json", "r", encoding="utf-8") as f:
     CATEGORY_MAPPING = json.load(f)
