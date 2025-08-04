@@ -51,7 +51,7 @@ export default function Home() {
   const [nutritionLabelImage, setNutritionLabelImage] = useState<string | null>(null);
 
   React.useEffect(() => {
-    fetch("http://127.0.0.1:8000/diet_rules")
+fetch("https://ingredient-replacer.onrender.com/diet_rules")
       .then((res) => res.json())
       .then((data) => setDietSummaries(data.diets || []))
       .catch(() => setDietSummaries([]));
@@ -83,7 +83,7 @@ export default function Home() {
         const cleanedIngredients = data.ingredients.map(cleanIngredient);
 
         try {
-          const enrichRes = await fetch("http://127.0.0.1:8000/enrich_ingredients", {
+const enrichRes = await fetch("https://ingredient-replacer.onrender.com/enrich_ingredients", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ingredients: cleanedIngredients }),
@@ -94,7 +94,7 @@ export default function Home() {
           setEnrichedIngredients([]);
         }
 
-        const swapRes = await fetch("http://127.0.0.1:8000/suggestions", {
+const swapRes = await fetch("https://ingredient-replacer.onrender.com/suggestions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ingredients: cleanedIngredients, diets: selectedDiets }),
@@ -103,7 +103,7 @@ export default function Home() {
         setSwapSuggestions(swapData.suggestions || []);
 
         try {
-          const nutritionRes = await fetch("http://127.0.0.1:5001/nutrition-label", {
+const nutritionRes = await fetch("https://ingredient-replacer.onrender.com/nutrition-label", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ingredients: cleanedIngredients, servings: 4 }),
