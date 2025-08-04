@@ -27,6 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Removed model/embedding loading for deployment without .pkl file.
 embedding_dict = None
 ingredient_labels = []
