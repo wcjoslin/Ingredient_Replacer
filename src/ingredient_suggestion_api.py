@@ -27,27 +27,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load all required data/models ONCE at startup
-with open("foodBERT/foodbert_embeddings/data/food_embeddings_dict_foodbert_combined.pkl", "rb") as f:
-    embedding_dict = pickle.load(f)
-ingredient_labels = list(embedding_dict.keys())
-all_embeddings_max = [np.max(embedding_dict[label], axis=0) for label in ingredient_labels]
-all_embeddings_max = np.stack(all_embeddings_max)
-from foodBERT.foodbert_embeddings.helpers.approx_knn_classifier import ApproxKNNClassifier
-knn_max = ApproxKNNClassifier(all_ingredient_embeddings=all_embeddings_max, max_embedding_count=40)
-raw_scores = []
-for emb in all_embeddings_max:
-    dists, _ = knn_max.k_nearest_neighbors(emb.reshape(1, -1))
-    raw_scores.extend(1 - dists.flatten())
-raw_scores = np.array(raw_scores)
-# Min-max normalization (no scikit-learn)
-min_score = raw_scores.min()
-max_score = raw_scores.max()
-if max_score > min_score:
-    norm_scores = (raw_scores - min_score) / (max_score - min_score)
-else:
-    norm_scores = raw_scores
-zscore_scaler = None  # Placeholder, not used
+# Removed model/embedding loading for deployment without .pkl file.
+embedding_dict = None
+ingredient_labels = []
+knn_max = None
+zscore_scaler = None
 
 with open("ingredient_primary_categories.json", "r", encoding="utf-8") as cat_file:
     primary_categories = json.load(cat_file)
