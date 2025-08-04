@@ -27,11 +27,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Removed model/embedding loading for deployment without .pkl file.
 embedding_dict = None
 ingredient_labels = []
 knn_max = None
 zscore_scaler = None
+
 
 with open("ingredient_primary_categories.json", "r", encoding="utf-8") as cat_file:
     primary_categories = json.load(cat_file)
