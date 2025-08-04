@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 import re
 import sys
-from sklearn.preprocessing import StandardScaler
+# Removed scikit-learn dependency for normalization
 
 from foodBERT.foodbert_embeddings.helpers.approx_knn_classifier import ApproxKNNClassifier
 from nutritional_analysis import calculate_nutrition_delta
