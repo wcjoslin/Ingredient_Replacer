@@ -6,9 +6,9 @@ import sys
 # Removed scikit-learn dependency for normalization
 
 from foodBERT.foodbert_embeddings.helpers.approx_knn_classifier import ApproxKNNClassifier
-from nutritional_analysis import calculate_nutrition_delta
-from culinary_rules import is_culinarily_valid
-from usda_api import get_food_nutrition_profile
+from src.nutritional_analysis import calculate_nutrition_delta
+from src.culinary_rules import is_culinarily_valid
+from src.usda_api import get_food_nutrition_profile
 
 # List of common spices to exclude from low-carb swaps and update nutrition for
 COMMON_SPICES = {
