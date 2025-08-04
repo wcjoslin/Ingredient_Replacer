@@ -1,5 +1,9 @@
 # Ingredient Replacer App
 
+**🌐 Public Demo:**  
+[https://ingredient-replacer.onrender.com](https://ingredient-replacer.onrender.com)
+
+
 ## Features
 
 - Upload a recipe URL and extract ingredients
