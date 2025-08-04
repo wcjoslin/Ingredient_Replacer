@@ -50,7 +50,10 @@ export async function POST(req: NextRequest) {
     );
 
     // POST scraped ingredients to backend extraction API for normalization
-    const enrichRes = await fetch(process.env.BACKEND_URL + "/enrich_ingredients", {
+    const backendUrl =
+      process.env.BACKEND_URL ||
+      "https://ingredient-replacer.onrender.com";
+    const enrichRes = await fetch(backendUrl + "/enrich_ingredients", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ingredients }),
