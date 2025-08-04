@@ -79,25 +79,20 @@ fetch("https://ingredient-replacer.onrender.com/diet_rules")
       });
       const data = await res.json();
       if (data.ingredients) {
-        setIngredients(data.ingredients);
-        const cleanedIngredients = data.ingredients.map(cleanIngredient);
-
-        try {
-const enrichRes = await fetch("https://ingredient-replacer.onrender.com/enrich_ingredients", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ingredients: cleanedIngredients }),
-          });
-          const enrichData = await enrichRes.json();
-          setEnrichedIngredients(enrichData.ingredients || []);
-        } catch {
-          setEnrichedIngredients([]);
+        // Use normalized/enriched ingredients directly from scrape API response
+        if (data.ingredients) {
+          setIngredients(data.ingredients);
         }
+        if (data.enrichedIngredients) {
+          setEnrichedIngredients(data.enrichedIngredients);
+        }
+
+const normalizedIngredients = (data.enrichedIngredients || []).map((ing: any) => ing.ingredient);
 
 const swapRes = await fetch("https://ingredient-replacer.onrender.com/suggestions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ingredients: cleanedIngredients, diets: selectedDiets }),
+          body: JSON.stringify({ ingredients: normalizedIngredients, diets: selectedDiets }),
         });
         const swapData = await swapRes.json();
         setSwapSuggestions(swapData.suggestions || []);
@@ -106,7 +101,7 @@ const swapRes = await fetch("https://ingredient-replacer.onrender.com/suggestion
 const nutritionRes = await fetch("https://ingredient-replacer.onrender.com/nutrition-label", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ingredients: cleanedIngredients, servings: 4 }),
+            body: JSON.stringify({ ingredients: normalizedIngredients, servings: 4 }),
           });
           if (nutritionRes.ok) {
             const nutritionData = await nutritionRes.json();

@@ -49,7 +49,21 @@ export async function POST(req: NextRequest) {
       (line) => line.length > 0 && line.split(" ").length <= 20
     );
 
-    return NextResponse.json({ ingredients });
+    // POST scraped ingredients to backend extraction API for normalization
+    const enrichRes = await fetch(process.env.BACKEND_URL + "/enrich_ingredients", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ingredients }),
+    });
+
+    if (!enrichRes.ok) {
+      return NextResponse.json({ error: "Failed to enrich ingredients" }, { status: 500 });
+    }
+
+    const enriched = await enrichRes.json();
+
+    // Return normalized/enriched ingredients to frontend
+    return NextResponse.json(enriched);
   } catch (err: any) {
     return NextResponse.json({ error: err.message || "Scraping error" }, { status: 500 });
   }
