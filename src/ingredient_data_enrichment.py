@@ -184,6 +184,8 @@ def enrich_ingredient(ingredient, nutrition_data, category_data, dietary_presets
         "bullet_points": bullet_points
     }
 
+from src.ingredient_workflow import normalize_ingredient_string, extract_core_ingredient_spacy
+
 def enrich_recipe_ingredients(ingredient_list):
     nutrition_list = load_json(NUTRITION_FILE)
     nutrition_data = preprocess_nutrition_data(nutrition_list)
@@ -193,9 +195,12 @@ def enrich_recipe_ingredients(ingredient_list):
 
     enriched = []
     for ingredient in ingredient_list:
+        # Apply spaCy-based normalization before enrichment
+        norm_ingr = normalize_ingredient_string(ingredient)
+        core_ingr = extract_core_ingredient_spacy(norm_ingr)
         enriched.append(
             enrich_ingredient(
-                ingredient, nutrition_data, category_data, dietary_presets
+                core_ingr, nutrition_data, category_data, dietary_presets
             )
         )
     return enriched
