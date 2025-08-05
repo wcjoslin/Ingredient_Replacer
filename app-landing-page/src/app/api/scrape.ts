@@ -53,20 +53,32 @@ export async function POST(req: NextRequest) {
     const backendUrl =
       process.env.BACKEND_URL ||
       "https://ingredient-replacer.onrender.com";
-    const enrichRes = await fetch(backendUrl + "/enrich_ingredients", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ingredients }),
-    });
+    console.log("Calling enrich_ingredients at:", backendUrl + "/enrich_ingredients");
+    let enrichRes;
+    try {
+      enrichRes = await fetch(backendUrl + "/enrich_ingredients", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ingredients }),
+      });
+    } catch (fetchErr) {
+      console.error("Error calling enrich_ingredients:", fetchErr);
+      return NextResponse.json({ error: "Network error calling enrich_ingredients" }, { status: 500 });
+    }
 
     if (!enrichRes.ok) {
-      return NextResponse.json({ error: "Failed to enrich ingredients" }, { status: 500 });
+      const errText = await enrichRes.text();
+      console.error("enrich_ingredients failed:", errText);
+      return NextResponse.json({ error: "Failed to enrich ingredients: " + errText }, { status: 500 });
     }
 
     const enriched = await enrichRes.json();
 
-    // Return normalized/enriched ingredients to frontend
-    return NextResponse.json(enriched);
+    // Return both raw and enriched ingredients to frontend
+    return NextResponse.json({
+      ingredients,
+      enrichedIngredients: enriched.ingredients
+    });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || "Scraping error" }, { status: 500 });
   }
