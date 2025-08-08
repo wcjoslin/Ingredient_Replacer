@@ -1,7 +1,7 @@
 # Ingredient Replacer App
 
 **🌐 Public Demo:**  
-[https://ingredient-replacer.onrender.com](https://ingredient-replacer.onrender.com)
+[(https://ingredient-replacer.vercel.app/)](https://ingredient-replacer.vercel.app/)
 Note: Ingredient swap suggestions Demo uses a precomputed foodBERT cache that may not have all ingredients available
 
 ## Features
