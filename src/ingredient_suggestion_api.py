@@ -16,6 +16,7 @@ from src.ingredient_workflow import map_ingredients_to_foodbert
 
 # Import robust enrichment logic
 from src.ingredient_data_enrichment import enrich_recipe_ingredients
+from src.recipe_nutrition_label_workflow import get_nutrition_label
 
 app = FastAPI(title="Multi-Ingredient Suggestion API")
 
@@ -67,6 +68,12 @@ def merge_restriction_rules(diet_ids: List[str]):
                 else:
                     merged_rules[k] = v
     return merged_rules
+
+@app.get("/list_src_files")
+def list_src_files():
+    import os
+    files = os.listdir("src")
+    return JSONResponse(content={"src_files": files})
 
 @app.get("/suggestions")
 def suggestions_get():
@@ -181,8 +188,8 @@ async def get_suggestions_post(request: Request):
 
 # --- New endpoint for ingredient enrichment (for diet highlight UI) ---
 
-@app.post("/enrich_ingredients")
-async def enrich_ingredients_post(request: Request):
+@app.post("/enrich")
+async def enrich_post(request: Request):
     """
     Accepts a POST request with a JSON body:
     {
@@ -194,4 +201,4 @@ async def enrich_ingredients_post(request: Request):
     ingredient_list = body.get("ingredients", [])
     # No mapping or filtering, just enrichment
     enriched = enrich_recipe_ingredients(ingredient_list)
-    return JSONResponse(content={"ingredients": enriched})
+    return JSONResponse(content={"ingredients": enriched["ingredients"]})
