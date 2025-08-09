@@ -19,7 +19,7 @@ import os
 
 # File paths (update if needed)
 NUTRITION_FILE = os.path.join("data enrichment", "enriched_ingredient_data_nutritionix.json")
-CATEGORY_FILE = "foodbert_ingredient_categories_merged.json"
+CATEGORY_FILE = os.path.join("src", "foodbert_ingredient_categories_merged.json")
 DIETARY_PRESETS_FILE = "data/dietary_restriction_presets.json"
 
 def load_json(path):
@@ -203,7 +203,7 @@ def enrich_recipe_ingredients(ingredient_list):
                 core_ingr, nutrition_data, category_data, dietary_presets
             )
         )
-    return enriched
+    return {"ingredients": enriched}
 
 if __name__ == "__main__":
     test_ingredients = ["Egg", "Milk", "Flour", "Unknown Ingredient"]
