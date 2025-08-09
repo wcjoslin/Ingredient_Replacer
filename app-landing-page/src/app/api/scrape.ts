@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
       "tomato paste",
       "hot sauce",
       "worcestershire sauce",
-      "lasagna noodles"
+      "lasagna noodles",
+      "debug-test-ingredient"
     ];
     console.log("Cleaned ingredients for enrichment (hardcoded):", cleanedIngredients);
 
