@@ -16,7 +16,7 @@ from src.ingredient_workflow import map_ingredients_to_foodbert
 
 # Import robust enrichment logic
 from src.ingredient_data_enrichment import enrich_recipe_ingredients
-from src.recipe_nutrition_label_workflow import get_nutrition_label
+# from src.recipe_nutrition_label_workflow import get_nutrition_label
 
 app = FastAPI(title="Multi-Ingredient Suggestion API")
 
