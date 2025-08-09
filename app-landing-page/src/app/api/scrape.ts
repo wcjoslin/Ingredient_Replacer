@@ -3,63 +3,28 @@ import * as cheerio from "cheerio";
 
 export async function POST(req: NextRequest) {
   try {
-    const { url } = await req.json();
-    if (!url || typeof url !== "string") {
-      return NextResponse.json({ error: "Missing or invalid URL" }, { status: 400 });
-    }
-
-    // Fetch the HTML content of the recipe page
-    const res = await fetch(url, { method: "GET" });
-    if (!res.ok) {
-      return NextResponse.json({ error: "Failed to fetch recipe site" }, { status: 400 });
-    }
-    const html = await res.text();
-
-    // Use cheerio to parse and extract ingredient names
-    const $ = cheerio.load(html);
-    let ingredients: string[] = [];
-
-    // Try common selectors for ingredient lists
-    // 1. All <li> elements containing "ingredient" in parent class/id
-    $("li").each((_, el) => {
-      const parent = $(el).parent();
-      const parentClass = parent.attr("class") || "";
-      const parentId = parent.attr("id") || "";
-      if (
-        /ingredient/i.test(parentClass) ||
-        /ingredient/i.test(parentId) ||
-        /ingredient/i.test($(el).attr("class") || "") ||
-        /ingredient/i.test($(el).attr("id") || "")
-      ) {
-        const text = $(el).text().trim();
-        if (text.length > 0) ingredients.push(text);
-      }
-    });
-
-    // 2. Fallback: any <span> or <div> with "ingredient" in class/id
-    if (ingredients.length === 0) {
-      $("[class*=ingredient], [id*=ingredient]").each((_, el) => {
-        const text = $(el).text().trim();
-        if (text.length > 0) ingredients.push(text);
-      });
-    }
-
-    // Remove duplicates and filter out non-ingredient lines
-    ingredients = Array.from(new Set(ingredients)).filter(
-      (line) => line.length > 0 && line.split(" ").length <= 20
-    );
-
-    // Clean ingredient names before enrichment (less aggressive)
-    const cleanedIngredients = ingredients.map(line =>
-      line.replace(/^▢\s*/, "")
-          .replace(/^\s*\d+([\/\d\s\.]*)?\s*/i, "")
-          .replace(/[,].*$/, "")
-          .replace(/\s*see notes.*/i, "")
-          .trim()
-          .toLowerCase()
-          .replace(/\s+/g, " ")
-    );
-    console.log("Cleaned ingredients for enrichment:", cleanedIngredients);
+    // DEBUG: Hardcoded ingredient list for outbound fetch test
+    const cleanedIngredients = [
+      "ricotta cheese",
+      "egg",
+      "mozzarella cheese",
+      "parmesan cheese",
+      "italian seasoning",
+      "salt",
+      "pepper",
+      "olive oil",
+      "yellow onion",
+      "ground beef",
+      "ground italian sausage",
+      "garlic",
+      "chicken broth",
+      "marinara sauce",
+      "tomato paste",
+      "hot sauce",
+      "worcestershire sauce",
+      "lasagna noodles"
+    ];
+    console.log("Cleaned ingredients for enrichment (hardcoded):", cleanedIngredients);
 
     // TEST: Fetch public API to verify outbound connectivity
     try {
@@ -93,7 +58,7 @@ export async function POST(req: NextRequest) {
       console.error("enrich_ingredients failed:", errText);
       return NextResponse.json({
         error: "Failed to enrich ingredients: " + errText,
-        ingredients,
+        ingredients: cleanedIngredients,
         enrichedIngredients: []
       }, { status: 500 });
     }
@@ -103,7 +68,7 @@ export async function POST(req: NextRequest) {
 
     // Return both raw and enriched ingredients to frontend
     return NextResponse.json({
-      ingredients,
+      ingredients: cleanedIngredients,
       enrichedIngredients: enriched.ingredients || []
     });
   } catch (err: any) {
