@@ -201,4 +201,7 @@ async def enrich_post(request: Request):
     ingredient_list = body.get("ingredients", [])
     # No mapping or filtering, just enrichment
     enriched = enrich_recipe_ingredients(ingredient_list)
+    # If enrich_recipe_ingredients returns a list, wrap it in a dict for compatibility
+    if isinstance(enriched, list):
+        return JSONResponse(content={"ingredients": enriched})
     return JSONResponse(content={"ingredients": enriched["ingredients"]})
