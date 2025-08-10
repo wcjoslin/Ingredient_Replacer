@@ -16,7 +16,6 @@ from src.ingredient_workflow import map_ingredients_to_foodbert
 
 # Import robust enrichment logic
 from src.ingredient_data_enrichment import enrich_recipe_ingredients
-# from src.recipe_nutrition_label_workflow import get_nutrition_label
 
 app = FastAPI(title="Multi-Ingredient Suggestion API")
 
@@ -69,12 +68,6 @@ def merge_restriction_rules(diet_ids: List[str]):
                     merged_rules[k] = v
     return merged_rules
 
-@app.get("/list_src_files")
-def list_src_files():
-    import os
-    files = os.listdir("src")
-    return JSONResponse(content={"src_files": files})
-
 @app.get("/suggestions")
 def suggestions_get():
     return JSONResponse(content={"error": "Use POST for /suggestions. This endpoint only supports POST requests with a JSON body containing ingredients and diets."}, status_code=405)
@@ -112,8 +105,8 @@ async def get_suggestions_post(request: Request):
         # Human-friendly display categories
         display_categories = [format_category_display(cat) for cat in raw_category_keys]
         # Find the enriched entry for this ingredient
-        enriched_entry = next((e for e in enriched_list if e["ingredient"] == ingr), None)
-        if enriched_entry:
+        enriched_entry = next((e for e in enriched_list if e.get("ingredient") == ingr), None)
+        if enriched_entry and isinstance(enriched_entry, dict):
             for bp in enriched_entry.get("bullet_points", []):
                 lower_bp = bp.lower()
                 if lower_bp.startswith("calories"):
@@ -138,6 +131,10 @@ async def get_suggestions_post(request: Request):
                         pass
                 elif bp.endswith("-friendly") or bp.startswith("Not "):
                     dietary_flags.append(bp.strip())
+        else:
+            # If enrichment failed, skip or add empty nutrition/flags
+            nutrition = {}
+            dietary_flags = []
         enriched_data.append({
             "ingredient": ingr,
             "nutrition": nutrition,
@@ -188,8 +185,8 @@ async def get_suggestions_post(request: Request):
 
 # --- New endpoint for ingredient enrichment (for diet highlight UI) ---
 
-@app.post("/enrich")
-async def enrich_post(request: Request):
+@app.post("/enrich_ingredients")
+async def enrich_ingredients_post(request: Request):
     """
     Accepts a POST request with a JSON body:
     {
@@ -201,7 +198,4 @@ async def enrich_post(request: Request):
     ingredient_list = body.get("ingredients", [])
     # No mapping or filtering, just enrichment
     enriched = enrich_recipe_ingredients(ingredient_list)
-    # If enrich_recipe_ingredients returns a list, wrap it in a dict for compatibility
-    if isinstance(enriched, list):
-        return JSONResponse(content={"ingredients": enriched})
-    return JSONResponse(content={"ingredients": enriched["ingredients"]})
+    return JSONResponse(content={"ingredients": enriched})
