@@ -78,29 +78,26 @@ fetch("https://ingredient-replacer.onrender.com/diet_rules")
         body: JSON.stringify({ url }),
       });
       const data = await res.json();
-      if (data.enrichedIngredients && Array.isArray(data.enrichedIngredients)) {
-        setEnrichedIngredients(data.enrichedIngredients);
-        const normalizedIngredients = data.enrichedIngredients.map((ing: any) => ing.ingredient);
+      if (data.ingredients) {
+        setIngredients(data.ingredients);
+        const cleanedIngredients = data.ingredients.map(cleanIngredient);
 
-        setIngredients(normalizedIngredients);
-
-        // TEMP: Direct client-side fetch to /enrich for debugging
         try {
-          const enrichRes = await fetch("https://ingredient-replacer.onrender.com/enrich", {
+          const enrichRes = await fetch("https://ingredient-replacer.onrender.com/enrich_ingredients", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ingredients: normalizedIngredients }),
+            body: JSON.stringify({ ingredients: cleanedIngredients }),
           });
           const enrichData = await enrichRes.json();
-          console.log("Direct /enrich response:", enrichData);
-        } catch (enrichError) {
-          console.error("Direct /enrich fetch error:", enrichError);
+          setEnrichedIngredients(enrichData.ingredients || []);
+        } catch {
+          setEnrichedIngredients([]);
         }
 
         const swapRes = await fetch("https://ingredient-replacer.onrender.com/suggestions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ingredients: normalizedIngredients, diets: selectedDiets }),
+          body: JSON.stringify({ ingredients: cleanedIngredients, diets: selectedDiets }),
         });
         const swapData = await swapRes.json();
         setSwapSuggestions(swapData.suggestions || []);
@@ -109,7 +106,7 @@ fetch("https://ingredient-replacer.onrender.com/diet_rules")
           const nutritionRes = await fetch("https://ingredient-replacer.onrender.com/nutrition-label", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ingredients: normalizedIngredients, servings: 4 }),
+            body: JSON.stringify({ ingredients: cleanedIngredients, servings: 4 }),
           });
           if (nutritionRes.ok) {
             const nutritionData = await nutritionRes.json();
