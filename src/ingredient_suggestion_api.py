@@ -199,3 +199,7 @@ async def enrich_ingredients_post(request: Request):
     # No mapping or filtering, just enrichment
     enriched = enrich_recipe_ingredients(ingredient_list)
     return JSONResponse(content={"ingredients": enriched})
+
+@app.get("/test-json")
+def test_json():
+    return JSONResponse(content={"message": "This is a test"})
