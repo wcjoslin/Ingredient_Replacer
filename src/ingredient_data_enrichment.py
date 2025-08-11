@@ -19,7 +19,7 @@ import os
 
 # File paths (update if needed)
 NUTRITION_FILE = os.path.join("data enrichment", "enriched_ingredient_data_nutritionix.json")
-CATEGORY_FILE = os.path.join("foodbert_ingredient_categories_merged.json")
+CATEGORY_FILE = os.path.join("src","foodbert_ingredient_categories_merged.json")
 DIETARY_PRESETS_FILE = "data/dietary_restriction_presets.json"
 
 def load_json(path):
