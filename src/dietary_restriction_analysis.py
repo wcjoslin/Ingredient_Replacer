@@ -6,6 +6,13 @@ def analyze_dietary_restrictions(enriched_ingredients, restrictions):
     Returns a list of flagged ingredients and rationale.
     Updated: robust category matching (case-insensitive, supports lists), and disables low-carb unless explicitly set.
     """
+    # Load category mapping for robust restriction matching
+    try:
+        with open("data/category_mapping_and_primary_tags.json", "r", encoding="utf-8") as f:
+            category_map = json.load(f)["primary_category_map"]
+    except Exception:
+        category_map = {}
+
     flagged = []
     for item in enriched_ingredients:
         ingredient = item["ingredient"]
@@ -15,9 +22,39 @@ def analyze_dietary_restrictions(enriched_ingredients, restrictions):
         # Normalize categories for comparison
         categories_norm = set([c.lower().strip() for c in categories if isinstance(c, str)])
 
-        # Macronutrient threshold (only if explicitly set)
+        # Map restriction category names to raw keys for robust matching
+        # Synonym mapping for common diet terms
+        synonym_map = {
+            "dairy": ["milk", "cheese"],
+            "meat": ["meat", "animal_products"],
+            "nut": ["nut", "nuts"],
+            "starchy vegetables": ["starchy_vegetables", "potatoes", "corn"],
+            "processed foods": ["processed_foods", "packaged_foods", "ready_meals", "snacks"]
+        }
+        def map_restriction_categories(restriction_list):
+            mapped = set()
+            for r in restriction_list:
+                r_norm = r.lower().replace(" ", "_").replace("-", "_").strip()
+                # Expand synonyms
+                expanded = [r_norm]
+                if r_norm in synonym_map:
+                    expanded += synonym_map[r_norm]
+                for term in expanded:
+                    if term in category_map:
+                        mapped.update([x.lower() for x in category_map[term]])
+                    elif term.rstrip("s") in category_map:
+                        mapped.update([x.lower() for x in category_map[term.rstrip("s")]])
+                    else:
+                        mapped.add(term)
+            return mapped
+
+        # Macronutrient thresholds (generic for all rules)
         nutrition = item.get("nutrition", {})
         carbs = nutrition.get("carbohydrates", None)
+        fat = nutrition.get("fat", None)
+        protein = nutrition.get("protein", None)
+
+        # Max carbohydrates
         if "max_carbohydrates_g_per_serving" in restrictions and carbs is not None:
             try:
                 max_carb = float(restrictions["max_carbohydrates_g_per_serving"])
@@ -26,10 +63,47 @@ def analyze_dietary_restrictions(enriched_ingredients, restrictions):
             except Exception:
                 pass
 
-        # Category exclusion (robust, case-insensitive)
-        exclude_categories = set([e.lower().strip() for e in restrictions.get("exclude_categories", []) if isinstance(e, str)])
-        if exclude_categories and categories_norm & exclude_categories:
-            rationale.append(f"Category {list(categories_norm & exclude_categories)} is excluded by restriction.")
+        # Min fat percent
+        if "min_fat_percent" in restrictions and fat is not None and nutrition.get("calories", None):
+            try:
+                fat_percent = (float(fat) * 9 / float(nutrition["calories"])) * 100
+                min_fat = float(restrictions["min_fat_percent"])
+                if fat_percent < min_fat:
+                    rationale.append(f"Fat percent ({fat_percent:.1f}%) below minimum ({min_fat}%).")
+            except Exception:
+                pass
+
+        # Max fat percent
+        if "max_fat_percent_per_serving" in restrictions and fat is not None and nutrition.get("calories", None):
+            try:
+                fat_percent = (float(fat) * 9 / float(nutrition["calories"])) * 100
+                max_fat = float(restrictions["max_fat_percent_per_serving"])
+                if fat_percent > max_fat:
+                    rationale.append(f"Fat percent ({fat_percent:.1f}%) exceeds max ({max_fat}%).")
+            except Exception:
+                pass
+
+        # Category exclusion (robust, case-insensitive, mapped to raw keys)
+        exclude_categories_raw = map_restriction_categories(restrictions.get("exclude_categories", []))
+        # For keto, only flag if carbs > max or fat percent < min
+        is_keto = "max_carbohydrates_g_per_serving" in restrictions and "min_fat_percent" in restrictions
+        if exclude_categories_raw and categories_norm & exclude_categories_raw:
+            if is_keto:
+                # Only flag if carbs > max or fat percent < min
+                flag = False
+                if carbs is not None and float(carbs) > float(restrictions["max_carbohydrates_g_per_serving"]):
+                    flag = True
+                if fat is not None and nutrition.get("calories", None):
+                    try:
+                        fat_percent = (float(fat) * 9 / float(nutrition["calories"])) * 100
+                        if fat_percent < float(restrictions["min_fat_percent"]):
+                            flag = True
+                    except Exception:
+                        pass
+                if flag:
+                    rationale.append(f"Category {list(categories_norm & exclude_categories_raw)} is excluded by restriction.")
+            else:
+                rationale.append(f"Category {list(categories_norm & exclude_categories_raw)} is excluded by restriction.")
 
         # Ingredient exclusion (case-insensitive)
         exclude_ingredients = [e.lower().strip() for e in restrictions.get("exclude_ingredients", []) if isinstance(e, str)]
@@ -42,7 +116,9 @@ def analyze_dietary_restrictions(enriched_ingredients, restrictions):
 
         # Vegan check (legacy, can be removed if category logic is robust)
         metadata = item.get("openfoodfacts_metadata", {})
-        if "exclude_categories" in restrictions and "meat" in exclude_categories:
+        # Legacy vegan check (optional, can be removed if category logic is robust)
+        exclude_categories_legacy = restrictions.get("exclude_categories", [])
+        if "exclude_categories" in restrictions and "meat" in exclude_categories_legacy:
             if metadata and not any("vegan" in tag for tag in metadata.get("vegan", [])):
                 rationale.append("Ingredient may not be vegan.")
 

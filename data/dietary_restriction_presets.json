@@ -17,7 +17,7 @@
     "source": "https://www.hsph.harvard.edu/nutritionsource/healthy-weight/diet-reviews/ketogenic-diet/",
     "rules": {
       "max_carbohydrates_g_per_serving": 10,
-      "min_fat_percent": 70,
+      "min_fat_percent": 40,
       "swap_grains_sugars_starchy_veg": "low-carb vegetables, healthy fats",
       "exclude_categories": ["grains", "sugar", "starchy vegetables", "most fruits", "sugars"]
     }
