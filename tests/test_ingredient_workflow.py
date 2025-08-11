@@ -5,9 +5,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../s
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../foodBERT")))
 
 import pytest
-from ingredient_workflow import normalize_ingredient_string, fuzzy_match_ingredient, map_ingredients_to_foodbert
-from dietary_restriction_analysis import analyze_dietary_restrictions
-from ingredient_swap_suggestions import get_enhanced_swap
+from src.ingredient_workflow import normalize_ingredient_string, fuzzy_match_ingredient, map_ingredients_to_foodbert
+from src.dietary_restriction_analysis import analyze_dietary_restrictions
+from src.ingredient_swap_suggestions import get_enhanced_swap
 
 def test_normalize_ingredient_string():
     assert normalize_ingredient_string("¾ cup parmesan cheese") == "parmesan cheese"

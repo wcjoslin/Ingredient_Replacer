@@ -1,3 +1,5 @@
+/env
+.env
 __pycache__/config.cpython-311.pyc
 __pycache__/dietary_restriction_analysis.cpython-311.pyc
 __pycache__/integrate_usda_openfoodfacts.cpython-311.pyc
