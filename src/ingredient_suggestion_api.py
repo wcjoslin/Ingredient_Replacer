@@ -105,8 +105,8 @@ async def get_suggestions_post(request: Request):
         # Human-friendly display categories
         display_categories = [format_category_display(cat) for cat in raw_category_keys]
         # Find the enriched entry for this ingredient
-        enriched_entry = next((e for e in enriched_list if e["ingredient"] == ingr), None)
-        if enriched_entry:
+        enriched_entry = next((e for e in enriched_list if isinstance(e, dict) and e.get("ingredient") == ingr), None)
+        if enriched_entry and isinstance(enriched_entry, dict):
             for bp in enriched_entry.get("bullet_points", []):
                 lower_bp = bp.lower()
                 if lower_bp.startswith("calories"):
@@ -131,6 +131,10 @@ async def get_suggestions_post(request: Request):
                         pass
                 elif bp.endswith("-friendly") or bp.startswith("Not "):
                     dietary_flags.append(bp.strip())
+        else:
+            # If enrichment failed, skip or add empty nutrition/flags
+            nutrition = {}
+            dietary_flags = []
         enriched_data.append({
             "ingredient": ingr,
             "nutrition": nutrition,
@@ -195,3 +199,7 @@ async def enrich_ingredients_post(request: Request):
     # No mapping or filtering, just enrichment
     enriched = enrich_recipe_ingredients(ingredient_list)
     return JSONResponse(content={"ingredients": enriched})
+
+@app.get("/test-json")
+def test_json():
+    return JSONResponse(content={"message": "This is a test"})
