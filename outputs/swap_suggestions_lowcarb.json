@@ -1,0 +1,127 @@
+[
+  {
+    "ingredient": "Penne",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "serrano",
+      "score": -0.3799452157701639,
+      "foodbert_score": 0.3043536915518783,
+      "nutrition_delta": 3.1171408450583327,
+      "original_nutrition": {
+        "calories": 333.0,
+        "protein": 14.04,
+        "fat": 1.75,
+        "carbohydrates": 70.18
+      },
+      "substitute_nutrition": {
+        "calories": 32.0,
+        "protein": 1.9,
+        "fat": 0.95,
+        "carbohydrates": 7.62
+      }
+    }
+  },
+  {
+    "ingredient": "Parmesan cheese",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."
+    }
+  },
+  {
+    "ingredient": "Garlic",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."
+    }
+  },
+  {
+    "ingredient": "Baby spinach leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Baby spinach leaves' (normalized: 'baby spinach leaves') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Basil leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."
+    }
+  },
+  {
+    "ingredient": "Lemon juice",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."
+    }
+  },
+  {
+    "ingredient": "Walnuts",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "No suitable substitute found."
+    }
+  },
+  {
+    "ingredient": "Lemon zest",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "No suitable substitute found."
+    }
+  },
+  {
+    "ingredient": "Olive oil",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."
+    }
+  },
+  {
+    "ingredient": "Salt",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."
+    }
+  },
+  {
+    "ingredient": "Black pepper",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "info": "Ingredient already meets low-carb cutoff (<=10g carbs), no swap needed."
+    }
+  }
+]

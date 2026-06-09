@@ -1,0 +1,14 @@
+{
+  "pre_diabetic": {
+    "id": "UmVjaXBlOmZmNmVhMDkwLWJmMjMtNDM0ZS04ZGJmLWUxMDQ2MTJmNDE5NQ==",
+    "name": "Lemon Pesto Pasta"
+  },
+  "vegan": {
+    "id": "UmVjaXBlOmUyNjRkZjhmLWM5NzEtNGI3Yi1hOTI2LWRjOTliZTZhN2Q1Mg==",
+    "name": "Watermelon Gazpacho"
+  },
+  "kosher": {
+    "id": "UmVjaXBlOjYyOTBmMTAwLWI0NGUtNDVlOS05NTNhLTUxN2FiOWNjYjc2ZQ==",
+    "name": "Garlic-Shrimp Pasta"
+  }
+}

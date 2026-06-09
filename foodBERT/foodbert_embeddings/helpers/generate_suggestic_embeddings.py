@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 from foodBERT.foodbert.helpers.prediction_model import PredictionModel, SimpleTokenizer
 
-SENTENCE_FILE = "filtered_ingredient_sentences.json"
+SENTENCE_FILE = "outputs/filtered_ingredient_sentences.json"
 USED_INGREDIENTS_FILE = "foodBERT/foodbert_embeddings/data/used_ingredients_clean.json"
 VOCAB_FILE = "foodBERT/foodbert/data/bert-base-cased-vocab.txt"
 OUTPUT_FILE = "foodBERT/foodbert_embeddings/data/food_embeddings_dict_suggestic.pkl"

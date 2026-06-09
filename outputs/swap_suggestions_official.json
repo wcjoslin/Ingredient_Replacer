@@ -1,0 +1,497 @@
+[
+  {
+    "ingredient": "Penne",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "ranked_swaps": [
+        {
+          "substitute": "rigatoni pasta",
+          "score": 0.34096084798278514,
+          "foodbert_score": 0.44800874197371904,
+          "nutrition_delta": 0.08723072798095066,
+          "original_nutrition": {
+            "calories": 195.92,
+            "protein": 7.19,
+            "fat": 1.15,
+            "carbohydrates": 38.27
+          },
+          "substitute_nutrition": {
+            "calories": 199.87,
+            "protein": 7.34,
+            "fat": 1.18,
+            "carbohydrates": 39.04
+          }
+        },
+        {
+          "substitute": "fusilli",
+          "score": 0.28512648558847176,
+          "foodbert_score": 0.35640810698558967,
+          "nutrition_delta": 0.0,
+          "original_nutrition": {
+            "calories": 195.92,
+            "protein": 7.19,
+            "fat": 1.15,
+            "carbohydrates": 38.27
+          },
+          "substitute_nutrition": {
+            "calories": 195.92,
+            "protein": 7.19,
+            "fat": 1.15,
+            "carbohydrates": 38.27
+          }
+        },
+        {
+          "substitute": "spaghetti",
+          "score": 0.21128032135423763,
+          "foodbert_score": 0.3877749156446847,
+          "nutrition_delta": 0.49469805580755066,
+          "original_nutrition": {
+            "calories": 195.92,
+            "protein": 7.19,
+            "fat": 1.15,
+            "carbohydrates": 38.27
+          },
+          "substitute_nutrition": {
+            "calories": 221,
+            "protein": 8,
+            "fat": 1.3,
+            "carbohydrates": 43
+          }
+        }
+      ]
+    }
+  },
+  {
+    "ingredient": "Parmesan cheese",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "ranked_swaps": [
+        {
+          "substitute": "feta cheese",
+          "score": -1.6815918625060258,
+          "foodbert_score": 0.625276621792684,
+          "nutrition_delta": 10.909065799700866,
+          "original_nutrition": {
+            "calories": 22,
+            "protein": 2,
+            "fat": 1.5,
+            "carbohydrates": 0.2
+          },
+          "substitute_nutrition": {
+            "calories": 75,
+            "protein": 4,
+            "fat": 6,
+            "carbohydrates": 1.1
+          }
+        },
+        {
+          "substitute": "mozzarella cheese",
+          "score": -1.7192945922004284,
+          "foodbert_score": 0.40428751604689106,
+          "nutrition_delta": 10.213623025189706,
+          "original_nutrition": {
+            "calories": 22,
+            "protein": 2,
+            "fat": 1.5,
+            "carbohydrates": 0.2
+          },
+          "substitute_nutrition": {
+            "calories": 85,
+            "protein": 6.3,
+            "fat": 6.3,
+            "carbohydrates": 0.6
+          }
+        },
+        {
+          "substitute": "cheddar cheese",
+          "score": -1.941946828086373,
+          "foodbert_score": 0.7316549311524417,
+          "nutrition_delta": 12.636353865041631,
+          "original_nutrition": {
+            "calories": 22,
+            "protein": 2,
+            "fat": 1.5,
+            "carbohydrates": 0.2
+          },
+          "substitute_nutrition": {
+            "calories": 113,
+            "protein": 7,
+            "fat": 9,
+            "carbohydrates": 0.4
+          }
+        }
+      ]
+    }
+  },
+  {
+    "ingredient": "Garlic",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "ranked_swaps": [
+        {
+          "substitute": "vegetable broth",
+          "score": -0.29608888364209013,
+          "foodbert_score": 0.09579743253518425,
+          "nutrition_delta": 1.8636341483511876,
+          "original_nutrition": {
+            "calories": 10,
+            "protein": 0.5,
+            "fat": 0.0,
+            "carbohydrates": 2.2
+          },
+          "substitute_nutrition": {
+            "calories": 15,
+            "protein": 1,
+            "fat": 0,
+            "carbohydrates": 3
+          }
+        },
+        {
+          "substitute": "ginger",
+          "score": -0.7299075712652402,
+          "foodbert_score": -0.4510213022005554,
+          "nutrition_delta": 1.845452647523979,
+          "original_nutrition": {
+            "calories": 10,
+            "protein": 0.5,
+            "fat": 0.0,
+            "carbohydrates": 2.2
+          },
+          "substitute_nutrition": {
+            "calories": 5,
+            "protein": 0.1,
+            "fat": 0,
+            "carbohydrates": 1
+          }
+        },
+        {
+          "substitute": "chives",
+          "score": -0.8316894005945181,
+          "foodbert_score": -0.37597591807700664,
+          "nutrition_delta": 2.6545433306645636,
+          "original_nutrition": {
+            "calories": 10,
+            "protein": 0.5,
+            "fat": 0.0,
+            "carbohydrates": 2.2
+          },
+          "substitute_nutrition": {
+            "calories": 1,
+            "protein": 0.1,
+            "fat": 0,
+            "carbohydrates": 0.1
+          }
+        }
+      ]
+    }
+  },
+  {
+    "ingredient": "Baby spinach leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Baby spinach leaves' (normalized: 'baby spinach leaves') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Basil leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "ranked_swaps": [
+        {
+          "substitute": "cilantro",
+          "score": -3.7939740289354047,
+          "foodbert_score": 0.34057554451123895,
+          "nutrition_delta": 20.33217232272198,
+          "original_nutrition": {
+            "calories": 0.12,
+            "protein": 0.02,
+            "fat": 0,
+            "carbohydrates": 0.01
+          },
+          "substitute_nutrition": {
+            "calories": 1,
+            "protein": 0.1,
+            "fat": 0,
+            "carbohydrates": 0.1
+          }
+        },
+        {
+          "substitute": "black pepper",
+          "score": -27.876342832334473,
+          "foodbert_score": -0.09776789979801043,
+          "nutrition_delta": 138.9906425624803,
+          "original_nutrition": {
+            "calories": 0.12,
+            "protein": 0.02,
+            "fat": 0,
+            "carbohydrates": 0.01
+          },
+          "substitute_nutrition": {
+            "calories": 6,
+            "protein": 0.0,
+            "fat": 0.0,
+            "carbohydrates": 0.9
+          }
+        },
+        {
+          "substitute": "vanilla extract",
+          "score": -29.692172508675483,
+          "foodbert_score": 0.1333407389871062,
+          "nutrition_delta": 148.99422549932584,
+          "original_nutrition": {
+            "calories": 0.12,
+            "protein": 0.02,
+            "fat": 0,
+            "carbohydrates": 0.01
+          },
+          "substitute_nutrition": {
+            "calories": 12,
+            "protein": 0,
+            "fat": 0,
+            "carbohydrates": 0.5
+          }
+        }
+      ]
+    }
+  },
+  {
+    "ingredient": "Lemon juice",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "No suitable substitute found."
+    }
+  },
+  {
+    "ingredient": "Walnuts",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "ranked_swaps": [
+        {
+          "substitute": "pecans",
+          "score": 2.6011761685653187,
+          "foodbert_score": 3.390847936095897,
+          "nutrition_delta": 0.5575109015569961,
+          "original_nutrition": {
+            "calories": 185,
+            "protein": 4.3,
+            "fat": 18.5,
+            "carbohydrates": 3.9
+          },
+          "substitute_nutrition": {
+            "calories": 196,
+            "protein": 2.6,
+            "fat": 20.4,
+            "carbohydrates": 3.9
+          }
+        },
+        {
+          "substitute": "almonds",
+          "score": 2.538652632407396,
+          "foodbert_score": 3.4959575126735283,
+          "nutrition_delta": 1.290566888657134,
+          "original_nutrition": {
+            "calories": 185,
+            "protein": 4.3,
+            "fat": 18.5,
+            "carbohydrates": 3.9
+          },
+          "substitute_nutrition": {
+            "calories": 164,
+            "protein": 6,
+            "fat": 14,
+            "carbohydrates": 6
+          }
+        },
+        {
+          "substitute": "cashews",
+          "score": 2.4102495951557903,
+          "foodbert_score": 3.5061083227185934,
+          "nutrition_delta": 1.9731853150954226,
+          "original_nutrition": {
+            "calories": 185,
+            "protein": 4.3,
+            "fat": 18.5,
+            "carbohydrates": 3.9
+          },
+          "substitute_nutrition": {
+            "calories": 157,
+            "protein": 5,
+            "fat": 12,
+            "carbohydrates": 9
+          }
+        }
+      ]
+    }
+  },
+  {
+    "ingredient": "Lemon zest",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "No suitable substitute found."
+    }
+  },
+  {
+    "ingredient": "Olive oil",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "ranked_swaps": [
+        {
+          "substitute": "vegetable oil",
+          "score": 0.09984276635872065,
+          "foodbert_score": 0.12921833485162446,
+          "nutrition_delta": 0.017659507612894594,
+          "original_nutrition": {
+            "calories": 119,
+            "protein": 0,
+            "fat": 13.5,
+            "carbohydrates": 0
+          },
+          "substitute_nutrition": {
+            "calories": 120.22,
+            "protein": 0,
+            "fat": 13.6,
+            "carbohydrates": 0
+          }
+        },
+        {
+          "substitute": "coconut oil",
+          "score": -0.1012202777599329,
+          "foodbert_score": -0.12232366656295546,
+          "nutrition_delta": 0.016806722547842667,
+          "original_nutrition": {
+            "calories": 119,
+            "protein": 0,
+            "fat": 13.5,
+            "carbohydrates": 0
+          },
+          "substitute_nutrition": {
+            "calories": 121,
+            "protein": 0,
+            "fat": 13.5,
+            "carbohydrates": 0
+          }
+        },
+        {
+          "substitute": "sesame oil",
+          "score": -0.27126047768829126,
+          "foodbert_score": -0.3277154982184955,
+          "nutrition_delta": 0.045440395567474354,
+          "original_nutrition": {
+            "calories": 119,
+            "protein": 0,
+            "fat": 13.5,
+            "carbohydrates": 0
+          },
+          "substitute_nutrition": {
+            "calories": 120,
+            "protein": 0,
+            "fat": 14,
+            "carbohydrates": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "ingredient": "Salt",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "No suitable substitute found."
+    }
+  },
+  {
+    "ingredient": "Black pepper",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "ranked_swaps": [
+        {
+          "substitute": "vanilla extract",
+          "score": -0.26374148186202073,
+          "foodbert_score": 0.031434093660272486,
+          "nutrition_delta": 1.4444437839511937,
+          "original_nutrition": {
+            "calories": 6,
+            "protein": 0.0,
+            "fat": 0.0,
+            "carbohydrates": 0.9
+          },
+          "substitute_nutrition": {
+            "calories": 12,
+            "protein": 0,
+            "fat": 0,
+            "carbohydrates": 0.5
+          }
+        },
+        {
+          "substitute": "vanilla essence",
+          "score": -0.42804456561794135,
+          "foodbert_score": -0.17811141913649034,
+          "nutrition_delta": 1.4277771515437454,
+          "original_nutrition": {
+            "calories": 6,
+            "protein": 0.0,
+            "fat": 0.0,
+            "carbohydrates": 0.9
+          },
+          "substitute_nutrition": {
+            "calories": 12.1,
+            "protein": 0,
+            "fat": 0,
+            "carbohydrates": 0.53
+          }
+        },
+        {
+          "substitute": "basil leaves",
+          "score": -4000.4719918451965,
+          "foodbert_score": -0.09776789979801043,
+          "nutrition_delta": 20001.96888762679,
+          "original_nutrition": {
+            "calories": 6,
+            "protein": 0.0,
+            "fat": 0.0,
+            "carbohydrates": 0.9
+          },
+          "substitute_nutrition": {
+            "calories": 0.12,
+            "protein": 0.02,
+            "fat": 0,
+            "carbohydrates": 0.01
+          }
+        }
+      ]
+    }
+  }
+]
