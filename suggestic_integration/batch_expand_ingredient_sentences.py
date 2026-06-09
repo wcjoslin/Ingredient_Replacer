@@ -91,16 +91,16 @@ def main():
         if (idx + 1) % 10 == 0:
             with open("all_ingredient_instructions.json", "w", encoding="utf-8") as f:
                 json.dump(all_instructions_dict, f, ensure_ascii=False, indent=2)
-            with open("expanded_ingredient_recipe_logs.json", "w", encoding="utf-8") as f:
+            with open("outputs/expanded_ingredient_recipe_logs.json", "w", encoding="utf-8") as f:
                 json.dump(recipe_logs, f, ensure_ascii=False, indent=2)
-            with open("skipped_ingredients.json", "w", encoding="utf-8") as f:
+            with open("outputs/skipped_ingredients.json", "w", encoding="utf-8") as f:
                 json.dump(skipped_ingredients, f, ensure_ascii=False, indent=2)
     # Final save
     with open("all_ingredient_instructions.json", "w", encoding="utf-8") as f:
         json.dump(all_instructions_dict, f, ensure_ascii=False, indent=2)
-    with open("expanded_ingredient_recipe_logs.json", "w", encoding="utf-8") as f:
+    with open("outputs/expanded_ingredient_recipe_logs.json", "w", encoding="utf-8") as f:
         json.dump(recipe_logs, f, ensure_ascii=False, indent=2)
-    with open("skipped_ingredients.json", "w", encoding="utf-8") as f:
+    with open("outputs/skipped_ingredients.json", "w", encoding="utf-8") as f:
         json.dump(skipped_ingredients, f, ensure_ascii=False, indent=2)
     print("Saved all instructions, recipe logs, and skipped ingredients.")
 

@@ -1,0 +1,22 @@
+[
+  {
+    "error": "Ingredient not in embedding vocabulary",
+    "ingredient": "olive oil",
+    "recipe_id": "UmVjaXBlOjA2YjM1ODcwLTNlYTctNDYxZC1iZGMwLWIwNmY1ZGZmOTJhMw==",
+    "recipe_name": "Garlic-Seafood Stew",
+    "all_ingredients": [
+      "olive oil",
+      "onion",
+      "garlic cloves",
+      "tomatoes",
+      "clam juice",
+      "bay leaf",
+      "salt",
+      "clam",
+      "mussels",
+      "shrimp",
+      "calamari",
+      "parsley"
+    ]
+  }
+]

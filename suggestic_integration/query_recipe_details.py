@@ -70,7 +70,7 @@ query getRecipe($id: ID!) {
 """
 
 def main():
-    with open("diet_test_recipe_selection.json", "r", encoding="utf-8") as f:
+    with open("outputs/diet_test_recipe_selection.json", "r", encoding="utf-8") as f:
         selection = json.load(f)
     results = {}
     for key, recipe in selection.items():
@@ -90,7 +90,7 @@ def main():
             except Exception:
                 pass
         results[key] = data
-    with open("diet_test_recipe_details.json", "w", encoding="utf-8") as f:
+    with open("outputs/diet_test_recipe_details.json", "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":

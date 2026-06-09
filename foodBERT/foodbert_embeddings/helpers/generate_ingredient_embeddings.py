@@ -46,7 +46,7 @@ def _generate_food_sentence_dict_combined():
     instruction_sentences = train_instruction_sentences + test_instruction_sentences
     print(f"DEBUG: Loaded {len(instruction_sentences)} instruction sentences")
 
-    suggestic_path = Path('filtered_ingredient_sentences.json')
+    suggestic_path = Path('outputs/filtered_ingredient_sentences.json')
     suggestic_sentences_dict = {}
     if suggestic_path.exists():
         with suggestic_path.open(encoding="utf-8") as f:

@@ -9,8 +9,8 @@ from foodBERT.foodbert_embeddings.helpers.approx_knn_classifier import ApproxKNN
 
 def suggestic_foodbert_ingredient_swap(
     recipe_id,
-    output_json_path="ingredient_swap_result.json",
-    error_log_path="ingredient_swap_errors.json"
+    output_json_path="outputs/ingredient_swap_result.json",
+    error_log_path="outputs/ingredient_swap_errors.json"
 ):
     """
     Query a Suggestic recipe by ID, extract the first ingredient, and use foodBERT to suggest a substitute.

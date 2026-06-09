@@ -27,7 +27,7 @@ def main():
             "id": node.get("id"),
             "name": node.get("name")
         })
-    with open("popular_recipes.json", "w", encoding="utf-8") as f:
+    with open("outputs/popular_recipes.json", "w", encoding="utf-8") as f:
         json.dump(recipes, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from nutritionix_api import get_nutritionix_profile
 
 MAX_API_CALLS = 200
 
-with open("missing_nutritionix_ingredients.json", "r", encoding="utf-8") as f:
+with open("outputs/missing_nutritionix_ingredients.json", "r", encoding="utf-8") as f:
     missing = json.load(f)
 
 with open("enriched_ingredient_data_nutritionix.json", "r", encoding="utf-8") as f:

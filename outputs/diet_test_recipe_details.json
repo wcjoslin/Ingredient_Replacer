@@ -1,0 +1,309 @@
+{
+  "pre_diabetic": {
+    "databaseId": "ff6ea090-bf23-434e-8dbf-e104612f4195",
+    "totalTime": "30 minutes",
+    "totalTimeInSeconds": 1800,
+    "name": "Lemon Pesto Pasta",
+    "rating": null,
+    "numberOfServings": 4,
+    "ingredientLines": [
+      "15 oz penne",
+      "5 oz grated Parmesan cheese",
+      "4 cloves garlic",
+      "2 cups baby spinach",
+      "1 cup basil leaves",
+      "3 tbsp lemon juice",
+      "1/2 cup chopped walnuts",
+      "1/3 tsp lemon zest",
+      "4 tbsp olive oil",
+      "Salt, to taste",
+      "Ground black pepper, to taste"
+    ],
+    "ingredients": [
+      {
+        "name": "Penne"
+      },
+      {
+        "name": "Parmesan cheese"
+      },
+      {
+        "name": "Garlic"
+      },
+      {
+        "name": "Baby spinach leaves"
+      },
+      {
+        "name": "Basil leaves"
+      },
+      {
+        "name": "Lemon juice"
+      },
+      {
+        "name": "Walnuts"
+      },
+      {
+        "name": "Lemon zest"
+      },
+      {
+        "name": "Olive oil"
+      },
+      {
+        "name": "Salt"
+      },
+      {
+        "name": "Black pepper"
+      }
+    ],
+    "language": null,
+    "courses": [],
+    "cuisines": null,
+    "source": null,
+    "mainImage": "https://storage.googleapis.com/recipes_images_sg/recipeId_ff6ea090-bf23-434e-8dbf-e104612f4195.jpg",
+    "isPremium": null,
+    "isFeatured": null,
+    "author": "Suggestic Premium",
+    "authorAvatar": "https://sg-data.storage.googleapis.com/author/suggestic-premium.png",
+    "ingredientsCount": 11,
+    "favoritesCount": 6,
+    "isUserFavorite": false,
+    "inUserShoppingList": false,
+    "weightInGrams": 871.0355982512106,
+    "servingWeight": 217.75889956280264,
+    "isLogged": false,
+    "relativeCalories": {
+      "carbs": 0.3068,
+      "fat": 0.5605,
+      "protein": 0.1327
+    },
+    "instructions": [
+      "Bring a large pot of lightly salted water to a boil. Cook pasta at a boil for about 12 minutes, drain. Transfer to a large bowl.",
+      "Put cheese in the bowl of a food processor, add garlic into the food processor and process until the cheese and garlic are combined.",
+      "Add spinach, basil, walnuts, lemon juice, lemon zest, and seasoning process until the mixture comes together into a thick paste. Scrape down the sides of the bowl with a spatula."
+    ],
+    "nutritionalInfo": {
+      "calories": 2.4751,
+      "protein": 0.0821,
+      "carbs": 0.1899,
+      "fat": 0.1541,
+      "sugar": 0.0068,
+      "fiber": 0.0164,
+      "saturatedFat": 0.0371,
+      "monounsaturatedFat": 0.062,
+      "polyunsaturatedFat": 0.0364,
+      "transFat": 0.0014,
+      "cholesterol": 0.14,
+      "sodium": 5.5156,
+      "potassium": 1.4757,
+      "vitaminA": 0,
+      "vitaminC": 0.0246,
+      "calcium": 1.5927,
+      "iron": 0.0123,
+      "netcarbs": 0.17
+    }
+  },
+  "vegan": {
+    "databaseId": "e264df8f-c971-4b7b-a926-dc99be6a7d52",
+    "totalTime": "15 minutes",
+    "totalTimeInSeconds": 900,
+    "name": "Watermelon Gazpacho",
+    "rating": null,
+    "numberOfServings": 2,
+    "ingredientLines": [
+      "3 cups cubed watermelon",
+      "1/2 cup coconut water",
+      "¼ cup freshly squeezed lime juice",
+      "1/2 tsp chili powder",
+      "1/2 tsp diced jalapeno pepper",
+      "Salt, to taste",
+      "1/2 cup diced cucumber",
+      "1/2 cup diced tomatoes",
+      "1 tsp olive oil"
+    ],
+    "ingredients": [
+      {
+        "name": "Watermelon"
+      },
+      {
+        "name": "Coconut water"
+      },
+      {
+        "name": "Lime juice"
+      },
+      {
+        "name": "Chili powder"
+      },
+      {
+        "name": "Jalapeno pepper"
+      },
+      {
+        "name": "Salt"
+      },
+      {
+        "name": "Cucumber"
+      },
+      {
+        "name": "Tomatoes"
+      },
+      {
+        "name": "Olive oil"
+      }
+    ],
+    "language": null,
+    "courses": [],
+    "cuisines": [
+      "Spanish"
+    ],
+    "source": null,
+    "mainImage": "https://storage.googleapis.com/recipes_images_sg/recipeId_e264df8f-c971-4b7b-a926-dc99be6a7d52.jpg",
+    "isPremium": null,
+    "isFeatured": null,
+    "author": "Suggestic Premium",
+    "authorAvatar": "https://sg-data.storage.googleapis.com/author/suggestic-premium.png",
+    "ingredientsCount": 9,
+    "favoritesCount": 5,
+    "isUserFavorite": false,
+    "inUserShoppingList": false,
+    "weightInGrams": 794.4333333333334,
+    "servingWeight": 397.2166666666667,
+    "isLogged": false,
+    "relativeCalories": {
+      "carbs": 0.547,
+      "fat": 0.3984,
+      "protein": 0.0545
+    },
+    "instructions": [
+      "Place the watermelon, coconut water, olive oil, lime juice, jalapeno pepper, chili powder, and salt in a blender and blend well.",
+      "Add the remaining ingredients and stir well before serving."
+    ],
+    "nutritionalInfo": {
+      "calories": 0.4161,
+      "protein": 0.0057,
+      "carbs": 0.0569,
+      "fat": 0.0184,
+      "sugar": 0.0387,
+      "fiber": 0.0045,
+      "saturatedFat": 0.0026,
+      "monounsaturatedFat": 0.0127,
+      "polyunsaturatedFat": 0.0023,
+      "transFat": 0,
+      "cholesterol": 0,
+      "sodium": 2.8741,
+      "potassium": 1.0804,
+      "vitaminA": 0,
+      "vitaminC": 0.0882,
+      "calcium": 0.077,
+      "iron": 0.0025,
+      "netcarbs": 0.05
+    }
+  },
+  "kosher": {
+    "databaseId": "6290f100-b44e-45e9-953a-517ab9ccb76e",
+    "totalTime": "25 minutes",
+    "totalTimeInSeconds": 1500,
+    "name": "Garlic-Shrimp Pasta",
+    "rating": null,
+    "numberOfServings": 4,
+    "ingredientLines": [
+      "6 oz spaghetti",
+      "2 tbsp ghee divided",
+      "3/4 lb shrimp uncooked, shelled and deveined",
+      "3 cloves garlic minced",
+      "1 tsp red pepper flakes",
+      "1 tsp smoked paprika",
+      "½ tsp salt",
+      "¼ cracked pepper",
+      "3 cups baby spinach",
+      "½ cup shredded Parmesan cheese",
+      "¼ cup minced fresh parsley"
+    ],
+    "ingredients": [
+      {
+        "name": "Spaghetti"
+      },
+      {
+        "name": "Ghee"
+      },
+      {
+        "name": "Shrimp"
+      },
+      {
+        "name": "Garlic"
+      },
+      {
+        "name": "Red pepper flakes"
+      },
+      {
+        "name": "Smoked paprika"
+      },
+      {
+        "name": "Salt"
+      },
+      {
+        "name": "Peppercorns"
+      },
+      {
+        "name": "Baby spinach leaves"
+      },
+      {
+        "name": "Parmesan cheese"
+      },
+      {
+        "name": "Parsley"
+      }
+    ],
+    "language": null,
+    "courses": [],
+    "cuisines": [
+      "American",
+      "Kid-Friendly"
+    ],
+    "source": null,
+    "mainImage": "https://storage.googleapis.com/recipes_images_sg/recipeId_6290f100-b44e-45e9-953a-517ab9ccb76e.jpg",
+    "isPremium": null,
+    "isFeatured": null,
+    "author": "Suggestic Premium",
+    "authorAvatar": "https://sg-data.storage.googleapis.com/author/suggestic-premium.png",
+    "ingredientsCount": 11,
+    "favoritesCount": 2,
+    "isUserFavorite": false,
+    "inUserShoppingList": false,
+    "weightInGrams": 718.39141625,
+    "servingWeight": 179.5978540625,
+    "isLogged": false,
+    "relativeCalories": {
+      "carbs": 0.433,
+      "fat": 0.3735,
+      "protein": 0.1935
+    },
+    "instructions": [
+      "Bring a large pot of water to a boil and cook pasta according to package directions.",
+      "During the last 5 minutes of cooking the pasta, heat 1/2 tablespoons of ghee in a large skillet over medium heat.",
+      "Once melted, add the shrimp, garlic, red pepper, paprika, salt, and pepper.",
+      "Cook the shrimp, stirring often, for 3-4 minutes or until pink on the outside. Remove shrimp to a plate and set aside.",
+      "Add the remaining tablespoons of ghee to the skillet and melt over low heat.",
+      "Use tongs to remove the cooked spaghetti from the pot of water, allowing most of the water to drip off the spaghetti, and place spaghetti in the skillet.",
+      "Add the spinach and Parmesan to the spaghetti and toss to coat, continuing to cook over low heat stirring constantly, until the spinach has wilted.",
+      "Return the shrimp to the skillet and stir to combine. Sprinkle with parsley before serving. Serve with additional Parmesan, if desired."
+    ],
+    "nutritionalInfo": {
+      "calories": 1.9004,
+      "protein": 0.0919,
+      "carbs": 0.2057,
+      "fat": 0.0789,
+      "sugar": 0.0004,
+      "fiber": 0.0081,
+      "saturatedFat": 0.0393,
+      "monounsaturatedFat": 0.005,
+      "polyunsaturatedFat": 0.001,
+      "transFat": 0.0006,
+      "cholesterol": 0.5543,
+      "sodium": 5.3326,
+      "potassium": 0.9455,
+      "vitaminA": 0,
+      "vitaminC": 0.0317,
+      "calcium": 0.9408,
+      "iron": 0.0051,
+      "netcarbs": 0.2
+    }
+  }
+}

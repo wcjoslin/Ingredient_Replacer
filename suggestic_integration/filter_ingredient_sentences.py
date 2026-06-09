@@ -2,8 +2,8 @@ import json
 import re
 
 INPUT_FILE = "all_ingredient_instructions.json"
-OUTPUT_FILE = "filtered_ingredient_sentences.json"
-SKIPPED_FILE = "filtered_skipped_ingredients.json"
+OUTPUT_FILE = "outputs/filtered_ingredient_sentences.json"
+SKIPPED_FILE = "outputs/filtered_skipped_ingredients.json"
 
 def normalize(text):
     return re.sub(r"[^a-zA-Z0-9 ]", "", text).lower()

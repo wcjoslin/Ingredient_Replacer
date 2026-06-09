@@ -1,0 +1,342 @@
+[
+  {
+    "ingredient": "Penne",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:gluten"
+      ],
+      "labels": [
+        "en:green-dot",
+        "fr:tidy-man",
+        "fr:triman"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:cereals-and-potatoes",
+        "en:cereals-and-their-products",
+        "en:pastas",
+        "en:cereal-pastas",
+        "en:dry-pastas",
+        "en:durum-wheat-pasta",
+        "en:dry-durum-wheat-pasta",
+        "en:penne",
+        "en:penne-rigate"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Parmesan cheese",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-content-unknown",
+        "en:vegan-status-unknown",
+        "en:vegetarian-status-unknown"
+      ],
+      "allergens": [
+        "en:milk"
+      ],
+      "labels": [
+        "en:contains-milk",
+        "en:made-in-italy",
+        "en:pdo"
+      ],
+      "categories": [
+        "en:dairies",
+        "en:fermented-foods",
+        "en:fermented-milk-products",
+        "en:cheeses"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Garlic",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:gluten"
+      ],
+      "labels": [
+        "en:vegetarian",
+        "en:vegan"
+      ],
+      "categories": [],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Baby spinach leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [],
+      "labels": [
+        "en:vegetarian",
+        "en:vegan"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:fruits-and-vegetables-based-foods",
+        "en:vegetables-based-foods",
+        "en:vegetables",
+        "en:fresh-foods",
+        "en:fresh-plant-based-foods",
+        "en:leaf-vegetables",
+        "en:fresh-vegetables",
+        "en:spinachs",
+        "en:spinach-young-leaves"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Basil leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan-status-unknown",
+        "en:vegetarian-status-unknown"
+      ],
+      "allergens": [
+        "en:soybeans"
+      ],
+      "labels": [],
+      "categories": [],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Lemon juice",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [],
+      "labels": [],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:beverages",
+        "en:plant-based-beverages",
+        "en:fruit-based-beverages",
+        "en:juices-and-nectars",
+        "en:fruit-juices",
+        "en:lemon-juice"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Walnuts",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:nuts"
+      ],
+      "labels": [
+        "en:green-dot",
+        "en:nutriscore",
+        "en:nutriscore-grade-a",
+        "fr:triman"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:nuts-and-their-products",
+        "en:nuts",
+        "en:shelled-nuts",
+        "en:walnuts",
+        "en:walnut-kernels"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Lemon zest",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil",
+        "en:non-vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:eggs",
+        "en:gluten",
+        "en:milk"
+      ],
+      "labels": [
+        "en:vegetarian"
+      ],
+      "categories": [
+        "en:dairies",
+        "en:snacks",
+        "en:desserts",
+        "en:sweet-snacks",
+        "en:dairy-desserts",
+        "en:biscuits-and-cakes",
+        "en:cakes",
+        "en:cheesecakes",
+        "en:lemon-cheesecakes"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Olive oil",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil",
+        "en:non-vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:milk"
+      ],
+      "labels": [
+        "en:sustainable",
+        "en:vegetarian",
+        "en:sustainable-palm-oil",
+        "en:green-dot"
+      ],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:fats",
+        "en:spreads",
+        "en:plant-based-spreads",
+        "en:salted-spreads",
+        "en:spreadable-fats",
+        "en:vegetable-fats",
+        "en:margarines"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Salt",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [],
+      "labels": [],
+      "categories": [
+        "en:condiments",
+        "en:salts",
+        "en:table-salts",
+        "en:groceries"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  },
+  {
+    "ingredient": "Black pepper",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "usda_carbs": null,
+    "metadata": {
+      "vegan": [
+        "en:palm-oil-free",
+        "en:vegan",
+        "en:vegetarian"
+      ],
+      "allergens": [
+        "en:gluten"
+      ],
+      "labels": [],
+      "categories": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:cereals-and-potatoes",
+        "en:breads",
+        "en:crisp-bread"
+      ],
+      "kosher": false,
+      "halal": false
+    }
+  }
+]

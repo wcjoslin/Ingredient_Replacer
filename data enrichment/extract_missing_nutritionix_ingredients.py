@@ -9,7 +9,7 @@ for entry in data:
     if any(v == "TBD" for v in profile.values()):
         missing.append(entry["ingredient"])
 
-with open("missing_nutritionix_ingredients.json", "w", encoding="utf-8") as f:
+with open("outputs/missing_nutritionix_ingredients.json", "w", encoding="utf-8") as f:
     json.dump(missing, f, ensure_ascii=False, indent=2)
 
 print(f"Found {len(missing)} ingredients with missing nutrition data. Output saved to missing_nutritionix_ingredients.json.")

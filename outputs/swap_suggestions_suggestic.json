@@ -1,0 +1,116 @@
+[
+  {
+    "ingredient": "Penne",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Penne' (normalized: 'penne') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Parmesan cheese",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Parmesan cheese' (normalized: 'parmesan cheese') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Garlic",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Garlic' (normalized: 'garlic') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Baby spinach leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Baby spinach leaves' (normalized: 'baby spinach leaves') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Basil leaves",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "cilantro leaves",
+      "score": -0.13373613357543945,
+      "manual_review": true,
+      "note": "Low similarity score; swap may not be appropriate."
+    }
+  },
+  {
+    "ingredient": "Lemon juice",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Lemon juice' (normalized: 'lemon juice') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Walnuts",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Walnuts' (normalized: 'walnuts') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Lemon zest",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "substitute": "lemon",
+      "score": 0.9083234593272209
+    }
+  },
+  {
+    "ingredient": "Olive oil",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Olive oil' (normalized: 'olive oil') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Salt",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Salt' (normalized: 'salt') not in embedding vocabulary."
+    }
+  },
+  {
+    "ingredient": "Black pepper",
+    "rationale": [
+      "Ingredient may not be kosher.",
+      "Ingredient may not be halal."
+    ],
+    "swap_suggestion": {
+      "error": "Ingredient 'Black pepper' (normalized: 'black pepper') not in embedding vocabulary."
+    }
+  }
+]

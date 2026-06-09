@@ -1,0 +1,26 @@
+[
+  {
+    "ingredient": "Penne",
+    "rationale": [
+      "Carbs (38.27g) exceed max per serving (15g)."
+    ],
+    "swap_suggestion": {
+      "substitute": "peas",
+      "score": -0.535862612146764,
+      "foodbert_score": -0.13935968291729878,
+      "nutrition_delta": 2.1218743290646245,
+      "original_nutrition": {
+        "calories": 195.92,
+        "protein": 7.19,
+        "fat": 1.15,
+        "carbohydrates": 38.27
+      },
+      "substitute_nutrition": {
+        "calories": 81,
+        "protein": 5.4,
+        "fat": 0.4,
+        "carbohydrates": 14
+      }
+    }
+  }
+]
